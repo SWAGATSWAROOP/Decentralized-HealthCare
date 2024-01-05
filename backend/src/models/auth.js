@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({
+  path: "./.env",
+});
 import Mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bycrpt from "bcrypt";
@@ -41,7 +43,7 @@ AuthSchema.pre("save", async function (next) {
   // we have to check if password is isModified then only encrypt/hash it else return
   if (!this.isModified("password")) return next();
   // Hashing or encrypting the password using bycrpt and also passing number of rounds
-  this.password = await bycrpt.hash(this.password, process.env.ROUNDS);
+  this.password = await bycrpt.hash(this.password, 10);
   next();
 });
 
