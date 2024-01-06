@@ -1,5 +1,5 @@
 import { User } from "../models/auth.js";
-import { ApiResponse } from "../utils/APIresponse.js";
+import ApiResponse from "../utils/APIresponse.js";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -70,7 +70,7 @@ export const loginUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   //check if username is there
-  if (!password && (!username || !email)) {
+  if (!username && !email) {
     throw new Error("Provide the username or Email");
   }
 
@@ -103,18 +103,25 @@ export const loginUser = async (req, res) => {
     secure: true,
   };
 
+  //We have to takeout the response because the circular object call in which the object calls itself
   // We are sending data in cookies but also in response because lets say the user want to save the cookies in local storage or moblie application where cookies will be not be set
-  return res
+  const responseData = {
+    user: {
+      // Extract the required properties from loggedinUser
+      _id: loggedinUser._id,
+      username: loggedinUser.username,
+      // Add other necessary properties here
+    },
+    accessToken,
+    refreshToken,
+  };
+
+  // Send this responseData as part of the response
+  res
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
-    .json(
-      new ApiResponse(
-        200,
-        { user: loggedinUser, accessToken, refreshToken },
-        "User Logged in Succesfully"
-      )
-    );
+    .json(new ApiResponse(200, responseData, "User Logged in Successfully"));
 };
 
 //Logout user

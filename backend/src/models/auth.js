@@ -82,22 +82,23 @@ AuthSchema.methods.generateAccessToken = function () {
     process.env.ACCESS_TOKEN_SECRET,
     {
       // Using algorith SHA256
-      algorithm: "SH256",
+      algorithm: "HS256",
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     }
   );
 };
 
+// algorithm should same in both refresh and access
 AuthSchema.methods.generateRefreshToken = function () {
   // As the refresh token is regularly refreshed therefore payload is less
-  jwt.sign(
+  return jwt.sign(
     {
       _id: this._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
       // Using algo RSA 256
-      algorithm: "RS256",
+      algorithm: "HS256",
       expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
     }
   );
