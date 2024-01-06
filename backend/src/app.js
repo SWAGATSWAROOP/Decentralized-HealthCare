@@ -16,6 +16,7 @@ app.use(
 // Putting limit on how much data can be received
 app.use(express.json({ limit: "1mb" }));
 
+//Putting a middleware to access URL
 app.use(express.urlencoded({ extended: true, limit: "32kb" }));
 
 // For Including static files like JS HTML and CSS and all

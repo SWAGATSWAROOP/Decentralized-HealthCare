@@ -1,6 +1,8 @@
 import { User } from "../models/auth.js";
 import { ApiResponse } from "../utils/APIresponse.js";
 
+
+//Registerng the user
 export const registeruser = async (req, res) => {
   try {
     //get user detail
