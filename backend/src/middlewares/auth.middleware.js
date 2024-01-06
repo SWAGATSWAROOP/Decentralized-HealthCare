@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/auth";
+import { User } from "../models/auth.js";
 
 //As we are not using respose therefore we can use _
 export const Verifyjwt = async (req, _, next) => {
