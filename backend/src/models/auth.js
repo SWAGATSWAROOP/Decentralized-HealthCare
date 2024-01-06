@@ -17,6 +17,20 @@ const AuthSchema = new Schema(
       trim: true,
       lowercase: true,
     },
+    email: {
+      type: String,
+      required: true,
+      index: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    phoneno: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
     password: {
       type: String,
       required: true,
