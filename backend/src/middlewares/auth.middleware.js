@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/auth.js";
 
 //As we are not using respose therefore we can use _
-export const Verifyjwt = async (req, _, next) => {
+export const Verifyjwt = async (req, res, next) => {
   try {
     // We are using or for mobile application in which cookies are not there and information is sent in header
     const token =
@@ -27,6 +27,7 @@ export const Verifyjwt = async (req, _, next) => {
     req.user = user;
     next();
   } catch (err) {
-    throw new Error(err?.message || "Invalid Access Token");
+    console.log("Invalid Access Token");
+    return res.status(401).json("Invalid Access Token");
   }
 };

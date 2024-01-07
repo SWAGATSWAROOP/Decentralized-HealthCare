@@ -1,5 +1,6 @@
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
+import jwt from "jsonwebtoken";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -122,7 +123,7 @@ export const loginUser = async (req, res) => {
   };
 
   // Send this responseData as part of the response
-  res
+  return res
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
@@ -155,4 +156,55 @@ export const logOutUser = async (req, res) => {
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User Logout Succesfully"));
+};
+
+export const refreshAccesstoken = async (req, res) => {
+  try {
+    //getting refresh token from cookies and for mobile devices request body
+    const incomingRT = req.cookies.refreshToken || req.body.refreshToken;
+    if (!incomingRT) {
+      console.log("Refresh Token is not present or wrong");
+      return res.status(401).json({ message: "Unauthorized Access" });
+    }
+    const decodedtoken = jwt.verify(
+      incomingRT,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    //Find out user in DB as we have stored _id while generting Refresh Token
+    const user = await User.findById(decodedtoken._id);
+    if (!user) {
+      console.log("User is not present");
+      return res.status(401).json("User is not present");
+    }
+
+    if (user?.refreshToken !== incomingRT) {
+      console.log("Refresh Token Doesn't Match");
+      return res.status(401).json({ message: "Refresh Token is used" });
+    }
+
+    const { accessToken, refreshToken } =
+      await generateAccessTokenAndRefreshToken(user._id);
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json(
+        new ApiResponse(
+          201,
+          { accessToken, refreshToken },
+          "Succesfully Regenerated Access and refreshToken"
+        )
+      );
+  } catch (error) {
+    res
+      .status(401)
+      .json({ message: "Something went wrong while refreshing access Token" });
+  }
 };
