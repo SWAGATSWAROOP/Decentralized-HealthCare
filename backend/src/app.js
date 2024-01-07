@@ -27,6 +27,8 @@ app.use(cookieParser());
 
 //routes import
 import userrouter from "./routes/userRouter.js";
+import profilerouter from "./routes/profileRouter.js";
 
 // Routes Declaration
 app.use("/user", userrouter);
+app.use("/profile", profilerouter);
