@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Verifyjwt } from "../middlewares/auth.middleware.js";
-import { getProfile } from "../controller/profile.controller.js";
+import { getProfile, updateProfile } from "../controller/profile.controller.js";
 
 const router = Router();
 
@@ -10,6 +10,6 @@ const router = Router();
 router.route("/").get(Verifyjwt, getProfile);
 
 //For updating data
-router.route("/update").post();
+router.route("/update").post(updateProfile);
 
 export default router;

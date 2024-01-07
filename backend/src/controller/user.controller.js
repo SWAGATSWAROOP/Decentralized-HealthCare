@@ -2,7 +2,7 @@ import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
 
-export const generateAccessTokenAndRefreshToken = async (userid) => {
+const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
     const user = await User.findById(userid);
     const accessToken = user.generateAccessToken();
@@ -98,7 +98,7 @@ export const loginUser = async (req, res) => {
     await generateAccessTokenAndRefreshToken(user._id);
 
   // We have to use loggedinUser because we have reference of user without refreshToken therefore we have to do it
-  const loggedinUser = User.findById(user._id).select(
+  const loggedinUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
 
@@ -111,12 +111,7 @@ export const loginUser = async (req, res) => {
   //We have to takeout the response because the circular object call in which the object calls itself
   // We are sending data in cookies but also in response because lets say the user want to save the cookies in local storage or moblie application where cookies will be not be set
   const responseData = {
-    user: {
-      // Extract the required properties from loggedinUser
-      _id: loggedinUser._id,
-      username: loggedinUser.username,
-      // Add other necessary properties here
-    },
+    user: loggedinUser,
     accessToken,
     refreshToken,
   };

@@ -4,9 +4,7 @@ import ApiResponse from "../utils/APIresponse.js";
 // get profile details
 export const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req?.user?._id).select(
-      "-password -refreshToken"
-    );
+    const user = await User.findById(req?.user?._id);
     if (!user) {
       return res.status(404).json(new ApiResponse(404, {}, "User Not found"));
     }
@@ -26,6 +24,23 @@ export const getProfile = async (req, res) => {
 };
 
 //update profile details
-const updateProfile = (req,res)=>{
-    
-}
+export const updateProfile = async (req, res) => {
+  try {
+    const { username, name, phoneno, email } = req.body;
+
+    const updateduser = await User.findOneAndUpdate(
+      { username },
+      { $set: { name, phoneno, email } },
+      { new: true }
+    ).select("-password -refreshToken");
+
+    res
+      .status(200)
+      .json(new ApiResponse(200, { user: updateduser }, "Updated Succesfully"));
+  } catch (error) {
+    console.log("Error in updating the value");
+    return res
+      .status(404)
+      .json(new ApiResponse(404, {}, "Something went wrong"));
+  }
+};
