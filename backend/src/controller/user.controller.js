@@ -2,7 +2,7 @@ import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
 
-const generateAccessTokenAndRefreshToken = async (userid) => {
+export const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
     const user = await User.findById(userid);
     const accessToken = user.generateAccessToken();
@@ -14,7 +14,6 @@ const generateAccessTokenAndRefreshToken = async (userid) => {
     return { refreshToken, accessToken };
   } catch (err) {
     console.log("Cannot geneate Access or Refresh Token");
-    return res.status(500).json({ message: "Something went wrong" });
   }
 };
 
