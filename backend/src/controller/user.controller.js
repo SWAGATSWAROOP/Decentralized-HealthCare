@@ -12,9 +12,8 @@ const generateAccessTokenAndRefreshToken = async (userid) => {
     //Returning the refresh and access token
     return { refreshToken, accessToken };
   } catch (err) {
-    throw new Error(
-      "Something went wrong while generating Access And Refresh Token"
-    );
+    console.log("Cannot geneate Access or Refresh Token");
+    return res.status(500).json({ message: "Something went wrong" });
   }
 };
 
@@ -29,13 +28,14 @@ export const registeruser = async (req, res) => {
         (field) => field.trim() === ""
       )
     ) {
-      throw new Error("Some Fields Are empty");
+      console.log("Some fiels are empty");
+      return res.status(401).json({ message: "Some fields are empty" });
     }
     //check if user always exist
     const fuser = await User.findOne({ $or: [{ username }, { email }] });
     if (fuser) {
       console.log("user alerady exist");
-      throw new Error("User Already Exists");
+      return res.status(401).json({ message: "User alerady exists" });
     }
     //Now Create the user
     const user = await User.create({
@@ -52,7 +52,7 @@ export const registeruser = async (req, res) => {
     );
     if (!createdUser) {
       console.log("User is not created Successfully");
-      throw new Error("User is not created Successfully");
+      return res.status(401).json({ message: "User is not created" });
     }
 
     //Return response
@@ -71,7 +71,10 @@ export const loginUser = async (req, res) => {
 
   //check if username is there
   if (!username && !email) {
-    throw new Error("Provide the username or Email");
+    console.log("Provide the username or Email");
+    return res
+      .status(401)
+      .json({ message: "Username or Email is not Provided" });
   }
 
   //Find user in the DB
@@ -79,13 +82,15 @@ export const loginUser = async (req, res) => {
 
   //If user is not found
   if (!user) {
-    throw new Error("User is not there in DB");
+    console.log("User is not there in DB");
+    return res.status(401).json({ message: "User is not created" });
   }
 
   //This isPasswordCorrect is not availabe on User Scehma it avilabe in the DB instance
   const checkPassword = await user.isPasswordCorrect(password);
   if (!checkPassword) {
-    throw new Error("password is not correct");
+    console.log("password is not correct");
+    return res.status(401).json({ message: "Password is not correct" });
   }
 
   //Now generateAccessTokenAndRefreshToken
