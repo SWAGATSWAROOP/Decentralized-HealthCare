@@ -44,3 +44,28 @@ export const updateProfile = async (req, res) => {
       .json(new ApiResponse(404, {}, "Something went wrong"));
   }
 };
+
+//forget password or change password
+export const forgetPassword = async (req, res) => {
+  try {
+    const { username, oldPassword, newPassword } = req.body;
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
+    if (!isPasswordCorrect) {
+      console.log("Password Doesnot Match");
+      return res
+        .status(200)
+        .json(new ApiResponse(200, {}, "Password is not correct"));
+    }
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Updated Password Succesfully"));
+  } catch (error) {
+    console.log("Something Went wrong while changing password");
+    return res
+      .status(500)
+      .json(new ApiResponse(500, {}, "Internal server error"));
+  }
+};
