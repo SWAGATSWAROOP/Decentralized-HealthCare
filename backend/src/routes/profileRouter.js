@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { Verifyjwt } from "../middlewares/auth.middleware.js";
 import {
-  forgetPassword,
   getProfile,
+  updatePassword,
   updateProfile,
 } from "../controller/profile.controller.js";
 
@@ -17,6 +17,6 @@ router.route("/").get(Verifyjwt, getProfile);
 router.route("/update").post(updateProfile);
 
 //for changing password
-router.route("/change-password").post(forgetPassword);
+router.route("/change-password").post(updatePassword);
 
 export default router;

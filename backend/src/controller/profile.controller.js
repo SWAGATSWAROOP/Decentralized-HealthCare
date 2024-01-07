@@ -46,7 +46,7 @@ export const updateProfile = async (req, res) => {
 };
 
 //forget password or change password
-export const forgetPassword = async (req, res) => {
+export const updatePassword = async (req, res) => {
   try {
     const { username, oldPassword, newPassword } = req.body;
     const user = await User.findOne({ username });
