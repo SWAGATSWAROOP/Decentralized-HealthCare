@@ -3,6 +3,7 @@ dotenv.config();
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -209,6 +210,7 @@ export const refreshAccesstoken = async (req, res) => {
 export const googleSignIn = async (req, res) => {
   try {
     const code = req.query.code;
+
     const { data } = await axios.post("https://oauth2.googleapis.com/token", {
       code,
       client_id: process.env.CLIENT_ID,
@@ -216,7 +218,7 @@ export const googleSignIn = async (req, res) => {
       redirect_uri: process.env.REDIRECT_URI,
       grant_type: "authorization_code",
     });
-    
+
     const { access_token, refresh_token } = data;
 
     // Use the access_token to fetch user data from Google's API
@@ -229,26 +231,29 @@ export const googleSignIn = async (req, res) => {
       }
     );
 
-    const { name, email, phone } = userInfoResponse;
-    // Store access_token anxxd refresh_token in your database as needed
+    const { name, email, sub } = userInfoResponse.data;
 
-    const ifexist = User.findOne({ email }).select("-password -refreshToken");
+    //Checking if user exist in DB
+    const ifexist = await User.findOne({ email });
+
     if (ifexist) {
       console.log("User already signed in");
       return res
         .status(201)
         .json(new ApiResponse(201, { user: ifexist }, "User already exist"));
     }
+
     //Create User if dont exist
     const user = await User.create({
       name: name,
       email: email,
-      phoneno: phone,
       username: email,
       refreshToken: refresh_token,
-      password: refresh_token,
+      phoneno: " ",
+      password: sub,
     });
 
+    // Further operations after successful user creation
     const options = {
       httpOnly: true,
       secure: true,

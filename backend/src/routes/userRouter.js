@@ -17,8 +17,18 @@ router.route("/login").post(loginUser);
 
 //googlesign in
 router.get("/", (_, res) => {
+  const scopes = [
+    "openid",
+    "profile",
+    "email",
+    "https://www.googleapis.com/auth/user.phonenumbers.read",
+  ];
   return res.redirect(
-    `https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20profile%20email%20phone&response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}`
+    `https://accounts.google.com/o/oauth2/v2/auth?scope=${scopes.join(
+      "%20"
+    )}&access_type=offline&response_type=code&client_id=${
+      process.env.CLIENT_ID
+    }&redirect_uri=${process.env.REDIRECT_URI}`
   );
 });
 router.route("/google-signin").get(googleSignIn);
