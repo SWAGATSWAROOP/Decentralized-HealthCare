@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config();
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
@@ -200,5 +202,72 @@ export const refreshAccesstoken = async (req, res) => {
     res
       .status(401)
       .json({ message: "Something went wrong while refreshing access Token" });
+  }
+};
+
+//Handling google sign
+export const googleSignIn = async (req, res) => {
+  try {
+    const code = req.query.code;
+    const { data } = await axios.post("https://oauth2.googleapis.com/token", {
+      code,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET,
+      redirect_uri: process.env.REDIRECT_URI,
+      grant_type: "authorization_code",
+    });
+    
+    const { access_token, refresh_token } = data;
+
+    // Use the access_token to fetch user data from Google's API
+    const userInfoResponse = await axios.get(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
+
+    const { name, email, phone } = userInfoResponse;
+    // Store access_token anxxd refresh_token in your database as needed
+
+    const ifexist = User.findOne({ email }).select("-password -refreshToken");
+    if (ifexist) {
+      console.log("User already signed in");
+      return res
+        .status(201)
+        .json(new ApiResponse(201, { user: ifexist }, "User already exist"));
+    }
+    //Create User if dont exist
+    const user = await User.create({
+      name: name,
+      email: email,
+      phoneno: phone,
+      username: email,
+      refreshToken: refresh_token,
+      password: refresh_token,
+    });
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    // Redirect or respond with success
+    res
+      .status(200)
+      .cookie("accessToken", access_token, options)
+      .cookie("refreshToken", refresh_token, options)
+      .json(
+        new ApiResponse(
+          200,
+          { user, accessToken: access_token, refreshToken: refresh_token },
+          "Authentication successful"
+        )
+      );
+  } catch (error) {
+    // Handle error
+    res.status(500).json(new ApiResponse(500, {}, "Authentication failed"));
   }
 };

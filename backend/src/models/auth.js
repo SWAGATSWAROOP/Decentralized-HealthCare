@@ -28,6 +28,7 @@ const AuthSchema = new Schema(
     phoneno: {
       type: String,
       default: "",
+      required: true,
       trim: true,
     },
     password: {

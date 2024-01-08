@@ -30,5 +30,8 @@ import userrouter from "./routes/userRouter.js";
 import profilerouter from "./routes/profileRouter.js";
 
 // Routes Declaration
+app.get("/", (req, res) => {
+  res.send("Working");
+});
 app.use("/user", userrouter);
 app.use("/profile", profilerouter);
