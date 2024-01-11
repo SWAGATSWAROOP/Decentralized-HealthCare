@@ -35,6 +35,9 @@ const AuthSchema = new Schema(
       required: true,
       trim: true,
     },
+    profilephoto: {
+      type: String, //Cloiudinary Url;
+    },
     name: {
       type: String,
       required: true,
