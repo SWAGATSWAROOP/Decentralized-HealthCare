@@ -60,7 +60,7 @@ orgDocSchema.pre("save", async function (next) {
 
 // ForChecking Password
 orgDocSchema.methods.checkPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
+  return await bcrypt.compare(password, this.password);
 };
 
 // generateAccessToken
@@ -92,4 +92,4 @@ orgDocSchema.methods.generateAccessToken = function () {
   );
 };
 
-export const OrgDocModel = mongoose.model("OrgDoc", orgDocSchema);
+export const OrgDoc = mongoose.model("OrgDoc", orgDocSchema);

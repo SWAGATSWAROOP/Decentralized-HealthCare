@@ -28,10 +28,17 @@ app.use(cookieParser());
 //routes import
 import userrouter from "./routes/userRouter.js";
 import profilerouter from "./routes/profileRouter.js";
+import orgrouter from "./routes/orgdocter.js";
 
 // Routes Declaration
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send("Working");
 });
+// user
 app.use("/user", userrouter);
+
+//profile
 app.use("/profile", profilerouter);
+
+//doc/org
+app.use("/org", orgrouter);

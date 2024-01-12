@@ -26,10 +26,10 @@ export const getProfile = async (req, res) => {
 //update profile details
 export const updateProfile = async (req, res) => {
   try {
-    const { username, name, phoneno, email } = req.body;
+    const { name, phoneno, email } = req.body;
 
     const updateduser = await User.findOneAndUpdate(
-      { username },
+      { email },
       { $set: { name, phoneno, email } },
       { new: true }
     ).select("-password -refreshToken");
@@ -48,8 +48,8 @@ export const updateProfile = async (req, res) => {
 //forget password or change password
 export const updatePassword = async (req, res) => {
   try {
-    const { username, oldPassword, newPassword } = req.body;
-    const user = await User.findOne({ username });
+    const { email, oldPassword, newPassword } = req.body;
+    const user = await User.findOne({ email });
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
     if (!isPasswordCorrect) {
       console.log("Password Doesnot Match");
