@@ -265,8 +265,6 @@ export const googleSignIn = async (req, res) => {
       type: false,
     });
 
-    console.log(userInfoResponse.data);
-
     // Further operations after successful user creation
     const options = {
       httpOnly: true,
