@@ -25,18 +25,14 @@ const generateAccessTokenAndRefreshToken = async (userid) => {
 export const registeruser = async (req, res) => {
   try {
     //get user detail
-    const { username, password, name, email, phoneno } = req.body;
+    const { password, name, email, phoneno } = req.body;
     //Validation
-    if (
-      [username, password, name, email, phoneno].some(
-        (field) => field.trim() === ""
-      )
-    ) {
+    if ([password, name, email, phoneno].some((field) => field.trim() === "")) {
       console.log("Some fiels are empty");
       return res.status(401).json({ message: "Some fields are empty" });
     }
     //check if user always exist
-    const fuser = await User.findOne({ $or: [{ username }, { email }] });
+    const fuser = await User.findOne({ email });
     if (fuser) {
       console.log("user alerady exist");
       return res.status(401).json({ message: "User alerady exists" });
@@ -61,7 +57,6 @@ export const registeruser = async (req, res) => {
     const user = await User.create({
       name,
       email: email.toLowerCase(),
-      username: username.toLowerCase(),
       password,
       phoneno,
       profilephoto: profilePhoto?.url || "",
@@ -88,18 +83,16 @@ export const registeruser = async (req, res) => {
 //Login User
 export const loginUser = async (req, res) => {
   //get data from request body
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
 
-  //check if username is there
-  if (!username && !email) {
-    console.log("Provide the username or Email");
-    return res
-      .status(401)
-      .json({ message: "Username or Email is not Provided" });
+  //check if email is there
+  if (!email) {
+    console.log("Provide the  Email");
+    return res.status(401).json({ message: " Email is not Provided" });
   }
 
   //Find user in the DB
-  const user = await User.findOne({ $or: [{ username }, { email }] });
+  const user = await User.findOne({ email });
 
   //If user is not found
   if (!user) {
@@ -265,7 +258,6 @@ export const googleSignIn = async (req, res) => {
     const user = await User.create({
       name: name,
       email: email,
-      username: email,
       refreshToken: refresh_token,
       phoneno: " ",
       password: sub,

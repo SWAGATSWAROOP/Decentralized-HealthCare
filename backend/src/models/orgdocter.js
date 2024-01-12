@@ -8,14 +8,6 @@ import jwt from "jsonwebtoken";
 
 const orgDocSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-      lowercase: true,
-      trim: true,
-      index: true,
-      unique: true,
-    },
     email: {
       type: String,
       required: true,
