@@ -4,6 +4,7 @@ import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import { uploadProfilePhoto } from "../utils/Cloudinary.js";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -40,6 +41,22 @@ export const registeruser = async (req, res) => {
       console.log("user alerady exist");
       return res.status(401).json({ message: "User alerady exists" });
     }
+
+    // Checking ProfilePhoto
+    // Mutler gives access to req.files?.profilephoto
+    let profilePhotoPath = req.files?.profilephoto[0]?.path;
+
+    let profilePhoto = "";
+
+    // If profile photo is there
+    if (profilePhotoPath) {
+      try {
+        profilePhoto = await uploadProfilePhoto(profilePhotoPath);
+      } catch (error) {
+        console.log("Error in uploading");
+      }
+    }
+
     //Now Create the user
     const user = await User.create({
       name,
@@ -47,6 +64,7 @@ export const registeruser = async (req, res) => {
       username: username.toLowerCase(),
       password,
       phoneno,
+      profilephoto: profilePhoto?.url || "",
     });
 
     //Check if user exists and also takeout all field except password and refresh refreshToken

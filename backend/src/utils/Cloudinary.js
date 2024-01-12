@@ -22,6 +22,8 @@ export const uploadProfilePhoto = async (localPath) => {
     return response;
   } catch (error) {
     // remove the locally saved temporary file from the server as the operation got failed
-    fs.unlinkSync(localPath);
+    if (localPath != "./public/default/profilephoto.png")
+      fs.unlinkSync(localPath);
+    console.log("Error in uploading");
   }
 };

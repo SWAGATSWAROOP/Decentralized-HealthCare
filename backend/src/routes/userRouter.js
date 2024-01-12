@@ -9,11 +9,14 @@ import {
   registeruser,
 } from "../controller/user.controller.js";
 import { Verifyjwt } from "../middlewares/auth.middleware.js";
-import { uploadProfilePhoto } from "../utils/Cloudinary.js";
+import { upload } from "../middlewares/mutlerFileUpload.js";
 
 const router = Router();
 
-router.route("/register").post(uploadProfilePhoto, registeruser);
+// Uploading profile photo
+router
+  .route("/register")
+  .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), registeruser);
 router.route("/login").post(loginUser);
 
 //googlesign in
