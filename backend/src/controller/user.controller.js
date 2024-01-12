@@ -241,8 +241,9 @@ export const googleSignIn = async (req, res) => {
         },
       }
     );
+    console.log(userInfoResponse.data);
 
-    const { name, email, sub } = userInfoResponse.data;
+    const { name, email, sub, picture } = userInfoResponse.data;
 
     //Checking if user exist in DB
     const ifexist = await User.findOne({ email });
@@ -259,7 +260,8 @@ export const googleSignIn = async (req, res) => {
       name: name,
       email: email,
       refreshToken: refresh_token,
-      phoneno: " ",
+      phoneno: "",
+      profilephoto: picture,
       password: sub,
     });
 
