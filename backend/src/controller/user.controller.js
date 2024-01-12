@@ -5,6 +5,7 @@ import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { uploadProfilePhoto } from "../utils/Cloudinary.js";
+import { removeFile } from "../utils/unlinkfileafterupload.js";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -52,6 +53,9 @@ export const registeruser = async (req, res) => {
         console.log("Error in uploading");
       }
     }
+
+    // Succesfully Removed the profile path
+    removeFile(profilePhotoPath);
 
     //Now Create the user
     const user = await User.create({
