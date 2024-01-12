@@ -9,14 +9,6 @@ import bycrpt from "bcrypt";
 // User Schema for Authentication And user
 const AuthSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-      index: true,
-      unique: true,
-      trim: true,
-      lowercase: true,
-    },
     email: {
       type: String,
       required: true,
