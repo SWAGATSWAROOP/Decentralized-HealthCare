@@ -9,10 +9,11 @@ import {
   registeruser,
 } from "../controller/user.controller.js";
 import { Verifyjwt } from "../middlewares/auth.middleware.js";
+import { uploadProfilePhoto } from "../utils/Cloudinary.js";
 
 const router = Router();
 
-router.route("/register").post(registeruser);
+router.route("/register").post(uploadProfilePhoto, registeruser);
 router.route("/login").post(loginUser);
 
 //googlesign in
