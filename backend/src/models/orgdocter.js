@@ -88,7 +88,7 @@ orgDocSchema.methods.generateAccessToken = function () {
 };
 
 // generateRefreshToken
-orgDocSchema.methods.generateAccessToken = () => {
+orgDocSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       _id: this._id,
