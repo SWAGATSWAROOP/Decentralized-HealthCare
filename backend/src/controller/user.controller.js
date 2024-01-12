@@ -241,7 +241,6 @@ export const googleSignIn = async (req, res) => {
         },
       }
     );
-    console.log(userInfoResponse.data);
 
     const { name, email, sub, picture } = userInfoResponse.data;
 
@@ -263,7 +262,10 @@ export const googleSignIn = async (req, res) => {
       phoneno: "",
       profilephoto: picture,
       password: sub,
+      type: false,
     });
+
+    console.log(userInfoResponse.data);
 
     // Further operations after successful user creation
     const options = {

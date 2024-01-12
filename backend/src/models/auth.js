@@ -39,6 +39,11 @@ const AuthSchema = new Schema(
     refreshToken: {
       type: String,
     },
+    // Type for google and normal signin
+    type: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
