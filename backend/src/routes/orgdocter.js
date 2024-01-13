@@ -1,6 +1,11 @@
 import { Router } from "express";
 import { upload } from "../middlewares/mutlerFileUpload.js";
-import { logOut, loginOrg, registerOrg } from "../controller/orgdocter.js";
+import {
+  logOut,
+  loginOrg,
+  refreshAccessToken,
+  registerOrg,
+} from "../controller/orgdocter.js";
 import { verifyDoc } from "../middlewares/authDoc.middleware.js";
 
 const router = Router();
@@ -13,5 +18,6 @@ router
 // secured Route
 router.route("/login").post(loginOrg);
 router.route("/logout").post(verifyDoc, logOut);
+router.route("/refreshToken").post(refreshAccessToken);
 
 export default router;

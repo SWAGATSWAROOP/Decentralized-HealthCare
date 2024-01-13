@@ -5,6 +5,7 @@ import ApiResponse from "../utils/APIresponse.js";
 import { uploadProfilePhoto } from "../utils/Cloudinary.js";
 import { options } from "../utils/cookieOptions.js";
 import { removeFile } from "../utils/unlinkFile.js";
+import jwt from "jsonwebtoken";
 
 // generating Access And refreshToken
 const generateAccessAndRefreshToken = async (userid) => {
@@ -168,5 +169,52 @@ export const logOut = async (req, res) => {
       .json(new ApiResponse(200, {}, "Successfully Logged Out"));
   } catch (error) {
     console.log("UnAuthorized");
+  }
+};
+
+export const refreshAccessToken = async (req, res) => {
+  try {
+    const inrefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+    if (!inrefreshToken) {
+      console.log("Refresh Token is not present or wrong");
+      return res.status(401).json({ message: "Unauthorized Access" });
+    }
+
+    const decodedtoken = jwt.verify(
+      inrefreshToken,
+      process.env.REFRESH_TOKEN_SECRET
+    );
+
+    const user = await OrgDoc.findById(decodedtoken._id);
+
+    if (!user) {
+      console.log("User is not present");
+      return res.status(401).json("User is not present");
+    }
+
+    if (user?.refreshToken !== inrefreshToken) {
+      console.log("Refresh Token Doesn't Match");
+      return res.status(401).json({ message: "Refresh Token is used" });
+    }
+
+    const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
+      user._id
+    );
+
+    return res
+      .status(200)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json(
+        new ApiResponse(
+          201,
+          { accessToken, refreshToken },
+          "Succesfully Regenerated Access and refreshToken"
+        )
+      );
+  } catch (error) {
+    return res
+      .status(401)
+      .json({ message: "Something went wrong while refreshing access Token" });
   }
 };

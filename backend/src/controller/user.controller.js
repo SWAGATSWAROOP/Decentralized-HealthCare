@@ -183,7 +183,7 @@ export const refreshAccesstoken = async (req, res) => {
     const { accessToken, refreshToken } =
       await generateAccessTokenAndRefreshToken(user._id);
 
-    res
+    return res
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
@@ -195,7 +195,7 @@ export const refreshAccesstoken = async (req, res) => {
         )
       );
   } catch (error) {
-    res
+    return res
       .status(401)
       .json({ message: "Something went wrong while refreshing access Token" });
   }
@@ -250,7 +250,7 @@ export const googleSignIn = async (req, res) => {
     });
 
     // Redirect or respond with success
-    res
+    return res
       .status(200)
       .cookie("accessToken", access_token, options)
       .cookie("refreshToken", refresh_token, options)
