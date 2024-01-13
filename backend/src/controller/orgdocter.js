@@ -139,3 +139,4 @@ export const loginOrg = async (req, res) => {
 };
 
 // Logout User
+const logOut = async (req, res) => {};
