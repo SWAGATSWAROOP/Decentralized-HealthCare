@@ -137,3 +137,5 @@ export const loginOrg = async (req, res) => {
       .json(new ApiResponse(500, {}, "Cannot Logged In Successfully"));
   }
 };
+
+// Logout User
