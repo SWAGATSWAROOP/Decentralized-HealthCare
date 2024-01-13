@@ -9,8 +9,7 @@ import { removeFile } from "../utils/unlinkfileafterupload.js";
 const generateAccessAndRefreshToken = async (userid) => {
   try {
     // Check if userid exist;
-    const user = await OrgDoc.findById({ userid });
-
+    const user = await OrgDoc.findById(userid);
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
     return { accessToken, refreshToken };
