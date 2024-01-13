@@ -13,6 +13,9 @@ const generateAccessAndRefreshToken = async (userid) => {
     const user = await OrgDoc.findById(userid);
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
+    user.refreshToken = refreshToken;
+    // Not Checking the validation before save
+    await user.save({ validateBeforeSave: false });
     return { accessToken, refreshToken };
   } catch (error) {
     console.log("error in generating access and refresh token");
@@ -94,9 +97,7 @@ export const loginOrg = async (req, res) => {
         .status(400)
         .json(new ApiResponse(400, {}, "Give full details"));
 
-    const user = await OrgDoc.findOne({ email }).select(
-      "-password -refreshToken"
-    );
+    const user = await OrgDoc.findOne({ email });
 
     if (!user)
       return res
@@ -115,23 +116,23 @@ export const loginOrg = async (req, res) => {
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
       user._id
     );
-    user.refreshToken = refreshToken;
 
-    // Not Checking the validation before save
-    await user.save({ validateBeforeSave: false });
+    const loggedinUser = await OrgDoc.findById(user._id).select(
+      "-password -refreshToken"
+    );
+
+    const response = {
+      user: loggedinUser,
+      accessToken,
+      refreshToken,
+    };
 
     // Password Matches
     return res
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
-      .json(
-        new ApiResponse(
-          200,
-          { user, accessToken, refreshToken },
-          "Successfully Logged In"
-        )
-      );
+      .json(new ApiResponse(200, response, "Successfully Logged In"));
   } catch (error) {
     return res
       .status(500)
@@ -141,27 +142,31 @@ export const loginOrg = async (req, res) => {
 
 // Logout User
 export const logOut = async (req, res) => {
-  const user = req.user;
+  try {
+    const user = req.user;
 
-  if (!user) {
-    res.status(500).json(new ApiResponse(500, {}, "Something went wrong"));
-  }
-
-  await OrgDoc.findByIdAndUpdate(
-    req.user._id,
-    {
-      $set: {
-        refreshToken: undefined,
-      },
-    },
-    {
-      new: true,
+    if (!user) {
+      res.status(500).json(new ApiResponse(500, {}, "Something went wrong"));
     }
-  );
 
-  return res
-    .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "Successfully Logged Out"));
+    await OrgDoc.findByIdAndUpdate(
+      req.user._id,
+      {
+        $set: {
+          refreshToken: undefined,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+
+    return res
+      .status(200)
+      .clearCookie("accessToken", options)
+      .clearCookie("refreshToken", options)
+      .json(new ApiResponse(200, {}, "Successfully Logged Out"));
+  } catch (error) {
+    console.log("UnAuthorized");
+  }
 };
