@@ -9,12 +9,11 @@ import { removeFile } from "../utils/unlinkfileafterupload.js";
 export const registerOrg = async (req, res) => {
   try {
     // check that if user sent all details
-    const { email, password, name, phoneno, address, type, profilephoto } =
-      req.body;
+    const { email, password, name, phoneno, address, type } = req.body;
 
     // check if all fiels are present or not
     if (
-      [email, password, name, phoneno, address, type, profilephoto].some(
+      [email, password, name, phoneno, address, type].some(
         (field) => field.trim() === ""
       )
     ) {
@@ -25,7 +24,7 @@ export const registerOrg = async (req, res) => {
     }
 
     //check if the user already exists
-    const ifExist = OrgDoc.findOne({ email });
+    const ifExist = await OrgDoc.findOne({ email: email });
 
     if (ifExist) {
       console.log("User already exists");
@@ -52,20 +51,15 @@ export const registerOrg = async (req, res) => {
     removeFile(profilePhotopath);
 
     // Creating the user
-    const user = await OrgDoc.create(
-      {
-        email,
-        password,
-        address,
-        type,
-        profilephoto: response.url,
-        phoneno,
-        name,
-      },
-      {
-        timestamps: true,
-      }
-    );
+    const user = await OrgDoc.create({
+      email,
+      password,
+      address,
+      type,
+      profilephoto: response.url,
+      phoneno,
+      name,
+    });
 
     return res
       .status(200)
@@ -73,6 +67,8 @@ export const registerOrg = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json(new ApiResponse(200, user, "Cannot Register Org"));
+      .json(new ApiResponse(500, {}, "Cannot Register Org"));
   }
 };
+
+// Login the user
