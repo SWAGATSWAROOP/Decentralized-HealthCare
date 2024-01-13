@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { upload } from "../middlewares/mutlerFileUpload.js";
-import { registerOrg } from "../controller/orgdocter.js";
+import { loginOrg, registerOrg } from "../controller/orgdocter.js";
 
 const router = Router();
 
@@ -9,6 +9,7 @@ router
   .route("/register")
   .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), registerOrg);
 
-router.route("/login");
+// secured Route
+router.route("/login").post(loginOrg);
 
 export default router;

@@ -67,9 +67,8 @@ orgDocSchema.methods.checkPassword = async function (password) {
 orgDocSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
-      id: this._id,
+      _id: this._id,
       name: this.name,
-      username: this.username,
       email: this.email,
     },
     process.env.ACCESS_TOKEN_SECRET,
@@ -80,7 +79,7 @@ orgDocSchema.methods.generateAccessToken = function () {
 };
 
 // generateRefreshToken
-orgDocSchema.methods.generateAccessToken = function () {
+orgDocSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,

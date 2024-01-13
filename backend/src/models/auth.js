@@ -74,7 +74,6 @@ AuthSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       _id: this._id,
-      username: this.username,
       name: this.name,
       phoneno: this.phoneno,
       email: this.email,
