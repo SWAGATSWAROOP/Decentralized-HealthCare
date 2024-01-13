@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -21,9 +20,24 @@ export const uploadProfilePhoto = async (localPath) => {
     console.log("File is uploaded on cloudinary", response.url);
     return response;
   } catch (error) {
-    // remove the locally saved temporary file from the server as the operation got failed
-    if (localPath != "./public/default/profilephoto.png")
-      fs.unlinkSync(localPath);
     console.log("Error in uploading");
+  }
+};
+
+export const updateImageByUrl = async (oldImageUrl, newImageFile) => {
+  try {
+    // Step 1: Retrieve the details of the existing image
+    const oldImageDetails = cloudinary.utils.extractPublicId(oldImageUrl);
+
+    // Step 2: Upload the new image
+    const result = await cloudinary.uploader.upload(newImageFile, {
+      public_id: oldImageDetails.public_id,
+      format: oldImageDetails.format,
+    });
+
+    // Step 3: Update the Cloudinary asset by replacing the existing image
+    console.log("Updated Image URL:", result.secure_url);
+  } catch (error) {
+    console.error("Error updating image:", error.message);
   }
 };
