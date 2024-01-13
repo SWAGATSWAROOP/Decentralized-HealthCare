@@ -3,7 +3,8 @@ dotenv.config();
 import { OrgDoc } from "../models/orgdocter.js";
 import ApiResponse from "../utils/APIresponse.js";
 import { uploadProfilePhoto } from "../utils/Cloudinary.js";
-import { removeFile } from "../utils/unlinkfileafterupload.js";
+import { options } from "../utils/cookieOptions.js";
+import { removeFile } from "../utils/unlinkFile.js";
 
 // generating Access And refreshToken
 const generateAccessAndRefreshToken = async (userid) => {
@@ -20,10 +21,11 @@ const generateAccessAndRefreshToken = async (userid) => {
 
 // register the user
 export const registerOrg = async (req, res) => {
+  //check if profile photo exist or logo
+  const profilePhotopath = req.files?.profilephoto[0]?.path;
   try {
     // check that if user sent all details
     const { email, password, name, phoneno, address, type } = req.body;
-
     // check if all fiels are present or not
     if (
       [email, password, name, phoneno, address, type].some(
@@ -46,8 +48,6 @@ export const registerOrg = async (req, res) => {
         .json(new ApiResponse(400, {}, "User already exists"));
     }
 
-    //check if profile photo exist or logo
-    const profilePhotopath = req.files?.profilephoto[0]?.path;
     if (!profilePhotopath) {
       return res
         .status(400)
@@ -59,9 +59,6 @@ export const registerOrg = async (req, res) => {
     if (!response) {
       return res.status(500).json(new ApiResponse(400, {}, "Unable to upload"));
     }
-
-    //   remove files
-    removeFile(profilePhotopath);
 
     // Creating the user
     const user = await OrgDoc.create({
@@ -81,6 +78,8 @@ export const registerOrg = async (req, res) => {
     return res
       .status(500)
       .json(new ApiResponse(500, {}, "Cannot Register Org"));
+  } finally {
+    removeFile(profilePhotopath);
   }
 };
 
@@ -95,15 +94,17 @@ export const loginOrg = async (req, res) => {
         .status(400)
         .json(new ApiResponse(400, {}, "Give full details"));
 
-    const ifExist = await OrgDoc.findOne({ email });
+    const user = await OrgDoc.findOne({ email }).select(
+      "-password -refreshToken"
+    );
 
-    if (!ifExist)
+    if (!user)
       return res
         .status(400)
         .json(new ApiResponse(400, {}, "User Doesnot exist"));
 
     // If Exist check password
-    const passwordCheck = await ifExist.checkPassword(password);
+    const passwordCheck = await user.checkPassword(password);
 
     if (!passwordCheck) {
       return res
@@ -112,22 +113,22 @@ export const loginOrg = async (req, res) => {
     }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
-      ifExist._id
+      user._id
     );
-    ifExist.refreshToken = refreshToken;
+    user.refreshToken = refreshToken;
 
     // Not Checking the validation before save
-    await ifExist.save({ validateBeforeSave: false });
+    await user.save({ validateBeforeSave: false });
 
     // Password Matches
     return res
       .status(200)
-      .cookie("accessToken", accessToken)
-      .cookie("refreshToken", refreshToken)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
       .json(
         new ApiResponse(
           200,
-          { ifExist, accessToken, refreshToken },
+          { user, accessToken, refreshToken },
           "Successfully Logged In"
         )
       );
@@ -139,4 +140,28 @@ export const loginOrg = async (req, res) => {
 };
 
 // Logout User
-const logOut = async (req, res) => {};
+export const logOut = async (req, res) => {
+  const user = req.user;
+
+  if (!user) {
+    res.status(500).json(new ApiResponse(500, {}, "Something went wrong"));
+  }
+
+  await OrgDoc.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+
+  return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "Successfully Logged Out"));
+};

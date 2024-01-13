@@ -5,7 +5,8 @@ import ApiResponse from "../utils/APIresponse.js";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import { uploadProfilePhoto } from "../utils/Cloudinary.js";
-import { removeFile } from "../utils/unlinkfileafterupload.js";
+import { options } from "../utils/cookieOptions.js";
+import { removeFile } from "../utils/unlinkFile.js";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -23,7 +24,10 @@ const generateAccessTokenAndRefreshToken = async (userid) => {
 };
 
 //Registerng the user
-export const registeruser = async (req, res) => {
+export const registeruser = async (req, res, next) => {
+  // Checking ProfilePhoto
+  // Mutler gives access to req.files?.profilephoto
+  let profilePhotoPath = req.files?.profilephoto[0]?.path;
   try {
     //get user detail
     const { password, name, email, phoneno } = req.body;
@@ -39,13 +43,7 @@ export const registeruser = async (req, res) => {
       return res.status(401).json({ message: "User alerady exists" });
     }
 
-    // Checking ProfilePhoto
-    // Mutler gives access to req.files?.profilephoto
-    let profilePhotoPath = req.files?.profilephoto[0]?.path;
-
     let profilePhoto = "";
-
-    // If profile photo is there
     if (profilePhotoPath) {
       try {
         profilePhoto = await uploadProfilePhoto(profilePhotoPath);
@@ -53,9 +51,6 @@ export const registeruser = async (req, res) => {
         console.log("Error in uploading");
       }
     }
-
-    // Succesfully Removed the profile path
-    removeFile(profilePhotoPath);
 
     //Now Create the user
     const user = await User.create({
@@ -81,6 +76,8 @@ export const registeruser = async (req, res) => {
       .json(new ApiResponse(200, createdUser, "User Registered Succesfully"));
   } catch (err) {
     console.log("Error in registering the user");
+  } finally {
+    removeFile(profilePhotoPath);
   }
 };
 
@@ -120,12 +117,6 @@ export const loginUser = async (req, res) => {
     "-password -refreshToken"
   );
 
-  //Option for cookies these both options make cookies updatable only from server side and not from frontend side
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
-
   //We have to takeout the response because the circular object call in which the object calls itself
   // We are sending data in cookies but also in response because lets say the user want to save the cookies in local storage or moblie application where cookies will be not be set
   const responseData = {
@@ -156,12 +147,6 @@ export const logOutUser = async (req, res) => {
       new: true,
     }
   );
-
-  //Option for cookies these both options make cookies updatable only from server side and not from frontend side
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
 
   return res
     .status(200)
@@ -198,12 +183,7 @@ export const refreshAccesstoken = async (req, res) => {
     const { accessToken, refreshToken } =
       await generateAccessTokenAndRefreshToken(user._id);
 
-    const options = {
-      httpOnly: true,
-      secure: true,
-    };
-
-    return res
+    res
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
@@ -268,12 +248,6 @@ export const googleSignIn = async (req, res) => {
       password: sub,
       type: false,
     });
-
-    // Further operations after successful user creation
-    const options = {
-      httpOnly: true,
-      secure: true,
-    };
 
     // Redirect or respond with success
     res
