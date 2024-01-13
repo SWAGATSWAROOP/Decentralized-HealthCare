@@ -10,6 +10,7 @@ const generateAccessAndRefreshToken = async (userid) => {
   try {
     // Check if userid exist;
     const user = await OrgDoc.findById({ userid });
+
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
     return { accessToken, refreshToken };
@@ -110,8 +111,6 @@ export const loginOrg = async (req, res) => {
         .status(400)
         .json(new ApiResponse(400, {}, "Password Doesnot Match"));
     }
-
-    console.log(ifExist);
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(
       ifExist._id
