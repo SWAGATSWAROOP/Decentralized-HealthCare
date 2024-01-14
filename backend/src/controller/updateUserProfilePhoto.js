@@ -1,4 +1,4 @@
-import { uploadProfilePhoto } from "../utils/Cloudinary.js";
+import { uploadProfilePhoto, removePhoto } from "../utils/Cloudinary.js";
 import { removeFile } from "../utils/unlinkFile.js";
 import ApiResponse from "../utils/APIresponse.js";
 import { User } from "../models/auth.js";
@@ -37,4 +37,30 @@ export const updateProfile = async (req, res) => {
   } finally {
     removeFile(localPath);
   }
+};
+
+//remove profilephoto
+export const removephoto = async (req, res) => {
+  try {
+    const decodedToken = decodedJWT(req.cookies.accessToken);
+    await User.findByIdAndUpdate(
+      decodedToken._id,
+      {
+        $set: {
+          profilephoto: "",
+        },
+      },
+      {
+        new: true,
+      }
+    );
+
+    const remP = await removePhoto(decodedToken.email);
+    if (!remP) {
+      return res.status(500).json(new ApiResponse(500, {}, "Unable To delete"));
+    }
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Successfully Removed"));
+  } catch (error) {}
 };

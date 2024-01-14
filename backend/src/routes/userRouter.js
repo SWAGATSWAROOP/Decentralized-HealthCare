@@ -10,7 +10,10 @@ import {
 } from "../controller/user.controller.js";
 import { Verifyjwt } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/mutlerFileUpload.js";
-import { updateProfile } from "../controller/updateUserProfilePhoto.js";
+import {
+  removephoto,
+  updateProfile,
+} from "../controller/updateUserProfilePhoto.js";
 
 const router = Router();
 
@@ -41,8 +44,13 @@ router.route("/google-signin").get(googleSignIn);
 //secured routes
 router.route("/logout").post(Verifyjwt, logOutUser);
 router.route("/refresh-token").post(refreshAccesstoken);
+
+// Change Profile
 router
   .route("/changephoto")
   .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), updateProfile);
+
+// Remove Profile
+router.route("/removeprofile").post(removephoto);
 
 export default router;

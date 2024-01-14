@@ -33,7 +33,9 @@ export const removePhoto = async (email) => {
       resource_type: "image",
       invalidate: true,
     });
+    return true;
   } catch (error) {
     console.log("Not Able to delete");
+    return false;
   }
 };
