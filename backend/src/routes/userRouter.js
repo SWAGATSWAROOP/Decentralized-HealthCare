@@ -13,7 +13,7 @@ import {
   updateProfile,
 } from "../controller/updateUserProfilePhoto.js";
 import {
-  forgetPaswwordUser,
+  forgetPasswordUser,
   verifyOtp,
 } from "../controller/forgetpasswordUser.js";
 
@@ -44,7 +44,7 @@ router.get("/", (_, res) => {
 router.route("/google-signin").get(googleSignIn);
 
 // Forget Password
-router.route("/forgetpass").get(forgetPaswwordUser).post(verifyOtp);
+router.route("/forgetpass").get(forgetPasswordUser).post(verifyOtp);
 
 //secured routes
 router.route("/logout").post(Verifyjwt, logOutUser);

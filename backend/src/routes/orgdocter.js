@@ -11,6 +11,10 @@ import {
 import { verifyDoc } from "../middlewares/authDoc.middleware.js";
 import { getProfileOrg } from "../controller/orgdocter.js";
 import { updateProfileOrg } from "../controller/updateProfilePhotoOrg.js";
+import {
+  forgetPasswordUser,
+  verifyOtp,
+} from "../controller/forgetpasswordOrg.js";
 
 const router = Router();
 
@@ -18,6 +22,9 @@ const router = Router();
 router
   .route("/register")
   .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), registerOrg);
+
+// forgetpass
+router.route("/forgetpass").get(forgetPasswordUser).post(verifyOtp);
 
 // secured Route
 router.route("/login").post(loginOrg);

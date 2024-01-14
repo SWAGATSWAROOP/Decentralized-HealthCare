@@ -19,7 +19,7 @@ let user;
 // Todo
 // Check for type if user is google account sign in not allowed
 
-export const forgetPaswwordUser = async (req, res) => {
+export const forgetPasswordUser = async (req, res) => {
   try {
     let email = req.body?.email;
     email = email.toLowerCase();
