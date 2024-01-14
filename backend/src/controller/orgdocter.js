@@ -281,3 +281,31 @@ export const updateDetails = async (req, res) => {
 };
 
 //update password
+export const updatePassword = async (req, res) => {
+  try {
+    const decodedToken = decodedJWT(req.cookies.accessToken);
+    const { oldPassword, newPassword } = req.body;
+    const user = await OrgDoc.findById(decodedToken._id);
+    if (!user) {
+      console.log("Error in fetching the data");
+      return res
+        .status(500)
+        .json(new ApiResponse(500, {}, "Cannot fetch user"));
+    }
+    const checkPassword = await user.checkPassword(oldPassword);
+    if (!checkPassword) {
+      return res
+        .status(400)
+        .json(new ApiResponse(400, {}, "Password Doesnot Match"));
+    }
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false });
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Password updated Succesfully"));
+  } catch (error) {
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Password Not updated"));
+  }
+};

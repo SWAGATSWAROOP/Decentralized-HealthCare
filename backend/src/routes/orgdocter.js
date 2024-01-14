@@ -6,6 +6,7 @@ import {
   refreshAccessToken,
   registerOrg,
   updateDetails,
+  updatePassword,
 } from "../controller/orgdocter.js";
 import { verifyDoc } from "../middlewares/authDoc.middleware.js";
 import { getProfileOrg } from "../controller/orgdocter.js";
@@ -23,5 +24,6 @@ router.route("/logout").post(verifyDoc, logOut);
 router.route("/refreshToken").post(refreshAccessToken);
 router.route("/profile").get(getProfileOrg);
 router.route("/update").post(updateDetails);
+router.route("/updatepass").post(updatePassword);
 
 export default router;
