@@ -42,6 +42,8 @@ export const forgetPaswwordUser = async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, {}, "Mail received Successfully"));
   } catch (error) {
+    genOTP = undefined;
+    user = undefined;
     return res.status(500).json(new ApiResponse(500, {}, "Unable to verify"));
   }
 };
@@ -56,13 +58,15 @@ export const verifyOtp = async (req, res) => {
     }
     user.password = password;
     await user.save({ validateBeforeSave: false });
-    // Clearing values
-    genOTP = "";
-    user = "";
+
     return res
       .status(200)
       .json(new ApiResponse(200, {}, "Updated Successfully"));
   } catch (error) {
     return res.status(500).json(new ApiResponse(500, {}, "Unable to verify"));
+  } finally {
+    // Clearing values
+    genOTP = undefined;
+    user = undefined;
   }
 };
