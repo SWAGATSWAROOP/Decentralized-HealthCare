@@ -171,6 +171,7 @@ export const logOut = async (req, res) => {
   }
 };
 
+// refresh accessToken
 export const refreshAccessToken = async (req, res) => {
   try {
     const inrefreshToken = req.cookies.refreshToken || req.body.refreshToken;
@@ -238,3 +239,45 @@ export const getProfileOrg = async (req, res) => {
     return res.status(500).json(new ApiResponse(500, {}, "Cannot fetch user"));
   }
 };
+
+//change details
+export const updateDetails = async (req, res) => {
+  try {
+    const decodedToken = decodedJWT(req.cookies.accessToken);
+    let { name, phoneno, address, type } = req.body;
+
+    // check if all fiels are present or not
+    if ([name, phoneno, address, type].some((field) => field.trim() === "")) {
+      console.log("Some fields are empty");
+      return res
+        .status(400)
+        .json(new ApiResponse(400, {}, "Some fields are empty"));
+    }
+
+    await OrgDoc.findByIdAndUpdate(
+      decodedToken._id,
+      {
+        $set: {
+          name,
+          phoneno,
+          address,
+          type,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, {}, "Successfully Updated"));
+  } catch (error) {
+    console.log("Error in updating values");
+    return res
+      .status(500)
+      .json(new ApiResponse(500, {}, "Error in updating values"));
+  }
+};
+
+//update password
