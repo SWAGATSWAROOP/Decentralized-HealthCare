@@ -28,7 +28,7 @@ export const updateImageByUrl = async (oldImageUrl, newImageFile) => {
   try {
     // Step 1: Retrieve the details of the existing image
     const oldImageDetails = cloudinary.utils.extractPublicId(oldImageUrl);
-
+    console.log(oldImageDetails);
     // Step 2: Upload the new image
     const result = await cloudinary.uploader.upload(newImageFile, {
       public_id: oldImageDetails.public_id,
