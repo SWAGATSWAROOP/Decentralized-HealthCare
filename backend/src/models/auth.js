@@ -1,7 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config({
-  path: "./.env",
-});
 import Mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
 import bycrpt from "bcrypt";
