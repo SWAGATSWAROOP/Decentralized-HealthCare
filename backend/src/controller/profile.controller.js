@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config({ path: "./.env" });
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import { decodedJWT } from "../utils/deCodeToken.js";

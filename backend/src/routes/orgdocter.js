@@ -10,6 +10,7 @@ import {
 } from "../controller/orgdocter.js";
 import { verifyDoc } from "../middlewares/authDoc.middleware.js";
 import { getProfileOrg } from "../controller/orgdocter.js";
+import { updateProfileOrg } from "../controller/updateProfilePhotoOrg.js";
 
 const router = Router();
 
@@ -25,5 +26,11 @@ router.route("/refreshToken").post(refreshAccessToken);
 router.route("/profile").get(getProfileOrg);
 router.route("/update").post(updateDetails);
 router.route("/updatepass").post(updatePassword);
+router
+  .route("/updatephoto")
+  .post(
+    upload.fields([{ name: "profilephoto", maxCount: 1 }]),
+    updateProfileOrg
+  );
 
 export default router;
