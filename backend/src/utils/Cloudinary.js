@@ -36,7 +36,8 @@ export const updateImageByUrl = async (oldImageUrl, newImageFile) => {
     });
 
     // Step 3: Update the Cloudinary asset by replacing the existing image
-    console.log("Updated Image URL:", result.secure_url);
+    console.log("Updated Image URL:");
+    return result;
   } catch (error) {
     console.error("Error updating image:", error.message);
   }

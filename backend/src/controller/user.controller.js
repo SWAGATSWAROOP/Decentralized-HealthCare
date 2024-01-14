@@ -24,7 +24,7 @@ const generateAccessTokenAndRefreshToken = async (userid) => {
 };
 
 //Registerng the user
-export const registeruser = async (req, res, next) => {
+export const registeruser = async (req, res) => {
   // Checking ProfilePhoto
   // Mutler gives access to req.files?.profilephoto
   let profilePhotoPath = req.files?.profilephoto[0]?.path;
