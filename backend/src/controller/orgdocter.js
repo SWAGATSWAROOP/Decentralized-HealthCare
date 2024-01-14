@@ -58,7 +58,7 @@ export const registerOrg = async (req, res) => {
     }
 
     //upload to Cloudinary
-    const response = await uploadProfilePhoto(profilePhotopath);
+    const response = await uploadProfilePhoto(profilePhotopath, email);
     if (!response) {
       return res.status(500).json(new ApiResponse(400, {}, "Unable to upload"));
     }
