@@ -1,10 +1,9 @@
-import dotenv from "dotenv";
-dotenv.config();
 import { OrgDoc } from "../models/orgdocter.js";
 import ApiResponse from "../utils/APIresponse.js";
 import { uploadProfilePhoto } from "../utils/Cloudinary.js";
 import { options } from "../utils/cookieOptions.js";
 import { removeFile } from "../utils/unlinkFile.js";
+import { decodedJWT } from "../utils/deCodeToken.js";
 import jwt from "jsonwebtoken";
 
 // generating Access And refreshToken
@@ -29,7 +28,7 @@ export const registerOrg = async (req, res) => {
   const profilePhotopath = req.files?.profilephoto[0]?.path;
   try {
     // check that if user sent all details
-    const { email, password, name, phoneno, address, type } = req.body;
+    let { email, password, name, phoneno, address, type } = req.body;
     // check if all fiels are present or not
     if (
       [email, password, name, phoneno, address, type].some(
@@ -41,7 +40,7 @@ export const registerOrg = async (req, res) => {
         .status(400)
         .json(new ApiResponse(400, {}, "Some fields are empty"));
     }
-
+    email = email.toLowerCase();
     //check if the user already exists
     const ifExist = await OrgDoc.findOne({ email: email });
 
@@ -70,7 +69,7 @@ export const registerOrg = async (req, res) => {
       password,
       address,
       type,
-      profilephoto: response.url,
+      profilephoto: response,
       phoneno,
       name,
     });
@@ -216,5 +215,26 @@ export const refreshAccessToken = async (req, res) => {
     return res
       .status(401)
       .json({ message: "Something went wrong while refreshing access Token" });
+  }
+};
+
+//get Profile of Org/OrgDoc
+export const getProfileOrg = async (req, res) => {
+  try {
+    const decodedToken = decodedJWT(req.cookies.accessToken);
+    const user = await OrgDoc.findById(decodedToken._id).select(
+      "-password -refreshToken"
+    );
+    if (!user) {
+      return res
+        .status(500)
+        .json(new ApiResponse(500, {}, "Cannot find the user"));
+    }
+    return res
+      .status(200)
+      .json(new ApiResponse(200, user, "Successfully Fetched profile"));
+  } catch (error) {
+    console.log("Error in fetching the data");
+    return res.status(500).json(new ApiResponse(500, {}, "Cannot fetch user"));
   }
 };

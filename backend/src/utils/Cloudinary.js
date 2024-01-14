@@ -6,39 +6,34 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
+  secure: true,
 });
 
-export const uploadProfilePhoto = async (localPath) => {
+export const uploadProfilePhoto = async (localPath, email) => {
   try {
     // if path is not present
     if (!localPath) return null;
     // upload file on cloudinary
     const response = await cloudinary.uploader.upload(localPath, {
-      resource_type: "auto",
+      public_id: email,
+      resource_type: "image",
+      overwrite: true,
     });
     // getting url of the file
     console.log("File is uploaded on cloudinary", response.url);
-    return response;
+    return response.secure_url;
   } catch (error) {
     console.log("Error in uploading");
   }
 };
 
-export const updateImageByUrl = async (oldImageUrl, newImageFile) => {
+export const removePhoto = async (email) => {
   try {
-    // Step 1: Retrieve the details of the existing image
-    const oldImageDetails = cloudinary.utils.extractPublicId(oldImageUrl);
-    console.log(oldImageDetails);
-    // Step 2: Upload the new image
-    const result = await cloudinary.uploader.upload(newImageFile, {
-      public_id: oldImageDetails.public_id,
-      format: oldImageDetails.format,
+    await cloudinary.uploader.destroy(email, {
+      resource_type: "image",
+      invalidate: true,
     });
-
-    // Step 3: Update the Cloudinary asset by replacing the existing image
-    console.log("Updated Image URL:");
-    return result;
   } catch (error) {
-    console.error("Error updating image:", error.message);
+    console.log("Not Able to delete");
   }
 };

@@ -1,10 +1,15 @@
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
+import { decodedJWT } from "../utils/deCodeToken.js";
 
 // get profile details
 export const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req?.user?._id);
+    const user = await User.findById(req?.user?._id).select(
+      "-password -refreshToken"
+    );
     if (!user) {
       return res.status(404).json(new ApiResponse(404, {}, "User Not found"));
     }
@@ -26,15 +31,18 @@ export const getProfile = async (req, res) => {
 //update profile details
 export const updateProfile = async (req, res) => {
   try {
-    const { name, phoneno, email } = req.body;
+    const { name, phoneno } = req.body;
+    const decodedToken = decodedJWT(req.cookies.accessToken);
+
+    const email = decodedToken.email;
 
     const updateduser = await User.findOneAndUpdate(
       { email },
-      { $set: { name, phoneno, email } },
+      { $set: { name, phoneno } },
       { new: true }
     ).select("-password -refreshToken");
 
-    res
+    return res
       .status(200)
       .json(new ApiResponse(200, { user: updateduser }, "Updated Succesfully"));
   } catch (error) {

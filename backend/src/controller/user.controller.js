@@ -1,12 +1,10 @@
-import dotenv from "dotenv";
-dotenv.config();
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
-import jwt from "jsonwebtoken";
 import axios from "axios";
 import { uploadProfilePhoto } from "../utils/Cloudinary.js";
 import { options } from "../utils/cookieOptions.js";
 import { removeFile } from "../utils/unlinkFile.js";
+import jwt from "jsonwebtoken";
 
 const generateAccessTokenAndRefreshToken = async (userid) => {
   try {
@@ -30,12 +28,13 @@ export const registeruser = async (req, res) => {
   let profilePhotoPath = req.files?.profilephoto[0]?.path;
   try {
     //get user detail
-    const { password, name, email, phoneno } = req.body;
+    let { password, name, email, phoneno } = req.body;
     //Validation
     if ([password, name, email, phoneno].some((field) => field.trim() === "")) {
       console.log("Some fiels are empty");
       return res.status(401).json({ message: "Some fields are empty" });
     }
+    email = email.toLowerCase();
     //check if user always exist
     const fuser = await User.findOne({ email });
     if (fuser) {
@@ -46,7 +45,7 @@ export const registeruser = async (req, res) => {
     let profilePhoto = "";
     if (profilePhotoPath) {
       try {
-        profilePhoto = await uploadProfilePhoto(profilePhotoPath);
+        profilePhoto = await uploadProfilePhoto(profilePhotoPath, email);
       } catch (error) {
         console.log("Error in uploading");
       }
@@ -55,10 +54,10 @@ export const registeruser = async (req, res) => {
     //Now Create the user
     const user = await User.create({
       name,
-      email: email.toLowerCase(),
+      email,
       password,
       phoneno,
-      profilephoto: profilePhoto?.url || "",
+      profilephoto: profilePhoto || "",
     });
 
     //Check if user exists and also takeout all field except password and refresh refreshToken
@@ -163,6 +162,7 @@ export const refreshAccesstoken = async (req, res) => {
       console.log("Refresh Token is not present or wrong");
       return res.status(401).json({ message: "Unauthorized Access" });
     }
+    
     const decodedtoken = jwt.verify(
       incomingRT,
       process.env.REFRESH_TOKEN_SECRET
