@@ -16,6 +16,9 @@ import { sendMail } from "../utils/nodemailer.js";
 let genOTP;
 let user;
 
+// Time for OTP validation
+const resetOTP = () => (genOTP = undefined);
+
 // Todo
 // Check for type if user is google account sign in not allowed
 
@@ -30,6 +33,8 @@ export const forgetPasswordUser = async (req, res) => {
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
     }
     genOTP = genearateOTP();
+    // reset otp
+    setTimeout(() => resetOTP(), 300000);
 
     const mail = await sendMail(email, genOTP);
     if (!mail) {

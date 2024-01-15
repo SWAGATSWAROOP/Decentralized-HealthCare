@@ -7,6 +7,11 @@ import { OrgDoc } from "../models/orgdocter.js";
 let genOTP;
 let user;
 
+// ToDo OTP time increase
+
+// Time for OTP validation
+const resetOTP = () => (genOTP = undefined);
+
 export const forgetPasswordUser = async (req, res) => {
   try {
     let email = req.body?.email;
@@ -18,6 +23,8 @@ export const forgetPasswordUser = async (req, res) => {
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
     }
     genOTP = genearateOTP();
+    // To reset otp
+    setTimeout(() => resetOTP(), 60000);
 
     const mail = await sendMail(email, genOTP);
     if (!mail) {
