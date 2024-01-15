@@ -19,15 +19,12 @@ let user;
 // Time for OTP validation
 const resetOTP = () => (genOTP = undefined);
 
-// Todo
-// Check for type if user is google account sign in not allowed
-
 export const forgetPasswordUser = async (req, res) => {
   try {
     let email = req.body?.email;
     email = email.toLowerCase();
     user = await User.findOne({ email });
-    if (!user) {
+    if (!user || !user.type) {
       return res
         .status(404)
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
