@@ -56,7 +56,6 @@ export const forgetPasswordUser = async (req, res) => {
 export const verifyOtp = async (req, res) => {
   try {
     const { otp, password } = req.body;
-    console.log(genOTP);
     if (otp != genOTP) {
       console.log("otp doesnot match");
       return res.status(400).json(new ApiResponse(400, {}, "Invalid OTP"));

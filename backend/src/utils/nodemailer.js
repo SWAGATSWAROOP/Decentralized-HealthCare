@@ -14,13 +14,12 @@ const transporter = nodemailer.createTransport({
 // sending mail
 export const sendMail = async (to_mail, OTP) => {
   try {
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: process.env.MAIL, // sender address
       to: to_mail, // list of receivers
       subject: `Forget Password OTP of ${to_mail}`, // Subject line
       text: `OTP for the mail ${to_mail} is ${OTP}`, // plain text body
     });
-    console.log(info);
     return true;
   } catch (error) {
     return false;
