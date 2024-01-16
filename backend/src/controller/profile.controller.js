@@ -56,6 +56,9 @@ export const updatePassword = async (req, res) => {
   try {
     const { email, oldPassword, newPassword } = req.body;
     const user = await User.findOne({ email });
+    if (!user.type) {
+      return res.status(400).json(new ApiResponse(400, {}, "Not Authorized"));
+    }
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
     if (!isPasswordCorrect) {
       console.log("Password Doesnot Match");
