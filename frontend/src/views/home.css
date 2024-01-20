@@ -237,7 +237,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background-color: rgba(126, 211, 165, 0.29);
+  background-color: var(--dl-color-primary1-blue80);
 }
 .home-hero1 {
   width: 100%;
