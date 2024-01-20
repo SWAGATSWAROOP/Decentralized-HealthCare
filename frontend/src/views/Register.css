@@ -1,0 +1,151 @@
+/* Initial CSS */
+#signUpBody {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    align-items: center;
+    font-family: 'Proxima Nova';
+  }
+  
+  #signUpBG {
+    background-image: url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGVhbHRoY2FyZSUyMHN5c3RlbXxlbnwwfHwwfHx8MA%3D%3D);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .greenLayer {
+    background-color: rgba(126, 211, 165, 0.44);
+    height: 100vh;
+  }
+  
+  h2 {
+    color: #048C7F;
+    text-align: center;
+  }
+  
+  .signUpform {
+    width: 60%;
+    margin: auto;
+  }
+  
+  input[type=text],
+  input[type=email],
+  input[type=password],
+  input[type=date],
+  input[type=number],
+  select {
+    border: none !important;
+    border-bottom: 1px solid silver !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+  
+  input[type=checkbox] {
+    border: 1px black solid !important;
+    border-radius: 3px !important;
+  }
+  
+  #signUpBtn {
+    padding: 10px 60px;
+    color: white;
+    background-color: #31b372;
+    border: 0;
+    margin: 40px;
+  }
+  
+  #signUpBtn:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(1.1);
+  }
+  
+  @media screen and (max-width:1000px) {
+    #signUpBody {
+      grid-template-columns: 0% 100%;
+    }
+  
+    #signUpBtn {
+      padding: 10px 50px;
+    }
+  }
+  
+  /* Additional CSS for new fields */
+  
+  /* For user type selection */
+  #userType,
+  #organizationName,
+  #address,
+  #profilePhoto {
+    width: 100%;
+    border: none !important;
+    border-bottom: 1px solid silver !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+  
+  /* For checkbox */
+  #terms-chkbox {
+    border: 1px black solid !important;
+    border-radius: 3px !important;
+  }
+  
+  /* For submit button */
+  #signUpBtn {
+    padding: 10px 60px;
+    color: white;
+    background-color: #31b372;
+    border: 0;
+    margin: 40px;
+  }
+  
+  #signUpBtn:hover {
+    transition: all .1s ease-in-out;
+    transform: scale(1.1);
+  }
+  
+  @media screen and (max-width: 1000px) {
+    #signUpBody {
+      grid-template-columns: 0% 100%;
+    }
+  
+    #signUpBtn {
+      padding: 10px 50px;
+    }
+  }
+  
+  /* For profile photo upload */
+  #profilePhotoInput {
+    display: none;
+  }
+  
+  #profilePhotoContainer {
+    margin-top: 20px;
+  }
+  
+  #profilePhotoLabel {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #31b372;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  #profilePhotoLabel:hover {
+    background-color: #2a9c64;
+  }
+  
+  #profilePhotoLabel:after {
+    content: 'Upload Profile Photo';
+    margin-left: 10px; 
+  }
+  
+  #profilePhotoPreview {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    display: block;
+    border-radius: 5px;
+    border: 2px solid #31b372; 
+  }
