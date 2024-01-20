@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import { NavLink } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // import axios from "axios";
 
 function Register() {
-  const history = useNavigate();
+  const history = useHistory();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // import "react-toastify/dist/ReactToastify.css";
 // import { toast } from "react-toastify";
 import { UserContext } from "../Context/UserContext";
@@ -57,7 +57,7 @@ function Login() {
       toast.error("Login failed");
     }
   };
-  const history = useNavigate();
+  const history = useHistory();
   // Function to handle sign-up button click
   const signUpClicked = () => {
    history.push("/Register");

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  Navigate,
+  Switch,
+  Redirect,
 } from 'react-router-dom'
 
 import './style.css'
@@ -20,13 +20,13 @@ import "./assets/assets/css/style.css";
 const App = () => {
   return (
     <Router>
-      <Routes>
+      <Switch>
         <Route component={Home} exact path="/" />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route component={NotFound} path="**" />
-        <Navigate to="**" />
-      </Routes>
+        <Redirect to="**" />
+      </Switch>
     </Router>
   )
 }
