@@ -22,7 +22,6 @@ const Home = () => {
             <nav className="home-links">
               <span>About</span>
               <span className="home-nav2">Features</span>
-              <span className="home-nav3">Pricing</span>
               <span className="home-nav4">Team</span>
               <span className="home-nav5">Blog</span>
             </nav>
@@ -53,7 +52,6 @@ const Home = () => {
               <nav className="home-links1">
                 <span className="home-nav11">About</span>
                 <span className="home-nav21">Features</span>
-                <span className="home-nav31">Pricing</span>
                 <span className="home-nav41">Team</span>
                 <span className="home-nav51">Blog</span>
               </nav>
@@ -342,7 +340,6 @@ const Home = () => {
             <nav className="home-nav1 home-nav1">
               <span className="home-nav12">About</span>
               <span className="home-nav22">Features</span>
-              <span className="home-nav32">Pricing</span>
               <span className="home-nav42">Team</span>
               <span className="home-nav52">Blog</span>
             </nav>
