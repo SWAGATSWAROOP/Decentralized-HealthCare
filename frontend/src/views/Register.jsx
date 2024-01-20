@@ -189,20 +189,21 @@ function Register() {
             </div>
           )}
 
-          {(userType === "Doctor" || userType === "Organization" || userType === "Patient") && (
-            <div>
-              <div className="form-floating mt-3 col-12 mx-2">
+          {(userType === "Doctor" || userType === "Organization") && (
+              <div className="mt-3 col-12 mx-2">
+                 <label htmlFor="address">Address</label>
                 <textarea
                   id="address"
                   name="address"
                   placeholder="Enter your address"
                   value={address}
                   onChange={(event) => setAddress(event.target.value)}
-                  className="form-control"
+                  className="form-control overflow-scroll resize-none"
                 ></textarea>
-                <label htmlFor="address">Address</label>
-              </div>
-              <div className="form-floating mt-3 col-12 mx-2">
+              </div>)}
+            {(userType === "Doctor" || userType === "Organization" || userType === "Patient") && (
+              <div className="mt-3 col-12 mx-2">
+                <label htmlFor="profilePhoto">Profile Photo</label>
                 <input
                   type="file"
                   id="profilePhoto"
@@ -210,9 +211,7 @@ function Register() {
                   onChange={(event) => setProfilePhoto(event.target.files[0])}
                   className="form-control"
                 />
-                <label htmlFor="profilePhoto">Profile Photo</label>
               </div>
-            </div>
           )}
 
           <div className="text-center">
