@@ -11,7 +11,6 @@ function Register() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
   const [address, setAddress] = useState("");
@@ -28,7 +27,6 @@ function Register() {
       lastName,
       email,
       phone,
-      username,
       password,
       userType,
       address,
@@ -48,7 +46,6 @@ function Register() {
       setLastName("");
       setEmail("");
       setPhone("");
-      setUsername("");
       setPassword("");
       setAddress("");
       setProfilePhoto(null);
@@ -122,19 +119,6 @@ function Register() {
                   <label htmlFor="lastName">Last Name</label>
                 </div>
               </div>
-              <div className="form-floating mt-3 col-12 mx-2">
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  className="form-control"
-                  placeholder="username"
-                  value={username}
-                  required
-                  onChange={(event) => setUsername(event.target.value)}
-                />
-                <label htmlFor="username">Username</label>
-              </div>
             </div>
           )}
 
@@ -205,7 +189,7 @@ function Register() {
             </div>
           )}
 
-          {(userType === "Doctor" || userType === "Organization") && (
+          {(userType === "Doctor" || userType === "Organization" || userType === "Patient") && (
             <div>
               <div className="form-floating mt-3 col-12 mx-2">
                 <textarea
@@ -231,17 +215,6 @@ function Register() {
             </div>
           )}
 
-          <div className="form-group form-check mt-5 mx-2">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="terms-chkbox"
-              required
-            />
-            <label className="" htmlFor="terms-chkbox">
-              I agree with the terms and conditions
-            </label>
-          </div>
           <div className="text-center">
             <button id={styles.signUpBtn} type="submit">
               Sign Up
