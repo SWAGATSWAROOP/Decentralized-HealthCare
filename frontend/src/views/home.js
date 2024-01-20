@@ -89,7 +89,11 @@ const Home = () => {
             </span>
             <div className="home-btn-group">
               <button className="home-hero-button1 button">Get Started</button>
-              <button className="home-hero-button2 button">Learn More →</button>
+              <a href="https://www.sciencedirect.com/science/article/pii/S200103701830028X">
+                <button className="home-hero-button2 button">
+                  Learn More →
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -225,7 +229,9 @@ const Home = () => {
           <span className="home-banner-sub-heading">
             Discover the Future of Patient Care
           </span>
-          <button className="home-banner-button button">Read More</button>
+          <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6068317/">
+            <button className="home-banner-button button">Read More</button>
+          </a>
         </div>
       </div>
       <div id="faq" className="home-faq">
