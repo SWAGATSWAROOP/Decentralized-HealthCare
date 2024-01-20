@@ -24,7 +24,7 @@
   justify-content: flex-start;
 }
 .feature-card-text {
-  font-family: "Raleway";
+  font-family: 'Raleway';
   font-weight: 600;
   line-height: 28px;
 }
@@ -32,7 +32,7 @@
   color: var(--dl-color-gray-800);
   line-height: 1.6;
 }
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   .feature-card-feature-card {
     flex-direction: row;
   }
@@ -40,7 +40,7 @@
     flex-direction: column;
   }
 }
-@media(max-width: 479px) {
+@media (max-width: 479px) {
   .feature-card-container {
     flex-direction: column;
   }

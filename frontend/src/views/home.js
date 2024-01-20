@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 
-import FeatureCard from '../components/feature-card'
-import GalleryCard3 from '../components/gallery-card3'
-import Question from '../components/question'
-import './home.css'
+import FeatureCard from '../components/feature-card';
+import GalleryCard3 from '../components/gallery-card3';
+import Question from '../components/question';
+import './home.css';
 
 const Home = (props) => {
   return (
@@ -27,12 +27,12 @@ const Home = (props) => {
               <span className="home-nav5">Blog</span>
             </nav>
             <div className="home-buttons">
-            <Link to="/login">
-        <button className="home-login buttons">Login</button>
-      </Link>
-      <Link to="/register">
-        <button className='home-register'>Register</button>
-      </Link>
+              <Link to="/login">
+                <button className="home-login buttons">Login</button>
+              </Link>
+              <Link to="/register">
+                <button className="home-register">Register</button>
+              </Link>
             </div>
           </div>
           <div data-thq="thq-burger-menu" className="home-burger-menu">
@@ -153,7 +153,7 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-      
+
       <div className="home-gallery">
         <div className="home-gallery1">
           <h1 className="home-gallery-heading heading2">
@@ -367,7 +367,7 @@ const Home = (props) => {
         </footer>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

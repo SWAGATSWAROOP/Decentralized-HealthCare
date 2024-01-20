@@ -22,12 +22,20 @@ const RegisterPage = () => {
             </div>
 
             <div className="field input-field">
-              <input type="password" placeholder="Create password" className="password" />
+              <input
+                type="password"
+                placeholder="Create password"
+                className="password"
+              />
             </div>
 
             <div className="field input-field">
-              <input type="password" placeholder="Confirm password" className="password" />
-              <i className='bx bx-hide eye-icon'></i>
+              <input
+                type="password"
+                placeholder="Confirm password"
+                className="password"
+              />
+              <i className="bx bx-hide eye-icon"></i>
             </div>
 
             <div className="field button-field">
@@ -36,13 +44,16 @@ const RegisterPage = () => {
           </form>
 
           <div className="form-link">
-            <span>Already have an account? <a href="#" className="link login-link" onClick={handleLoginLink}>Login</a></span>
+            <span>
+              Already have an account?{' '}
+              <a href="#" className="link login-link" onClick={handleLoginLink}>
+                Login
+              </a>
+            </span>
           </div>
         </div>
 
         <div className="line"></div>
-
-        
 
         <div className="media-options">
           <a href="#" className="field google">
