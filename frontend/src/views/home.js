@@ -8,7 +8,7 @@ import GalleryCard3 from '../components/gallery-card3';
 import Question from '../components/question';
 import './home.css';
 
-const Home = (props) => {
+const Home = () => {
   return (
     <div className="home-container">
       <Helmet>
