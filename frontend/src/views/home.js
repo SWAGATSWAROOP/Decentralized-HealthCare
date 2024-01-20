@@ -17,13 +17,12 @@ const Home = () => {
       </Helmet>
       <div className="home-header">
         <header data-thq="thq-navbar" className="home-navbar-interactive">
-          <span className="home-logo">HEALTHCARE</span>
+          <span className="home-logo">DHM</span>
           <div data-thq="thq-navbar-nav" className="home-desktop-menu">
             <nav className="home-links">
               <span>About</span>
               <span className="home-nav2">Features</span>
-              <span className="home-nav4">Team</span>
-              <span className="home-nav5">Blog</span>
+              <span className="home-nav4">FAQ</span>
             </nav>
             <div className="home-buttons">
               <Link to="/login">
@@ -52,8 +51,7 @@ const Home = () => {
               <nav className="home-links1">
                 <span className="home-nav11">About</span>
                 <span className="home-nav21">Features</span>
-                <span className="home-nav41">Team</span>
-                <span className="home-nav51">Blog</span>
+                <span className="home-nav41">FAQ</span>
               </nav>
               <div className="home-buttons1">
                 <button className="home-login1 button">Login</button>
@@ -336,18 +334,20 @@ const Home = () => {
       <div className="home-footer">
         <footer className="home-footer1">
           <div className="home-container32">
-            <span className="home-logo2">HEALTHCARE</span>
+            <span className="home-logo2">
+              Decentralized HealthCare Management
+            </span>
             <nav className="home-nav1 home-nav1">
-              <span className="home-nav12">About</span>
-              <span className="home-nav22">Features</span>
-              <span className="home-nav42">Team</span>
-              <span className="home-nav52">Blog</span>
+              <span className="home-nav42">
+                Experience the future of healthcare with our decentralized
+                blockchain system
+              </span>
             </nav>
           </div>
           <div className="home-separator"></div>
           <div className="home-container33">
             <span className="home-text61">
-              © 2023 myCompany, All Rights Reserved.
+              © 2023 DHM, All Rights Reserved.
             </span>
             <div className="home-icon-group1">
               <svg viewBox="0 0 950.8571428571428 1024" className="home-icon10">
