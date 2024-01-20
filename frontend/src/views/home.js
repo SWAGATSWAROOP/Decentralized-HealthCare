@@ -20,9 +20,15 @@ const Home = () => {
           <span className="home-logo">DHM</span>
           <div data-thq="thq-navbar-nav" className="home-desktop-menu">
             <nav className="home-links">
-              <span>About</span>
-              <span className="home-nav2">Features</span>
-              <span className="home-nav4">FAQ</span>
+              <a href="#details">
+                <span className="home-nav2">About</span>
+              </a>
+              <a href="#features">
+                <span className="home-nav2">Features</span>
+              </a>
+              <a href="#faq">
+                <span className="home-nav4">FAQ</span>
+              </a>
             </nav>
             <div className="home-buttons">
               <Link to="/login">
@@ -88,7 +94,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="home-details">
+      <div id="details" className="home-details">
         <div className="home-details1">
           <div className="home-container02">
             <span className="home-text sectionTitle">
@@ -114,7 +120,7 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="home-features">
+      <div id="features" className="home-features">
         <div className="home-features-container">
           <div className="home-features1">
             <div className="home-container03">
@@ -222,7 +228,7 @@ const Home = () => {
           <button className="home-banner-button button">Read More</button>
         </div>
       </div>
-      <div className="home-faq">
+      <div id="faq" className="home-faq">
         <div className="home-faq-container">
           <div className="home-faq1">
             <div className="home-container30">

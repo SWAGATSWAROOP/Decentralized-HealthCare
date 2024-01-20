@@ -46,6 +46,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: center;
+  cursor: pointer;
 }
 .home-nav1 {
   transition: 0.3s;
