@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,8 @@ import Question from '../components/question';
 import './home.css';
 
 const Home = () => {
+  // For opening the hamburger icon
+  const [open, setOpen] = useState(false);
   return (
     <div className="home-container">
       <Helmet>
@@ -40,7 +42,11 @@ const Home = () => {
             </div>
           </div>
           <div data-thq="thq-burger-menu" className="home-burger-menu">
-            <svg viewBox="0 0 1024 1024" className="home-icon">
+            <svg
+              viewBox="0 0 1024 1024"
+              className="home-icon"
+              onClick={() => setOpen(!open)}
+            >
               <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
             </svg>
           </div>
