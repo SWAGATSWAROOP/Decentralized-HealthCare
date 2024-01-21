@@ -19,7 +19,7 @@ const Home = () => {
     };
 
     const closeSideBar = () => {
-      if (open && window.scrollY > 300) {
+      if (open && window.scrollY > 400) {
         setOpen(false);
       }
     };
