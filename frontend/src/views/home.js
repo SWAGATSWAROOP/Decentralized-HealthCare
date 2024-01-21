@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,28 @@ import './home.css';
 const Home = () => {
   // For opening the hamburger icon
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (open && window.innerWidth > 768) {
+        setOpen(false);
+      }
+    };
+
+    const closeSideBar = () => {
+      if (open && window.scrollY > 300) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', closeSideBar);
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener
+    return () => {
+      window.removeEventListener('scroll', closeSideBar);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [open]);
   return (
     <div className="home-container">
       <Helmet>
@@ -41,17 +63,48 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div data-thq="thq-burger-menu" className="home-burger-menu">
-            <svg
-              viewBox="0 0 1024 1024"
-              className="home-icon"
-              onClick={() => setOpen(!open)}
-            >
-              <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-            </svg>
-          </div>
-          {/* Todo */}
+          {!open && (
+            <div data-thq="thq-burger-menu" className="home-burger-menu">
+              <svg
+                viewBox="0 0 1024 1024"
+                className={`home-icon`}
+                onClick={() => setOpen(!open)}
+              >
+                <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+              </svg>
+            </div>
+          )}
         </header>
+        {open && (
+          <div
+            className="z-50 absolute mt-4 top-0 right-0 pr-3 w-40 pb-40"
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
+          >
+            <div className="flex justify-end">
+              <div className="cursor-pointer" onClick={() => setOpen(false)}>
+                X
+              </div>
+            </div>
+            <div className="home-logo ml-3">Menu</div>
+            <div className="right-10 ml-3 mt-4">
+              <Link to="/login">
+                <div>Login</div>
+              </Link>
+              <Link to="/register">
+                <div>Register</div>
+              </Link>
+              <div>
+                <a href="#details">About</a>
+              </div>
+              <div>
+                <a href="#features">Features</a>
+              </div>
+              <div className="pb-2">
+                <a href="#faq">FAQ</a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="home-hero">
         <div className="home-hero1">
