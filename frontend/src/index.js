@@ -11,6 +11,11 @@ import RegisterPage from './views/Register';
 import './assets/assets/css/font-awesome.min.css';
 import './assets/assets/css/style.css';
 
+// Importing store
+import { store } from './store/store.js';
+// importing Provider from react redux
+import { Provider } from 'react-redux';
+
 const App = () => {
   return (
     <Router>
@@ -25,4 +30,9 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);

@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.0.0-alpha.0",
+    "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.5",
     "prop-types": "15.7.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-google-login": "^5.2.2",
     "react-helmet": "^6.1.0",
+    "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3"
   },
   "scripts": {
