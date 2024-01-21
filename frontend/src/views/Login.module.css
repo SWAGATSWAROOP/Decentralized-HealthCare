@@ -72,6 +72,15 @@
 }
 @media screen and (max-width: 1000px) {
   #loginFormDiv {
+    height: 80%;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.86);
+    overflow-y: scroll;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #loginFormDiv {
     height: 90%;
     width: 70%;
     background-color: rgba(255, 255, 255, 0.86);
