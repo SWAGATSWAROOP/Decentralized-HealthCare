@@ -206,6 +206,8 @@ function Register() {
                 <label htmlFor="profilePhoto">Profile Photo</label>
                 <input
                   type="file"
+                  accept="image"
+                  multiple={false}
                   id="profilePhoto"
                   name="profilePhoto"
                   onChange={(event) => setProfilePhoto(event.target.files[0])}
