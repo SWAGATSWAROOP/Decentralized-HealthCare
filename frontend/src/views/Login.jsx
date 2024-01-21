@@ -11,7 +11,7 @@ function Login() {
     <div id={styles.loginBody}>
       <div className={styles.greenLayer1}>
         <div id={styles.loginFormDiv}>
-          <p>Welcome back!</p>
+          <h1>Welcome back!</h1>
           <form className="col-6" id="loginForm">
             {/* Input field for email */}
             <div className="form-floating mt-3 col-12 mx-2">

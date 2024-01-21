@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-wrap: break-word;
 }
 
 #loginFormDiv {
@@ -24,6 +25,7 @@
   justify-content: center;
   align-items: center;
   font-family: 'Proxima Nova';
+  padding: 20px;
 }
 
 #loginFormDiv p {
