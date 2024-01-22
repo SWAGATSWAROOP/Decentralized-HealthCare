@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
+import GoogleButton from 'react-google-button';
 
 function Login() {
   const [password, setPassword] = useState("");
@@ -66,11 +67,9 @@ function Login() {
               </Link>
             </div>
             <div className="mt-3 mx-2">
-              {/* <GoogleLogin
-                clientId="your-google-client-id"
-                buttonText="Google"
-                className={styles.googleSignInButton}
-              /> */}
+              <GoogleButton
+                onClick={() => { console.log('Google button clicked') }}
+              />
             </div>
           </form>
         </div>
