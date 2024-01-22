@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userSlice from '../slices/user.slice.js';
+import userReducer from '../slices/user.slice.js'; // Rename to userReducer
 
 export const store = configureStore({
-  user: userSlice,
+  reducer: {
+    user: userReducer, // Use the reducer function, not the instance
+  },
 });

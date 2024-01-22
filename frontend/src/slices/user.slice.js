@@ -8,15 +8,15 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signedIn: (state) => {
+    setSignedIn: (state) => {
       state.signedIn = true;
     },
-    signedOut: (state) => {
+    setSignedOut: (state) => {
       state.signedIn = false;
     },
   },
 });
 
-export const { signedIn, signedOut } = userSlice.actions;
+export const { setSignedIn, setSignedOut } = userSlice.actions;
 
 export default userSlice.reducer;

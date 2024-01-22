@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
 import { Link } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
 
 function Login() {
   const [password, setPassword] = useState("");
@@ -67,11 +66,11 @@ function Login() {
               </Link>
             </div>
             <div className="mt-3 mx-2">
-              <GoogleLogin
+              {/* <GoogleLogin
                 clientId="your-google-client-id"
                 buttonText="Google"
                 className={styles.googleSignInButton}
-              />
+              /> */}
             </div>
           </form>
         </div>
