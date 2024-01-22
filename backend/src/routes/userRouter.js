@@ -23,6 +23,8 @@ const router = Router();
 router
   .route("/register")
   .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), registeruser);
+
+  // User login
 router.route("/login").post(loginUser);
 
 //googlesign in
