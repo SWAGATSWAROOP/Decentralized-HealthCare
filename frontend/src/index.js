@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 
 import './style.css';
 import Home from './views/home';
@@ -30,9 +31,10 @@ const App = () => {
   );
 };
 
-ReactDOM.render(
+const container = document.getElementById('app');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('app')
+  </Provider>
 );
