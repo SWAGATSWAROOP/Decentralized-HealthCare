@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import styles from "./Login.module.css";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import styles from './Login.module.css';
+import { Link } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
+import axios from 'axios';
 
 function Login() {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [type, setType] = useState('');
+
+  const googleSignIn = async () => {
+    const res = await axios.get();
+  };
 
   return (
     <div id={styles.loginBody}>
@@ -14,6 +20,22 @@ function Login() {
           <h1>Welcome back!</h1>
           <form className="col-6" id="loginForm">
             {/* Input field for email */}
+            <div className="form-floating mt-3 col-12 mx-2">
+              <select
+                id="userType"
+                name="userType"
+                value={type}
+                onChange={(event) => setType(event.target.value)}
+                className="form-select"
+                required
+              >
+                <option value="">Select User Type</option>
+                <option value="Patient">Patient</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Organization">Organization</option>
+              </select>
+              <label htmlFor="userType">User Type</label>
+            </div>
             <div className="form-floating mt-3 col-12 mx-2">
               <input
                 type="email"
@@ -54,9 +76,9 @@ function Login() {
               </button>
               <button
                 className={[
-                  "col-12 col-md-6 mt-3 mt-md-0",
+                  'col-12 col-md-6 mt-3 mt-md-0',
                   styles.signUpBtn,
-                ].join(" ")}
+                ].join(' ')}
               >
                 Sign Up
               </button>
@@ -66,11 +88,11 @@ function Login() {
                 Forgot Password?
               </Link>
             </div>
-            <div className="mt-3 mx-2">
-              <GoogleButton
-                onClick={() => { console.log('Google button clicked') }}
-              />
-            </div>
+            {type === 'Patient' && (
+              <div className="mt-3 mx-2">
+                <GoogleButton onClick={() => googleSignIn()} />
+              </div>
+            )}
           </form>
         </div>
       </div>
