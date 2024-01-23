@@ -166,6 +166,7 @@ export const logOut = async (req, res) => {
       .status(200)
       .clearCookie("accessToken", options)
       .clearCookie("refreshToken", options)
+      .clearCookie("userid", options)
       .json(new ApiResponse(200, {}, "Successfully Logged Out"));
   } catch (error) {
     console.log("UnAuthorized");
