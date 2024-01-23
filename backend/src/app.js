@@ -30,7 +30,7 @@ import orgrouter from "./routes/orgdocter.js";
 
 // Routes Declaration
 app.get("/", (_, res) => {
-  res.send("Working");
+  res.status(200).json({ working: "working" });
 });
 // user
 app.use("/user", userrouter);

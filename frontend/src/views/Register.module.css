@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 45% 55%;
   align-items: center;
-  font-family: 'Proxima Nova';
+  font-family: "Proxima Nova";
 }
 
 #signUpBG {
@@ -28,11 +28,11 @@ h2 {
   margin: auto;
 }
 
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='date'],
-input[type='number'],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
 select {
   border: none !important;
   border-bottom: 1px solid silver !important;
@@ -40,7 +40,7 @@ select {
   background-color: transparent !important;
 }
 
-input[type='checkbox'] {
+input[type="checkbox"] {
   border: 1px black solid !important;
   border-radius: 3px !important;
 }

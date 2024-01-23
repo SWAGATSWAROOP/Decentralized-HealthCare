@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import { NavLink } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const history = useNavigate();
@@ -14,54 +14,13 @@ function Register() {
   const [userType, setUserType] = useState("");
   const [address, setAddress] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
-  const [organizationType, setOrganizationType] = useState("");
 
-  const [passwordValidationMessage, setPasswordValidationMessage] = useState("");
+  const [passwordValidationMessage, setPasswordValidationMessage] =
+    useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    let user = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      password,
-      userType,
-      address,
-      profilePhoto,
-      organizationType,
-    };
-
-    // Attach Frontend With Backend Fetching Data using axios
-    const response = await axios.post(
-      "http://localhost:8080/api/register",
-      user
-    );
-
-    if (response.status === 200) {
-      console.log("User Added");
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setPhone("");
-      setPassword("");
-      setAddress("");
-      setProfilePhoto(null);
-      setOrganizationType("");
-      history.push("/");
-    }
   };
-
-  useEffect(() => {
-    if (password.length > 0 && password?.trim()?.length <= 6) {
-      setPasswordValidationMessage(
-        "Password Length must be greater than 6 characters"
-      );
-    } else {
-      setPasswordValidationMessage("");
-    }
-  }, [password]);
 
   return (
     <div id={styles.signUpBody}>
@@ -189,30 +148,33 @@ function Register() {
           )}
 
           {(userType === "Doctor" || userType === "Organization") && (
-              <div className="mt-3 col-12 mx-2">
-                 <label htmlFor="address">Address</label>
-                <textarea
-                  id="address"
-                  name="address"
-                  placeholder="Enter your address"
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
-                  className="form-control overflow-scroll resize-none"
-                ></textarea>
-              </div>)}
-            {(userType === "Doctor" || userType === "Organization" || userType === "Patient") && (
-              <div className="mt-3 col-12 mx-2">
-                <label htmlFor="profilePhoto">Profile Photo</label>
-                <input
-                  type="file"
-                  accept="image"
-                  multiple={false}
-                  id="profilePhoto"
-                  name="profilePhoto"
-                  onChange={(event) => setProfilePhoto(event.target.files[0])}
-                  className="form-control"
-                />
-              </div>
+            <div className="mt-3 col-12 mx-2">
+              <label htmlFor="address">Address</label>
+              <textarea
+                id="address"
+                name="address"
+                placeholder="Enter your address"
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+                className="form-control overflow-scroll resize-none"
+              ></textarea>
+            </div>
+          )}
+          {(userType === "Doctor" ||
+            userType === "Organization" ||
+            userType === "Patient") && (
+            <div className="mt-3 col-12 mx-2">
+              <label htmlFor="profilePhoto">Profile Photo</label>
+              <input
+                type="file"
+                accept="image"
+                multiple={false}
+                id="profilePhoto"
+                name="profilePhoto"
+                onChange={(event) => setProfilePhoto(event.target.files[0])}
+                className="form-control"
+              />
+            </div>
           )}
 
           <div className="text-center">

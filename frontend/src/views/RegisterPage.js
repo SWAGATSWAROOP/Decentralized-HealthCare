@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const RegisterPage = () => {
   const handleSignup = (e) => {
@@ -45,7 +45,7 @@ const RegisterPage = () => {
 
           <div className="form-link">
             <span>
-              Already have an account?{' '}
+              Already have an account?{" "}
               <a href="#" className="link login-link" onClick={handleLoginLink}>
                 Login
               </a>

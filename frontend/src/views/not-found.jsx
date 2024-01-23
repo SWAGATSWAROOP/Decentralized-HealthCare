@@ -1,7 +1,7 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { Helmet } from "react-helmet";
 
-import './not-found.css';
+import "./not-found.css";
 
 const NotFound = (props) => {
   return (

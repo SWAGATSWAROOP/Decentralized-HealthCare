@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
-import FeatureCard from '../components/feature-card';
-import GalleryCard3 from '../components/gallery-card3';
-import Question from '../components/question';
-import './home.css';
+import FeatureCard from "../components/feature-card";
+import GalleryCard3 from "../components/gallery-card3";
+import Question from "../components/question";
+import "./home.css";
 
 const Home = () => {
   // For opening the hamburger icon
@@ -24,13 +24,13 @@ const Home = () => {
       }
     };
 
-    window.addEventListener('scroll', closeSideBar);
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("scroll", closeSideBar);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup the event listener
     return () => {
-      window.removeEventListener('scroll', closeSideBar);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("scroll", closeSideBar);
+      window.removeEventListener("resize", handleResize);
     };
   }, [open]);
   return (
@@ -78,7 +78,7 @@ const Home = () => {
         {open && (
           <div
             className="z-50 absolute mt-4 top-0 right-0 pr-3 w-40 pb-40"
-            style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.95)" }}
           >
             <div className="flex justify-end">
               <div className="cursor-pointer" onClick={() => setOpen(false)}>
@@ -281,14 +281,14 @@ const Home = () => {
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
@@ -297,14 +297,14 @@ const Home = () => {
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
@@ -315,14 +315,14 @@ const Home = () => {
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
@@ -331,14 +331,14 @@ const Home = () => {
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>
                     <span>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: ' ',
+                          __html: " ",
                         }}
                       />
                     </span>

@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
-import styles from './Login.module.css';
-import { Link } from 'react-router-dom';
-import GoogleButton from 'react-google-button';
-import axios from 'axios';
+import React, { useState } from "react";
+import styles from "./Login.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import GoogleButton from "react-google-button";
+import axios from "axios";
 
 function Login() {
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [type, setType] = useState('');
+  const navigate = useNavigate();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [type, setType] = useState("");
 
-  const googleSignIn = async () => {
-    const res = await axios.get();
-  };
+  // Google sign in for users
+  const googleLogin = useGoogleLogin({
+    onSuccess: async ({ code }) => {
+      const tokens = await axios.post("/user/google-signin", {
+        // http://localhost:4000/user/google backend that will exchange the code
+        code,
+      });
+      navigate("/");
+    },
+    flow: "auth-code",
+  });
 
   return (
     <div id={styles.loginBody}>
@@ -49,7 +59,6 @@ function Login() {
               />
               <label htmlFor="email">Email</label>
             </div>
-
             {/* Input field for password */}
             <div className="form-floating mt-4 col-12 mx-2">
               <input
@@ -64,7 +73,6 @@ function Login() {
               />
               <label htmlFor="password">Password</label>
             </div>
-
             {/* Buttons for login and sign-up */}
             <div className="d-flex flex-column flex-md-row  mx-2 mt-5 justify-content-between">
               <button
@@ -76,9 +84,9 @@ function Login() {
               </button>
               <button
                 className={[
-                  'col-12 col-md-6 mt-3 mt-md-0',
+                  "col-12 col-md-6 mt-3 mt-md-0",
                   styles.signUpBtn,
-                ].join(' ')}
+                ].join(" ")}
               >
                 Sign Up
               </button>
@@ -88,12 +96,16 @@ function Login() {
                 Forgot Password?
               </Link>
             </div>
-            {type === 'Patient' && (
-              <div className="mt-3 mx-2">
-                <GoogleButton onClick={() => googleSignIn()} />
-              </div>
-            )}
           </form>
+          {type === "Patient" && (
+            <div className="mt-3 mx-2">
+              <GoogleButton
+                onClick={() => {
+                  googleLogin();
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

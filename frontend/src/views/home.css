@@ -30,7 +30,7 @@
 }
 .home-logo {
   font-size: 2em;
-  font-family: 'Lato';
+  font-family: "Lato";
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -260,7 +260,7 @@
   color: var(--dl-color-gray-white);
   max-width: 800px;
   text-align: center;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
 }
 .home-hero-sub-heading {
@@ -337,13 +337,13 @@
 .home-text {
   color: var(--dl-color-primary1-blue80);
   text-align: left;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
 .home-details-heading {
   width: 80%;
   text-align: left;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
@@ -399,11 +399,11 @@
 }
 .home-text03 {
   color: var(--dl-color-primary1-blue80);
-  font-family: 'Raleway';
+  font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
 .home-features-heading {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
@@ -449,11 +449,11 @@
 }
 .home-text06 {
   color: var(--dl-color-primary1-blue80);
-  font-family: 'Raleway';
+  font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
 .home-pricing-heading {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
@@ -497,7 +497,7 @@
   justify-content: flex-start;
 }
 .home-text09 {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -625,7 +625,7 @@
   justify-content: flex-start;
 }
 .home-text17 {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -780,7 +780,7 @@
   justify-content: flex-start;
 }
 .home-text28 {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -917,7 +917,7 @@
 }
 .home-gallery-heading {
   text-align: center;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
 }
 .home-gallery-sub-heading {
@@ -958,7 +958,7 @@
 .home-banner-heading {
   color: var(--dl-color-gray-white);
   text-align: center;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
 }
 .home-banner-sub-heading {
@@ -1020,11 +1020,11 @@
 }
 .home-text40 {
   color: var(--dl-color-primary1-blue80);
-  font-family: 'Raleway';
+  font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
 .home-text43 {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   line-height: 1.6;
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
