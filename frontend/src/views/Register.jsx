@@ -6,7 +6,6 @@ import axios from "axios";
 
 function Register() {
   const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
