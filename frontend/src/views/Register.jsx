@@ -21,30 +21,44 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("profilephoto", profilePhoto);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
     if (userType === "Patient") {
       const name = firstName + " " + lastName;
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phoneno", phone);
+      formData.append("password", password);
       await axios
-        .post("/user/register", {
-          name: name,
-          email: email,
-          phoneno: phone,
-          password: password,
-          profilephoto: profilePhoto,
-        })
+        .post("/user/register", formData, config)
         .then(() => navigate("/login"))
         .catch();
-    } else if (userType === "Doctor" || userType === "Organization") {
+    } else if (userType === "Doctor") {
       const name = firstName + lastName;
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phoneno", phone);
+      formData.append("password", password);
+      formData.append("address", address);
+      formData.append("type", userType);
       await axios
-        .post("/org/register", {
-          name: name,
-          email: email,
-          phoneno: phone,
-          password: password,
-          profilephoto: profilePhoto,
-          address: address,
-          type: userType,
-        })
+        .post("/org/register", formData, config)
+        .then(() => navigate("/login"))
+        .catch();
+    } else if (userType === "Organization") {
+      formData.append("name", firstName);
+      formData.append("email", email);
+      formData.append("phoneno", phone);
+      formData.append("password", password);
+      formData.append("address", address);
+      formData.append("type", userType);
+      await axios
+        .post("/org/register", formData, config)
         .then(() => navigate("/login"))
         .catch();
     }

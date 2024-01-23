@@ -30,6 +30,7 @@ export const registerOrg = async (req, res) => {
     // check that if user sent all details
     let { email, password, name, phoneno, address, type } = req.body;
     // check if all fiels are present or not
+    console.log(email, password, name, phoneno, address);
     if (
       [email, password, name, phoneno, address, type].some(
         (field) => field.trim() === ""
