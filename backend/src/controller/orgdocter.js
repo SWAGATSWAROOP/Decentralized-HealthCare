@@ -130,6 +130,7 @@ export const loginOrg = async (req, res) => {
     // Password Matches
     return res
       .status(200)
+      .cookie("userid", user._id, options)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
       .json(new ApiResponse(200, response, "Successfully Logged In"));
