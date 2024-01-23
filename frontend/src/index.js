@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 
 import "./style.css";
-import Home from "./views/home";
-import NotFound from "./views/not-found";
-import LoginPage from "./views/Login";
-import RegisterPage from "./views/Register";
+import Home from "./views/home.jsx";
+import NotFound from "./views/not-found.jsx";
+import LoginPage from "./views/Login.jsx";
+import RegisterPage from "./views/Register.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";

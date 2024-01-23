@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -20,6 +21,33 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (userType === "Patient") {
+      const name = firstName + " " + lastName;
+      await axios
+        .post("/user/register", {
+          name: name,
+          email: email,
+          phoneno: phone,
+          password: password,
+          profilephoto: profilePhoto,
+        })
+        .then(() => navigate("/login"))
+        .catch();
+    } else if (userType === "Doctor" || userType === "Organization") {
+      const name = firstName + lastName;
+      await axios
+        .post("/org/register", {
+          name: name,
+          email: email,
+          phoneno: phone,
+          password: password,
+          profilephoto: profilePhoto,
+          address: address,
+          type: userType,
+        })
+        .then(() => navigate("/login"))
+        .catch();
+    }
   };
 
   return (
@@ -30,7 +58,7 @@ function Register() {
       <div>
         <h2>Create An Account</h2>
         <form className={styles.signUpform} onSubmit={handleSubmit}>
-          <div className="form-floating mt-3 col-12 mx-2">
+          <div className="form-floating mt-2 col-12 mx-2">
             <select
               id="userType"
               name="userType"
@@ -46,10 +74,9 @@ function Register() {
             </select>
             <label htmlFor="userType">User Type</label>
           </div>
-
           {(userType === "Patient" || userType === "Doctor") && (
             <div>
-              <div className="d-flex flex-column flex-lg-row flex-sm-column mt-5">
+              <div className="d-flex flex-column flex-lg-row flex-sm-column mt-3">
                 <div className="col-12 col-sm-12 col-lg-6  form-floating mx-2 ">
                   <input
                     type="text"
@@ -63,7 +90,7 @@ function Register() {
                   />
                   <label htmlFor="firstName">First Name</label>
                 </div>
-                <div className="col-12  col-sm-12 col-lg-6  mt-3 mt-sm-3 mt-lg-0 form-floating mx-2">
+                <div className="col-12  col-sm-12 col-lg-6  mt-2 mt-sm-3 mt-lg-0 form-floating mx-2">
                   <input
                     type="text"
                     id="lastName"
@@ -80,26 +107,9 @@ function Register() {
             </div>
           )}
 
-          {userType === "Patient" && (
-            <div className="form-floating mt-3 col-12 mx-2">
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="1234567890"
-                pattern="[0-9]{10}"
-                value={phone}
-                onChange={(event) => setPhone(event.target.value)}
-                required
-                className="form-control"
-              />
-              <label htmlFor="phone">Phone Number</label>
-            </div>
-          )}
-
-          {(userType === "Doctor" || userType === "Organization") && (
+          {userType !== "" && (
             <div>
-              <div className="form-floating mt-3 col-12 mx-2">
+              <div className="form-floating mt-2 col-12 mx-2">
                 <input
                   type="email"
                   id="email"
@@ -112,7 +122,7 @@ function Register() {
                 />
                 <label htmlFor="email">Email</label>
               </div>
-              <div className="form-floating mt-3 col-12 mx-2">
+              <div className="form-floating mt-2 col-12 mx-2">
                 <input
                   type="password"
                   id="password"
@@ -128,11 +138,25 @@ function Register() {
               <div className="mx-2 text-danger">
                 {passwordValidationMessage}
               </div>
+              <div className="form-floating mt-2 col-12 mx-2">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="1234567890"
+                  pattern="[0-9]{10}"
+                  value={phone}
+                  onChange={(event) => setPhone(event.target.value)}
+                  required
+                  className="form-control"
+                />
+                <label htmlFor="phone">Phone Number</label>
+              </div>
             </div>
           )}
 
           {userType === "Organization" && (
-            <div className="form-floating mt-3 col-12 mx-2">
+            <div className="form-floating mt-2 col-12 mx-2">
               <input
                 type="text"
                 id="organizationName"
@@ -148,7 +172,7 @@ function Register() {
           )}
 
           {(userType === "Doctor" || userType === "Organization") && (
-            <div className="mt-3 col-12 mx-2">
+            <div className="mt-2 col-12 mx-2">
               <label htmlFor="address">Address</label>
               <textarea
                 id="address"
@@ -163,7 +187,7 @@ function Register() {
           {(userType === "Doctor" ||
             userType === "Organization" ||
             userType === "Patient") && (
-            <div className="mt-3 col-12 mx-2">
+            <div className="mt-2 col-12 mx-2">
               <label htmlFor="profilePhoto">Profile Photo</label>
               <input
                 type="file"
@@ -176,7 +200,6 @@ function Register() {
               />
             </div>
           )}
-
           <div className="text-center">
             <button id={styles.signUpBtn} type="submit">
               Sign Up

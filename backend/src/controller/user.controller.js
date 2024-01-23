@@ -30,9 +30,10 @@ export const registeruser = async (req, res) => {
   try {
     //get user detail
     let { password, name, email, phoneno } = req.body;
+    console.log(password, name, email, phoneno);
     //Validation
     if ([password, name, email, phoneno].some((field) => field.trim() === "")) {
-      console.log("Some fiels are empty");
+      console.log("Some fiedls are empty");
       return res.status(401).json({ message: "Some fields are empty" });
     }
     email = email.toLowerCase();
