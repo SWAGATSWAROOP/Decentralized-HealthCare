@@ -4,12 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import GoogleButton from "react-google-button";
 import axios from "axios";
+import { useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
+  const [emailMessage, setEmailMessage] = useState("Invalid");
+  const [passwordMessage, setPasswordMessage] = useState("Invalid");
+  const [validEmailVisiblity, setValidEmailVisiblity] = useState("invisible");
+  const [validPasswordVisiblity, setValidPasswordVisiblity] =
+    useState("invisible");
 
   // Google sign in for users
   const googleLogin = useGoogleLogin({
@@ -23,11 +29,33 @@ function Login() {
     flow: "auth-code",
   });
 
+  useEffect(() => {
+    if (email.length) {
+      const regex = new RegExp(
+        "^([a-z0-9-._]+)@([a-z0-9-]+).([a-z]{2,20})(.[a-z]{2,8})?$",
+        "i"
+      );
+      if (!regex.test(email)) {
+        setValidEmailVisiblity("");
+      } else setValidEmailVisiblity("invisible");
+    } else setValidEmailVisiblity("invisible");
+    if (password.length) {
+      const regex = new RegExp(
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$",
+        "i"
+      );
+      if (!regex.test(password)) {
+      }
+    }
+  }, [email, password]);
+
   return (
     <div id={styles.loginBody}>
       <div className={styles.greenLayer1}>
         <div id={styles.loginFormDiv}>
-          <h1>Welcome back!</h1>
+          <div>
+            <h1>Welcome back!</h1>
+          </div>
           <form className="col-6" id="loginForm">
             {/* Input field for email */}
             <div className="form-floating mt-3 col-12 mx-2">
@@ -46,7 +74,7 @@ function Login() {
               </select>
               <label htmlFor="userType">User Type</label>
             </div>
-            <div className="form-floating mt-3 col-12 mx-2">
+            <div className="form-floating mt-2 col-12 mx-2">
               <input
                 type="email"
                 id="email"
@@ -59,8 +87,11 @@ function Login() {
               />
               <label htmlFor="email">Email</label>
             </div>
+            <div className={`${validEmailVisiblity} mt-2`}>
+              <h1 className="text-red-600">{passwordMessage}</h1>
+            </div>
             {/* Input field for password */}
-            <div className="form-floating mt-4 col-12 mx-2">
+            <div className="form-floating mt-1 col-12 mx-2">
               <input
                 type="password"
                 id="password"
@@ -72,6 +103,9 @@ function Login() {
                 placeholder="password"
               />
               <label htmlFor="password">Password</label>
+              <div className={`${validPasswordVisiblity} flex justify-center`}>
+                <h1 className="text-red-600 ml-12">{emailMessage}</h1>
+              </div>
             </div>
             {/* Buttons for login and sign-up */}
             <div className="d-flex flex-column flex-md-row  mx-2 mt-5 justify-content-between">

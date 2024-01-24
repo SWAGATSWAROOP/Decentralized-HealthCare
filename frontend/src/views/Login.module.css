@@ -17,8 +17,11 @@
 }
 
 #loginFormDiv {
+  box-sizing: border-box;
   height: 80%;
   width: 45%;
+  min-height: fit-content;
+  min-width: fit-content;
   background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
@@ -26,6 +29,7 @@
   align-items: center;
   font-family: "Proxima Nova";
   padding: 20px;
+  overflow: scroll;
 }
 
 #loginFormDiv p {
@@ -77,15 +81,14 @@
     height: 80%;
     width: 50%;
     background-color: rgba(255, 255, 255, 0.86);
-    overflow-y: scroll;
   }
 }
 
 @media screen and (max-width: 768px) {
   #loginFormDiv {
-    height: 90%;
-    width: 70%;
+    height: 100%;
+    width: 100%;
+    padding-top: 300px;
     background-color: rgba(255, 255, 255, 0.86);
-    overflow-y: scroll;
   }
 }
