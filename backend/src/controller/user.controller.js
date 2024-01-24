@@ -129,7 +129,6 @@ export const loginUser = async (req, res) => {
   // Send this responseData as part of the response
   return res
     .status(200)
-    .cookie("userid", user._id, options)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(new ApiResponse(200, responseData, "User Logged in Successfully"));
@@ -154,7 +153,6 @@ export const logOutUser = async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .clearCookie("userid", options)
     .json(new ApiResponse(200, {}, "User Logout Succesfully"));
 };
 
@@ -255,7 +253,6 @@ export const googleSignIn = async (req, res) => {
     // Redirect or respond with success
     return res
       .status(200)
-      .cookie("userid", user._id, options)
       .cookie("accessToken", access_token, options)
       .cookie("refreshToken", refresh_token, options)
       .json(
