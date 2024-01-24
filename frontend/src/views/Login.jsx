@@ -12,10 +12,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
   const [emailMessage, setEmailMessage] = useState("Invalid");
-  const [passwordMessage, setPasswordMessage] = useState("Invalid");
   const [validEmailVisiblity, setValidEmailVisiblity] = useState("invisible");
-  const [validPasswordVisiblity, setValidPasswordVisiblity] =
-    useState("invisible");
 
   // Google sign in for users
   const googleLogin = useGoogleLogin({
@@ -39,15 +36,7 @@ function Login() {
         setValidEmailVisiblity("");
       } else setValidEmailVisiblity("invisible");
     } else setValidEmailVisiblity("invisible");
-    if (password.length) {
-      const regex = new RegExp(
-        "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$",
-        "i"
-      );
-      if (!regex.test(password)) {
-      }
-    }
-  }, [email, password]);
+  }, [email]);
 
   return (
     <div id={styles.loginBody}>
@@ -64,7 +53,7 @@ function Login() {
                 name="userType"
                 value={type}
                 onChange={(event) => setType(event.target.value)}
-                className="form-select"
+                className="form-control"
                 required
               >
                 <option value="">Select User Type</option>
@@ -83,12 +72,12 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="form-control"
+                className="form-control outline-none"
               />
               <label htmlFor="email">Email</label>
             </div>
-            <div className={`${validEmailVisiblity} mt-2`}>
-              <h1 className="text-red-600">{passwordMessage}</h1>
+            <div className={`${validEmailVisiblity} flex justify-center mt-2`}>
+              <h1 className="text-red-600">{emailMessage}</h1>
             </div>
             {/* Input field for password */}
             <div className="form-floating mt-1 col-12 mx-2">
@@ -98,14 +87,11 @@ function Login() {
                 name="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="form-control"
                 required
                 placeholder="password"
+                className="form-control"
               />
               <label htmlFor="password">Password</label>
-              <div className={`${validPasswordVisiblity} flex justify-center`}>
-                <h1 className="text-red-600 ml-12">{emailMessage}</h1>
-              </div>
             </div>
             {/* Buttons for login and sign-up */}
             <div className="d-flex flex-column flex-md-row  mx-2 mt-5 justify-content-between">

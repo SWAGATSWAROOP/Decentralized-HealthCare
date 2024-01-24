@@ -15,6 +15,12 @@ function Register() {
   const [address, setAddress] = useState("");
   const [profilePhoto, setProfilePhoto] = useState(null);
 
+  const [emailMessage, setEmailMessage] = useState("Invalid");
+  const [passwordMessage, setPasswordMessage] = useState("Invalid");
+  const [validEmailVisiblity, setValidEmailVisiblity] = useState("invisible");
+  const [validPasswordVisiblity, setValidPasswordVisiblity] =
+    useState("invisible");
+
   const [passwordValidationMessage, setPasswordValidationMessage] =
     useState("");
 
