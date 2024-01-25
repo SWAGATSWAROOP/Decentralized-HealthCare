@@ -17,10 +17,13 @@ function Login() {
   // Google sign in for users
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
-      const tokens = await axios.post("/user/google-signin", {
-        // http://localhost:4000/user/google backend that will exchange the code
-        code,
-      });
+      const tokens = await axios.post(
+        "https://dhmbackend.onrender.com/user/google-signin",
+        {
+          // https://dhmbackend.onrender.com/user/google backend that will exchange the code
+          code,
+        }
+      );
       navigate("/");
     },
     flow: "auth-code",
