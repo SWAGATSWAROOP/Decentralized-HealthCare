@@ -11,7 +11,7 @@ import "./home.css";
 const Home = () => {
   // For opening the hamburger icon
   const [open, setOpen] = useState(false);
-  useEffect(() => {sss
+  useEffect(() => {
     const handleResize = () => {
       if (open && window.innerWidth > 768) {
         setOpen(false);
