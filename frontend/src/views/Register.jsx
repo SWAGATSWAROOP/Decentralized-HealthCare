@@ -117,7 +117,6 @@ function Register() {
                     className="form-control"
                     placeholder="last name"
                     value={lastName}
-                    required
                     onChange={(event) => setLastName(event.target.value)}
                   />
                   <label htmlFor="lastName">Last Name</label>
@@ -166,7 +165,7 @@ function Register() {
                   pattern="[0-9]{10}"
                   value={phone}
                   onChange={(event) => setPhone(event.target.value)}
-                  required
+                  required={userType == "Patient" ? false : true}
                   className="form-control"
                 />
                 <label htmlFor="phone">Phone Number</label>
@@ -198,6 +197,7 @@ function Register() {
                 name="address"
                 placeholder="Enter your address"
                 value={address}
+                required
                 onChange={(event) => setAddress(event.target.value)}
                 className="form-control overflow-scroll resize-none"
               ></textarea>
@@ -214,6 +214,7 @@ function Register() {
                 multiple={false}
                 id="profilePhoto"
                 name="profilePhoto"
+                required={userType == "Patient" ? false : true}
                 onChange={(event) => setProfilePhoto(event.target.files[0])}
                 className="form-control"
               />
