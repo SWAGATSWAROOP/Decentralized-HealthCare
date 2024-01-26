@@ -19,12 +19,12 @@ function Login() {
     onSuccess: async ({ code }) => {
       const tokens = await axios
         .post("/user/google-signin", {
-          // https://dhmbackend.onrender.com/user/google backend that will exchange the code
+          // backend that will exchange the code
           code,
         })
         .then(() => navigate("/dashboard", { replace: true }))
         .catch((err) => {
-          console.log("Error in redirection");
+          console.log("Error in redirection", err);
         });
     },
     flow: "auth-code",

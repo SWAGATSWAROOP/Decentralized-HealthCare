@@ -40,7 +40,7 @@ function Register() {
       formData.append("phoneno", phone);
       formData.append("password", password);
       await axios
-        .post("https://dhmbackend.onrender.com/user/register", formData, config)
+        .post("/user/register", formData, config)
         .then(() => navigate("/login"))
         .catch();
     } else if (userType === "Doctor") {
@@ -52,7 +52,7 @@ function Register() {
       formData.append("address", address);
       formData.append("type", userType);
       await axios
-        .post("https://dhmbackend.onrender.com/org/register", formData, config)
+        .post("/org/register", formData, config)
         .then(() => navigate("/login"))
         .catch();
     } else if (userType === "Organization") {
@@ -63,7 +63,7 @@ function Register() {
       formData.append("address", address);
       formData.append("type", userType);
       await axios
-        .post("https://dhmbackend.onrender.com/org/register", formData, config)
+        .post("/org/register", formData, config)
         .then(() => navigate("/login"))
         .catch();
     }
