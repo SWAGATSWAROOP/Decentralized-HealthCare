@@ -1,0 +1,49 @@
+/* PatientProfile.css */
+
+.user-profile-box {
+    width: 600px; /* Increased width */
+    height: 600px; /* Increased height */
+    padding: 20px;
+    background-color: rgba(126, 211, 165, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Lato', sans-serif; /* Match the font used in the navbar */
+  }
+  
+  .user-profile-box h2 {
+    font-size: 28px; /* Increased font size */
+    margin-bottom: 20px;
+  }
+  
+  .profile-field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Increased margin */
+  }
+  
+  .profile-field label {
+    font-weight: bold;
+  }
+  
+  .profile-field span {
+    font-size: 20px; /* Increased font size */
+  }
+  
+  button {
+    background-color: #31b372;
+    color: #fff;
+    padding: 12px; /* Increased padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Increased font size */
+  }
+  
+  button:hover {
+    background-color: #146a3f;
+  }
+  
