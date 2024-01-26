@@ -27,7 +27,7 @@ app.use(cookieParser());
 import userrouter from "./routes/userRouter.js";
 import profilerouter from "./routes/profileRouter.js";
 import orgrouter from "./routes/orgdocter.js";
-
+import checkAuth from "./routes/checkauth.js";
 // Routes Declaration
 app.get("/", (_, res) => {
   res.status(200).json({ working: "working" });
@@ -40,3 +40,6 @@ app.use("/profile", profilerouter);
 
 //doc/org
 app.use("/org", orgrouter);
+
+// check-auth
+app.use("/check", checkAuth);

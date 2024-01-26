@@ -1,29 +1,38 @@
-import React from 'react';
-import './PatientProfile.css';
+import React from "react";
+import "./PatientProfile.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const PatientProfile = ({ onClose }) => {
+  const [name, setname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  useEffect(() => {
+    const fetchdata = async () => {
+      const res = await axios.get("/profile");
+      console.log(res);
+      if (res.data.success) {
+        setname(res.data?.data?.user?.name);
+        setEmail(res.data?.data?.user?.email);
+        setPhone(res.data?.data?.user?.phoneno);
+      }
+    };
+    fetchdata();
+  }, []);
   return (
     <div className="user-profile-box">
       <h2>User Profile</h2>
       <div className="profile-field">
-        <label>Username:</label>
-        <span>{/* Add username value here */}</span>
-      </div>
-      <div className="profile-field">
-        <label>First Name:</label>
-        <span>{/* Add first name value here */}</span>
-      </div>
-      <div className="profile-field">
-        <label>Last Name:</label>
-        <span>{/* Add last name value here */}</span>
+        <label>Name:</label>
+        <span>{name}</span>
       </div>
       <div className="profile-field">
         <label>Email:</label>
-        <span>{/* Add email value here */}</span>
+        <span>{email}</span>
       </div>
       <div className="profile-field">
         <label>Phone no.:</label>
-        <span>{/* Add phone number value here */}</span>
+        <span>{phone}</span>
       </div>
       <div className="profile-field">
         <label>Health Status:</label>
