@@ -20,15 +20,17 @@ function Login() {
   // Google sign in for users
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
-      const tokens = await axios
-        .post("/user/google-signin", {
-          // backend that will exchange the code
-          code,
-        })
-        .then(() => navigate("/dashboard", { replace: true }))
-        .catch((err) => {
-          console.log("Error in redirection", err);
-        });
+      const res = await axios.post("/user/google-signin", {
+        // backend that will exchange the code
+        code,
+      });
+
+      if (res.data.success) {
+        dispatch(setSignedIn());
+        navigate("/dashboard", { replace: true });
+      } else {
+        alert("Error in Logging in");
+      }
     },
     flow: "auth-code",
   });
