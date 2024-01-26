@@ -50,15 +50,10 @@ function Login() {
         console.log(error);
       }
     } else {
-      await axios
-        .post("/org/login", {
-          email: email,
-          password: password,
-        })
-        .then(() => navigate("/dashboard", { replace: true }))
-        .catch((err) => {
-          console.log(err);
-        });
+      await axios.post("/org/login", {
+        email: email,
+        password: password,
+      });
     }
   };
 
