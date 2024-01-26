@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./src/index.js",
-    "dev" : "nodemon ./src/index.js"
+    "start": "nodemon ./src/index.js"
   },
   "author": "Swagat Swaroop Parida",
   "license": "MIT",
