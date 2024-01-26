@@ -7,6 +7,8 @@ import Home from "./views/home.jsx";
 import NotFound from "./views/not-found.jsx";
 import LoginPage from "./views/Login.jsx";
 import RegisterPage from "./views/Register.jsx";
+import Dashboard from "./views/Dashboard.jsx";
+import ProtectedRoute from "./components/Global/components/ProtectedRoute/protectedroute.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -27,6 +29,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/*" element={<Home />} />
+        <ProtectedRoute path="/dashboard" element={Dashboard}></ProtectedRoute>
       </Routes>
     </Router>
   );

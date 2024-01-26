@@ -17,14 +17,15 @@ function Login() {
   // Google sign in for users
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
-      const tokens = await axios.post(
-        "https://dhmbackend.onrender.com/user/google-signin",
-        {
+      const tokens = await axios
+        .post("/user/google-signin", {
           // https://dhmbackend.onrender.com/user/google backend that will exchange the code
           code,
-        }
-      );
-      navigate("/");
+        })
+        .then(() => navigate("/dashboard", { replace: true }))
+        .catch((err) => {
+          console.log("Error in redirection");
+        });
     },
     flow: "auth-code",
   });
