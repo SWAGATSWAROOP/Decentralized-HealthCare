@@ -39,10 +39,13 @@ function Register() {
       formData.append("email", email);
       formData.append("phoneno", phone);
       formData.append("password", password);
-      await axios
-        .post("/user/register", formData, config)
-        .then(() => navigate("/login"))
-        .catch();
+      const res = await axios.post("/user/register", formData, config);
+
+      if (res.data.success) {
+        navigate("/login");
+      } else {
+        alert("Unable to register");
+      }
     } else if (userType === "Doctor") {
       const name = firstName + lastName;
       formData.append("name", name);
@@ -51,21 +54,27 @@ function Register() {
       formData.append("password", password);
       formData.append("address", address);
       formData.append("type", userType);
-      await axios
-        .post("/org/register", formData, config)
-        .then(() => navigate("/login"))
-        .catch();
-    } else if (userType === "Organization") {
+      const res = await axios.post("/org/register", formData, config);
+
+      if (res.data.success) {
+        navigate("/login");
+      } else {
+        alert("Unable to register");
+      }
+    } else {
       formData.append("name", firstName);
       formData.append("email", email);
       formData.append("phoneno", phone);
       formData.append("password", password);
       formData.append("address", address);
       formData.append("type", userType);
-      await axios
-        .post("/org/register", formData, config)
-        .then(() => navigate("/login"))
-        .catch();
+      const res = await axios.post("/org/register", formData, config);
+
+      if (res.data.success) {
+        navigate("/login");
+      } else {
+        alert("Unable to register");
+      }
     }
   };
 
@@ -237,13 +246,13 @@ function Register() {
               Sign Up
             </button>
           </div>
-          <div className="text-center">
-            Already have an account?{" "}
-            <NavLink to="/login" exact>
-              Sign In
-            </NavLink>
-          </div>
         </form>
+        <div className="text-center">
+          Already have an account?{" "}
+          <NavLink to="/login" exact>
+            Sign In
+          </NavLink>
+        </div>
       </div>
     </div>
   );
