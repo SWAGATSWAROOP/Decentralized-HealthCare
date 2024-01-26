@@ -2,6 +2,7 @@
   "name": "colossal-educated-pony",
   "version": "1.0.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "@craco/craco": "^7.0.0-alpha.0",
     "@react-oauth/google": "^0.12.1",

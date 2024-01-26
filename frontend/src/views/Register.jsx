@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Register.module.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -68,6 +68,18 @@ function Register() {
         .catch();
     }
   };
+
+  useEffect(() => {
+    if (email.length) {
+      const regex = new RegExp(
+        "^([a-z0-9-._]+)@([a-z0-9-]+).([a-z]{2,20})(.[a-z]{2,8})?$",
+        "i"
+      );
+      if (!regex.test(email)) {
+        setValidEmailVisiblity("");
+      } else setValidEmailVisiblity("invisible");
+    } else setValidEmailVisiblity("invisible");
+  }, [email]);
 
   return (
     <div id={styles.signUpBody}>

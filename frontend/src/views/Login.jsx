@@ -5,8 +5,11 @@ import { useGoogleLogin } from "@react-oauth/google";
 import GoogleButton from "react-google-button";
 import axios from "axios";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSignedIn } from "../slices/user.slice";
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -29,6 +32,35 @@ function Login() {
     },
     flow: "auth-code",
   });
+
+  const submitTo = async (event) => {
+    event.preventDefault();
+    if (type === "Patient") {
+      try {
+        const res = await axios.post("/user/login", {
+          email: email,
+          password: password,
+        });
+
+        if (res.data.success) {
+          dispatch(setSignedIn());
+          navigate("/dashboard", { replace: true });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      await axios
+        .post("/org/login", {
+          email: email,
+          password: password,
+        })
+        .then(() => navigate("/dashboard", { replace: true }))
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   useEffect(() => {
     if (email.length) {
@@ -103,6 +135,7 @@ function Login() {
                 className="col-12 col-md-6"
                 id={styles.loginBtn}
                 type="submit"
+                onClick={(event) => submitTo(event)}
               >
                 Login
               </button>
@@ -111,6 +144,7 @@ function Login() {
                   "col-12 col-md-6 mt-3 mt-md-0",
                   styles.signUpBtn,
                 ].join(" ")}
+                onClick={() => navigate("/register")}
               >
                 Sign Up
               </button>
