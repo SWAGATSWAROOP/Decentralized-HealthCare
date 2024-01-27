@@ -16,15 +16,22 @@ const Dashboard = () => {
       <Helmet>
         <title>Dencentralized Healthcare</title>
       </Helmet>
-      <NavBar onUserProfileClick={handleUserProfileClick} />
-      <div className={styles.dashboardContent}>
+      <div className="mt-4">
+        <NavBar onUserProfileClick={handleUserProfileClick} />
+      </div>
+
+      <div
+        className={`${styles.dashboardContent} mt-10 ${showUserProfile ? "hidden" : ""}`}
+      >
         <h1>Welcome to the Patient Dashboard</h1>
         {/* Add other content here */}
       </div>
 
-      {showUserProfile && (
-        <UserProfileBox onClose={() => setShowUserProfile(false)} />
-      )}
+      <div className="mt-2 z-10">
+        {showUserProfile && (
+          <UserProfileBox onClose={() => setShowUserProfile(false)} />
+        )}
+      </div>
     </div>
   );
 };

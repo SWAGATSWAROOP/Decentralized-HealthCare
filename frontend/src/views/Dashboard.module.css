@@ -6,13 +6,13 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  background-image: url('https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg');
+  background-image: url("https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .dashboardContent {
-  margin-top: 1000px; /* Adjust this margin to create space for the NavBar */
+  /* Adjust this margin to create space for the NavBar */
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
