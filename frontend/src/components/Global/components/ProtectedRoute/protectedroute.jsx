@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import NotFound from "../../../../views/not-found";
+import NotFound from "../../../../views/Login.jsx";
 import axios from "axios";
 import { setSignedIn } from "../../../../slices/user.slice.js";
 

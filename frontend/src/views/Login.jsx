@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSignedIn } from "../slices/user.slice";
+import { Helmet } from "react-helmet";
 
 function Login() {
   const dispatch = useDispatch();
@@ -73,6 +74,9 @@ function Login() {
 
   return (
     <div id={styles.loginBody}>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <div className={styles.greenLayer1}>
         <div id={styles.loginFormDiv}>
           <div>
