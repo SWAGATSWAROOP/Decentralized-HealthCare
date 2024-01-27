@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import NotFound from "../../../../views/Login.jsx";
+import Login from "../../../../views/Login.jsx";
 import axios from "axios";
 import { setSignedIn } from "../../../../slices/user.slice.js";
 
@@ -19,7 +19,7 @@ const ProtectedRoute = ({ children }) => {
   }, [dispatch]);
 
   const isAuthenticated = useSelector((state) => state.user.signedIn);
-  return isAuthenticated ? <>{children}</> : <NotFound />;
+  return isAuthenticated ? <>{children}</> : <Login />;
 };
 
 export default ProtectedRoute;
