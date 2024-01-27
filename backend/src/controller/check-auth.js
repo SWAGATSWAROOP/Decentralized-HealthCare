@@ -5,7 +5,7 @@ const checkAuth = (req, res) => {
   try {
     const accessToken = req.cookies.accessToken;
     const token = decodedJWT(accessToken);
-    console.log(token);
+    
     if (token) {
       return res.status(200).json(new ApiResponse(200, {}, "Valid Token"));
     }
