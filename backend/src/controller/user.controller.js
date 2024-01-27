@@ -216,7 +216,7 @@ export const googleSignIn = async (req, res) => {
     );
 
     const { tokens } = await oAuth2Client.getToken(req.body.code); // exchange code for tokens
-    const { access_token, refresh_token } = tokens;
+    const { access_token } = tokens;
 
     // Use the access_token to fetch user data from Google's API
     const userInfoResponse = await axios.get(
@@ -235,10 +235,15 @@ export const googleSignIn = async (req, res) => {
       "-password -refreshtoken"
     );
 
+    //Now generateAccessTokenAndRefreshToken
     if (ifexist) {
+      const { refreshToken, accessToken } =
+        await generateAccessTokenAndRefreshToken(ifexist._id);
       console.log("User already signed in");
       return res
         .status(201)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
         .json(new ApiResponse(201, { user: ifexist }, "User already exist"));
     }
 
@@ -246,25 +251,25 @@ export const googleSignIn = async (req, res) => {
     const user = await User.create({
       name: name,
       email: email,
-      refreshToken: refresh_token,
       phoneno: "",
       profilephoto: picture,
       password: sub,
       type: false,
-    }).select("-password -refresh_token");
+    });
+
+    // generate refresh and access token once user is created
+    const { refreshToken, accessToken } =
+      await generateAccessTokenAndRefreshToken(user._id);
+
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
 
     // Redirect or respond with success
     return res
       .status(200)
-      .cookie("accessToken", access_token, options)
-      .cookie("refreshToken", refresh_token, options)
-      .json(
-        new ApiResponse(
-          200,
-          { user, accessToken: access_token, refreshToken: refresh_token },
-          "Authentication successful"
-        )
-      );
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
+      .json(new ApiResponse(200, {}, "Authentication successful"));
   } catch (error) {
     // Handle error
     res.status(500).json(new ApiResponse(500, {}, "Authentication failed"));
