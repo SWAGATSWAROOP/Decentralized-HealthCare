@@ -3,7 +3,6 @@ import NavBar from "./NavBar";
 import UserProfileBox from "./PatientProfile"; // Import the UserProfileBox component
 import styles from "./Dashboard.module.css";
 import { Helmet } from "react-helmet";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [showUserProfile, setShowUserProfile] = useState(false);
