@@ -44,27 +44,33 @@ const Home = () => {
           <span className="home-logo">DHM</span>
           <div data-thq="thq-navbar-nav" className="home-desktop-menu">
             <nav className="home-links">
-              <a href="#details" className="hover:scale-125">
-                <span className="home-nav2">About</span>
+              <a
+                href="#details"
+                className="inline-block home-nav1 hover:scale-125"
+              >
+                About
               </a>
-              <a href="#features" className="hover:scale-125">
-                <span className="home-nav2">Features</span>
-              </a>
-              <a href="#faq" className="hover:scale-125">
-                <span className="home-nav4">FAQ</span>
+              <div>
+                <a
+                  href="#features"
+                  className="hover:scale-125 inline-block home-nav1"
+                >
+                  Features
+                </a>
+              </div>
+              <a href="#faq" className="inline-block home-nav1 hover:scale-125">
+                FAQ
               </a>
             </nav>
             <div className="home-buttons">
-              <Link to="/login">
-                <button className="home-login buttons hover:scale-125">
-                  Login
-                </button>
-              </Link>
-              <Link to="/register">
-                <button className="home-register hover:scale-125">
+              <button className="home-login hover:scale-125">
+                <Link to="/login">Login</Link>
+              </button>
+              <button className="home-register hover:scale-125">
+                <Link to="/register" className="text-white">
                   Register
-                </button>
-              </Link>
+                </Link>
+              </button>
             </div>
           </div>
           {!open && (
@@ -91,12 +97,8 @@ const Home = () => {
             </div>
             <div className="home-logo ml-3">Menu</div>
             <div className="right-10 ml-3 mt-4">
-              <Link to="/login">
-                <div>Login</div>
-              </Link>
-              <Link to="/register">
-                <div>Register</div>
-              </Link>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
               <div>
                 <a href="#details">About</a>
               </div>

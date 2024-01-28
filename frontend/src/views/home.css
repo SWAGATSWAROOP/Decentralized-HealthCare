@@ -47,40 +47,15 @@
   justify-content: center;
   cursor: pointer;
 }
+
 .home-nav1 {
   transition: 0.3s;
+  margin-left: 40px;
 }
 .home-nav1:hover {
-  color: #3d6e70ff;
+  color: green;
 }
-.home-nav2 {
-  transition: 0.3s;
-  margin-left: var(--dl-space-space-twounits);
-}
-.home-nav2:hover {
-  color: #3d6e70ff;
-}
-.home-nav3 {
-  transition: 0.3s;
-  margin-left: var(--dl-space-space-twounits);
-}
-.home-nav3:hover {
-  color: #3d6e70ff;
-}
-.home-nav4 {
-  transition: 0.3s;
-  margin-left: var(--dl-space-space-twounits);
-}
-.home-nav4:hover {
-  color: #3d6e70ff;
-}
-.home-nav5 {
-  transition: 0.3s;
-  margin-left: var(--dl-space-space-twounits);
-}
-.home-nav5:hover {
-  color: #3d6e70ff;
-}
+
 .home-buttons {
   display: flex;
   align-items: center;
