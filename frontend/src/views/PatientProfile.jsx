@@ -43,7 +43,7 @@ const PatientProfile = ({ onClose }) => {
       </div>
       <div className="profile-field"></div>
       <button
-        className="p-3 bg-blue-600 border-none rounded-s-xl cursor-pointer text-xl hover:bg-red-500"
+        className="p-3 text-white bg-blue-600 border-none rounded-xl cursor-pointer text-{16px} hover:bg-red-500"
         onClick={onClose}
       >
         Close
