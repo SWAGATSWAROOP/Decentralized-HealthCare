@@ -29,20 +29,6 @@
   font-size: 20px; /* Increased font size */
 }
 
-button {
-  background-color: blue;
-  color: #fff;
-  padding: 12px; /* Increased padding */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px; /* Increased font size */
-}
-
-button:hover {
-  background-color: red;
-}
-
 @media screen and (max-width: 700px) {
   .user-profile-box {
     width: 400px;
