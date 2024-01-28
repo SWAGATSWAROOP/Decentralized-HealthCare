@@ -1,19 +1,22 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
-
 
 function NavBar({ onUserProfileClick }) {
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
+  const navigate = useNavigate();
 
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-logo" onClick={() => onUserProfileClick()}>
-            <span>Patient's Profile</span>
-            <span className="icon"></span>
+          <div
+            className="nav-logo h-full flex items-center"
+            onClick={() => onUserProfileClick()}
+          >
+            <div>Patient's Profile</div>
           </div>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -34,8 +37,11 @@ function NavBar({ onUserProfileClick }) {
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
-                Medical History
+              <div
+                className="nav-links"
+                onClick={() => navigate("/access-history")}
+              >
+                Data Access History
               </div>
             </li>
             <li className="nav-item">
@@ -51,7 +57,11 @@ function NavBar({ onUserProfileClick }) {
           </ul>
 
           <div className="nav-icon" onClick={handleClick}>
-            {click ? <span className="icon"></span> : <span className="icon"></span>}
+            {click ? (
+              <span className="icon"></span>
+            ) : (
+              <span className="icon"></span>
+            )}
           </div>
         </div>
       </nav>

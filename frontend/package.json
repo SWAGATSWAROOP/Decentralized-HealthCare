@@ -5,6 +5,10 @@
   "proxy": "http://localhost:4000",
   "dependencies": {
     "@craco/craco": "^7.0.0-alpha.0",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.6",
+    "@mui/material": "^5.15.6",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.5",

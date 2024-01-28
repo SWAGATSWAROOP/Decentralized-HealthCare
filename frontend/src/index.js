@@ -9,6 +9,7 @@ import LoginPage from "./views/Login.jsx";
 import RegisterPage from "./views/Register.jsx";
 import Dashboard from "./views/Dashboard.jsx";
 import ProtectedRoute from "./components/Global/components/ProtectedRoute/protectedroute.jsx";
+import AuditAcess from "./views/AuditAccessControls.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -34,6 +35,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/access-history"
+          element={
+            <ProtectedRoute>
+              <AuditAcess />
             </ProtectedRoute>
           }
         />

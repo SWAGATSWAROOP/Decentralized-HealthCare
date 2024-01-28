@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboardContainer}>
       <Helmet>
-        <title>Dencentralized Healthcare</title>
+        <title>DashBoard</title>
       </Helmet>
       <div className="mt-4">
         <NavBar onUserProfileClick={handleUserProfileClick} />
