@@ -44,22 +44,26 @@ const Home = () => {
           <span className="home-logo">DHM</span>
           <div data-thq="thq-navbar-nav" className="home-desktop-menu">
             <nav className="home-links">
-              <a href="#details">
+              <a href="#details" className="hover:scale-125">
                 <span className="home-nav2">About</span>
               </a>
-              <a href="#features">
+              <a href="#features" className="hover:scale-125">
                 <span className="home-nav2">Features</span>
               </a>
-              <a href="#faq">
+              <a href="#faq" className="hover:scale-125">
                 <span className="home-nav4">FAQ</span>
               </a>
             </nav>
             <div className="home-buttons">
               <Link to="/login">
-                <button className="home-login buttons">Login</button>
+                <button className="home-login buttons hover:scale-125">
+                  Login
+                </button>
               </Link>
               <Link to="/register">
-                <button className="home-register">Register</button>
+                <button className="home-register hover:scale-125">
+                  Register
+                </button>
               </Link>
             </div>
           </div>
@@ -117,7 +121,7 @@ const Home = () => {
             </span>
             <div className="home-btn-group">
               <Link to="/register">
-                <button className="home-hero-button1 button">
+                <button className="home-hero-button1 button hover:scale-110">
                   Get Started
                 </button>
               </Link>
@@ -262,7 +266,9 @@ const Home = () => {
             Discover the Future of Patient Care
           </span>
           <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6068317/">
-            <button className="home-banner-button button">Read More</button>
+            <button className="home-banner-button button hover:scale-110">
+              Read More
+            </button>
           </a>
         </div>
       </div>
