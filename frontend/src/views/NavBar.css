@@ -10,6 +10,7 @@
   background-color: rgba(126, 211, 165, 0.8);
   border: 3px;
   border-radius: 50px;
+  cursor: pointer;
 }
 
 .nav-container {
