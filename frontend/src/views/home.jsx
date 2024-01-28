@@ -116,9 +116,13 @@ const Home = () => {
               HealthChain: Empowering Patients with Decentralized Solutions
             </span>
             <div className="home-btn-group">
-              <button className="home-hero-button1 button">Get Started</button>
+              <Link to="/register">
+                <button className="home-hero-button1 button">
+                  Get Started
+                </button>
+              </Link>
               <a href="https://www.sciencedirect.com/science/article/pii/S200103701830028X">
-                <button className="home-hero-button2 button">
+                <button className="home-hero-button2 button hover:scale-150">
                   Learn More →
                 </button>
               </a>

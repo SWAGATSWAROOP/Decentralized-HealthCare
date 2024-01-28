@@ -299,15 +299,13 @@
   transition: 0.3s;
   font-weight: bold;
   padding-top: var(--dl-space-space-unit);
-  border-color: transparent;
   padding-left: var(--dl-space-space-twounits);
   padding-right: var(--dl-space-space-twounits);
   padding-bottom: var(--dl-space-space-unit);
+  border-color: transparent;
   background-color: transparent;
 }
-.home-hero-button2:hover {
-  border-color: var(--dl-color-gray-white);
-}
+
 .home-details {
   flex: 0 0 auto;
   width: 100%;
