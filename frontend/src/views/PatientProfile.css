@@ -7,8 +7,6 @@
   background-color: rgba(126, 211, 165, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  top: 50%;
-  left: 50%;
   font-family: "Lato", sans-serif; /* Match the font used in the navbar */
 }
 
@@ -32,7 +30,7 @@
 }
 
 button {
-  background-color: #31b372;
+  background-color: blue;
   color: #fff;
   padding: 12px; /* Increased padding */
   border: none;
@@ -42,5 +40,13 @@ button {
 }
 
 button:hover {
-  background-color: #146a3f;
+  background-color: red;
+}
+
+@media screen and (max-width: 700px) {
+  .user-profile-box {
+    width: 400px;
+    height: 400px;
+    padding: 10px;
+  }
 }

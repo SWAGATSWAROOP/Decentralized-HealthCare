@@ -7,6 +7,7 @@ const PatientProfile = ({ onClose }) => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [profilephoto, setProfilePhoto] = useState("./public/profilephoto.png");
   useEffect(() => {
     const fetchdata = async () => {
       const res = await axios.get("/profile");
@@ -15,6 +16,9 @@ const PatientProfile = ({ onClose }) => {
         setname(res.data?.data?.user?.name);
         setEmail(res.data?.data?.user?.email);
         setPhone(res.data?.data?.user?.phoneno);
+        if (res.data?.data?.user?.profilephoto) {
+          setProfilePhoto("res.data?.data?.user?.profilephoto");
+        }
       }
     };
     fetchdata();
@@ -22,6 +26,9 @@ const PatientProfile = ({ onClose }) => {
   return (
     <div className="user-profile-box">
       <h2>User Profile</h2>
+      <div>
+        <img src={profilephoto} alt="" />
+      </div>
       <div className="profile-field">
         <label>Name:</label>
         <span>{name}</span>
@@ -34,10 +41,7 @@ const PatientProfile = ({ onClose }) => {
         <label>Phone no.:</label>
         <span>{phone}</span>
       </div>
-      <div className="profile-field">
-        <label>Health Status:</label>
-        <span>{/* Add health status value here */}</span>
-      </div>
+      <div className="profile-field"></div>
       <button onClick={onClose}>Close</button>
     </div>
   );
