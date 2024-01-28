@@ -2,7 +2,7 @@
 
 .user-profile-box {
   width: 600px; /* Increased width */
-  height: 600px; /* Increased height */
+  height: 3/4; /* Increased height */
   padding: 20px;
   background-color: rgba(126, 211, 165, 0.8);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

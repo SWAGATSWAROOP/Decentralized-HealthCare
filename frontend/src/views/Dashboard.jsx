@@ -27,7 +27,7 @@ const Dashboard = () => {
         {/* Add other content here */}
       </div>
 
-      <div className="mt-2 z-10">
+      <div className="mt-4 z-10">
         {showUserProfile && (
           <UserProfileBox onClose={() => setShowUserProfile(false)} />
         )}
