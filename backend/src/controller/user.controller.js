@@ -45,7 +45,7 @@ export const registeruser = async (req, res) => {
     }
 
     let profilePhoto = "";
-    
+
     if (profilePhotoPath) {
       try {
         profilePhoto = await uploadProfilePhoto(profilePhotoPath, email);
