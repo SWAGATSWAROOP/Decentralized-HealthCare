@@ -26,10 +26,7 @@ const generateAccessTokenAndRefreshToken = async (userid) => {
 export const registeruser = async (req, res) => {
   // Checking ProfilePhoto
   // Mutler gives access to req.files?.profilephoto
-  let profilePhotoPath = "";
-  if (req?.files && req?.files?.profilePhoto && req.files.profilePhoto[0]) {
-    profilePhotoPath = req.files?.profilephoto[0]?.path;
-  }
+  let profilePhotoPath = req.files?.profilephoto[0]?.path;
   try {
     //get user detail
     let { password, name, email, phoneno } = req.body;
@@ -48,6 +45,7 @@ export const registeruser = async (req, res) => {
     }
 
     let profilePhoto = "";
+    
     if (profilePhotoPath) {
       try {
         profilePhoto = await uploadProfilePhoto(profilePhotoPath, email);
