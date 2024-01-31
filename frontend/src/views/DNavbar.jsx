@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./NavBar.css";
 
-
 function NavBar({ onUserProfileClick }) {
   const [click, setClick] = useState(false);
 
@@ -51,7 +50,11 @@ function NavBar({ onUserProfileClick }) {
           </ul>
 
           <div className="nav-icon" onClick={handleClick}>
-            {click ? <span className="icon"></span> : <span className="icon"></span>}
+            {click ? (
+              <span className="icon"></span>
+            ) : (
+              <span className="icon"></span>
+            )}
           </div>
         </div>
       </nav>
@@ -59,4 +62,4 @@ function NavBar({ onUserProfileClick }) {
   );
 }
 
-export default DNavBar;
+export default NavBar;
