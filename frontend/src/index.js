@@ -10,6 +10,7 @@ import RegisterPage from "./views/Register.jsx";
 import Dashboard from "./views/Dashboard.jsx";
 import ProtectedRoute from "./components/Global/components/ProtectedRoute/protectedroute.jsx";
 import AuditAcess from "./views/AuditAccessControls.jsx";
+import DDashboard from "./views/DDashboard.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -43,6 +44,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <AuditAcess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ddashboard"
+          element={
+            <ProtectedRoute>
+              <DDashboard />
             </ProtectedRoute>
           }
         />

@@ -50,13 +50,21 @@ function Login() {
           navigate("/dashboard", { replace: true });
         }
       } catch (error) {
-        console.log(error);
+        console.log(alert(error));
       }
     } else {
-      await axios.post("/org/login", {
-        email: email,
-        password: password,
-      });
+      try {
+        const res = await axios.post("/org/login", {
+          email: email,
+          password: password,
+        });
+        if (res.data.success) {
+          dispatch(setSignedIn());
+          navigate("/ddashboard", { replace: true });
+        }
+      } catch (error) {
+        console.log(alert(error));
+      }
     }
   };
 
