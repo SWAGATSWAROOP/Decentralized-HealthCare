@@ -3,7 +3,7 @@ import "./PatientProfile.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PatientProfile = ({ onClose }) => {
+const PatientProfile = () => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -41,13 +41,6 @@ const PatientProfile = ({ onClose }) => {
         <label>Phone no.:</label>
         <span>{phone}</span>
       </div>
-      <div className="profile-field"></div>
-      <button
-        className="p-3 text-white bg-blue-600 border-none rounded-xl cursor-pointer text-{16px} hover:bg-red-500"
-        onClick={onClose}
-      >
-        Close
-      </button>
     </div>
   );
 };

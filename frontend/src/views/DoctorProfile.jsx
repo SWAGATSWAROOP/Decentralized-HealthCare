@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./PatientProfile.css";
+import NavBar from "./DNavbar";
 
-const PatientProfile = ({ onClose }) => {
+const DocterProfile = () => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -33,40 +34,37 @@ const PatientProfile = ({ onClose }) => {
 
   return (
     <>
-      <div className="user-profile-box">
-        <div className="profile-field">
-          <h2>User Profile</h2>
-          <img className="rounded-full h-20 w-20" src={profilephoto} alt="" />
+      <div className="flex flex-col justify-center items-center">
+        <NavBar />
+        <div className="user-profile-box mt-4">
+          <div className="profile-field">
+            <h2>User Profile</h2>
+            <img className="rounded-full h-20 w-20" src={profilephoto} alt="" />
+          </div>
+          <div className="profile-field">
+            <label>Name:</label>
+            <span>{name}</span>
+          </div>
+          <div className="profile-field">
+            <label>Email:</label>
+            <span>{email}</span>
+          </div>
+          <div className="profile-field">
+            <label>Phone no:</label>
+            <span>{phone}</span>
+          </div>
+          <div className="profile-field flex-col">
+            <label>Address:</label>
+            <div>{address}</div>
+          </div>
+          <div className="profile-field">
+            <label>Type:</label>
+            <span>{type}</span>
+          </div>
         </div>
-        <div className="profile-field">
-          <label>Name:</label>
-          <span>{name}</span>
-        </div>
-        <div className="profile-field">
-          <label>Email:</label>
-          <span>{email}</span>
-        </div>
-        <div className="profile-field">
-          <label>Phone no:</label>
-          <span>{phone}</span>
-        </div>
-        <div className="profile-field flex-col">
-          <label>Address:</label>
-          <div>{address}</div>
-        </div>
-        <div className="profile-field">
-          <label>Type:</label>
-          <span>{type}</span>
-        </div>
-        <button
-          className="p-3 text-white bg-blue-600 border-none rounded-xl cursor-pointer text-{16px} hover:bg-red-500"
-          onClick={onClose}
-        >
-          Close
-        </button>
       </div>
     </>
   );
 };
 
-export default PatientProfile;
+export default DocterProfile;

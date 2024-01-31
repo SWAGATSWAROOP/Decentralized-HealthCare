@@ -1,61 +1,46 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
-function NavBar({ onUserProfileClick }) {
-  const [click, setClick] = useState(false);
-
-  const handleClick = () => setClick(!click);
-
+function NavBar() {
+  const navigate = useNavigate();
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-logo" onClick={() => onUserProfileClick()}>
+          <div className="nav-logo" onClick={() => {}}>
             <span>Doctor's Profile</span>
             <span className="icon"></span>
           </div>
-
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu">
             <li className="nav-item">
               <div
                 className="nav-links"
-                onClick={() => {
-                  setClick(false);
-                  onUserProfileClick(true);
-                }}
+                onClick={() => navigate("/org/profile")}
               >
                 User Profile
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Patients List
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Hospital Visits
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Scheduled Appointments
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Meetings
               </div>
             </li>
           </ul>
-
-          <div className="nav-icon" onClick={handleClick}>
-            {click ? (
-              <span className="icon"></span>
-            ) : (
-              <span className="icon"></span>
-            )}
-          </div>
         </div>
       </nav>
     </>

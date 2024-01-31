@@ -11,6 +11,8 @@ import Dashboard from "./views/Dashboard.jsx";
 import ProtectedRoute from "./components/Global/components/ProtectedRoute/protectedroute.jsx";
 import AuditAcess from "./views/AuditAccessControls.jsx";
 import DDashboard from "./views/DDashboard.jsx";
+import DocterProfile from "./views/DoctorProfile.jsx";
+import PatientProfile from "./views/PatientProfile.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -31,6 +33,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/*" element={<Home />} />
+        {/* Secured Routes */}
         <Route
           path="/dashboard"
           element={
@@ -52,6 +55,22 @@ const App = () => {
           element={
             <ProtectedRoute>
               <DDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/org/profile"
+          element={
+            <ProtectedRoute>
+              <DocterProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/profile"
+          element={
+            <ProtectedRoute>
+              <PatientProfile />
             </ProtectedRoute>
           }
         />

@@ -2,37 +2,27 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
-function NavBar({ onUserProfileClick }) {
-  const [click, setClick] = useState(false);
-
-  const handleClick = () => setClick(!click);
+function NavBar() {
   const navigate = useNavigate();
 
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <div
-            className="nav-logo h-full flex items-center"
-            onClick={() => onUserProfileClick()}
-          >
+          <div className="nav-logo h-full flex items-center" onClick={() => {}}>
             <div>Patient's Profile</div>
           </div>
-
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
               <div
                 className="nav-links"
-                onClick={() => {
-                  setClick(false);
-                  onUserProfileClick(true);
-                }}
+                onClick={() => navigate("/org/profile")}
               >
                 User Profile
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Upload Reports
               </div>
             </li>
@@ -45,12 +35,12 @@ function NavBar({ onUserProfileClick }) {
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Doctors Consulted
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => setClick(false)}>
+              <div className="nav-links" onClick={() => {}}>
                 Health Insurance Policies
               </div>
             </li>
