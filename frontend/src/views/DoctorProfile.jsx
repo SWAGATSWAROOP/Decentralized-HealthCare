@@ -8,8 +8,8 @@ const PatientProfile = ({ onClose }) => {
   const [phone, setPhone] = useState("");
   const [profilephoto, setProfilePhoto] = useState("./profilephoto.png");
   useEffect(() => {
-    try {
-      const fetchData = async () => {
+    const fetchData = async () => {
+      try {
         const res = await axios.get("/org/profile");
         console.log(res);
 
@@ -17,14 +17,15 @@ const PatientProfile = ({ onClose }) => {
           setname(res.data?.data?.user?.name);
           setEmail(res.data?.data?.user?.email);
           setPhone(res.data?.data?.user?.phoneno);
-          setProfilePhoto(res.data?.data?.user?.profilephoto);
         }
-        fetchData();
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+      } catch (error) {
+        alert(error);
+      }
+    };
+
+    fetchData(); // Call the fetchData function
+  }, []); // Empty dependency array means this effect will run once on mount
+
   return (
     <>
       <div className="user-profile-box">

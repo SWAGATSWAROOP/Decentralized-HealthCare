@@ -234,7 +234,7 @@ export const getProfileOrg = async (req, res) => {
     }
     return res
       .status(200)
-      .json(new ApiResponse(200, user, "Successfully Fetched profile"));
+      .json(new ApiResponse(200, { user }, "Successfully Fetched profile"));
   } catch (error) {
     console.log("Error in fetching the data");
     return res.status(500).json(new ApiResponse(500, {}, "Cannot fetch user"));
