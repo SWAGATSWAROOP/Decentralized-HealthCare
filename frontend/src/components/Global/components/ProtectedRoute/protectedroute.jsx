@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const check = async () => {
       const res = await axios.get("/check/check-auth");
-      console.log(res);
+
       if (res.data.success) {
         dispatch(setSignedIn());
       }
