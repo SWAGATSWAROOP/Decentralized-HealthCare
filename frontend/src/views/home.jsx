@@ -97,8 +97,12 @@ const Home = () => {
             </div>
             <div className="home-logo ml-3">Menu</div>
             <div className="right-10 ml-3 mt-4">
-              <Link to="/login">Login</Link>
-              <Link to="/register">Register</Link>
+              <Link to="/login">
+                <div>Login</div>
+              </Link>
+              <Link to="/register">
+                <div>Register</div>
+              </Link>
               <div>
                 <a href="#details">About</a>
               </div>
