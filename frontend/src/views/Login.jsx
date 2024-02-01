@@ -6,7 +6,7 @@ import GoogleButton from "react-google-button";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setSignedIn } from "../slices/user.slice";
+import { setSignedIn, setEmail } from "../slices/user.slice";
 import { Helmet } from "react-helmet";
 
 function Login() {
@@ -28,6 +28,7 @@ function Login() {
 
       if (res.data.success) {
         dispatch(setSignedIn());
+        dispatch(setEmail(email));
         navigate("/dashboard", { replace: true });
       } else {
         alert("Error in Logging in");

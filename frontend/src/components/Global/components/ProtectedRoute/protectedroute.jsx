@@ -1,27 +1,28 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { setSignedIn } from "../../../../slices/user.slice.js";
 
 const ProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const check = async () => {
-      const res = await axios.get("/check/check-auth");
-
-      if (res.data.success) {
-        dispatch(setSignedIn());
-      }
-    };
-    check();
+    try {
+      const check = async () => {
+        const res = await axios.get("/check/check-auth").then().catch();
+        if (res.data.success) {
+          dispatch(setSignedIn());
+        }
+      };
+      check();
+    } catch (error) {
+      console.log(error);
+    }
   }, [dispatch]);
 
   const isAuthenticated = useSelector((state) => state.user.signedIn);
-  if (!isAuthenticated) navigate("/login", { replace: true });
-  return <>{children}</>;
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
