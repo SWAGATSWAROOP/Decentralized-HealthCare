@@ -7,8 +7,11 @@ function NavBar() {
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-logo h-full flex items-center" onClick={() => {}}>
-            <div>Doctor's Profile</div>
+          <div
+            className="nav-logo h-full flex items-center"
+            onClick={() => navigate("/ddashboard")}
+          >
+            <div>Doctor's DashBoard</div>
           </div>
           <ul className="nav-menu">
             <li className="nav-item">
