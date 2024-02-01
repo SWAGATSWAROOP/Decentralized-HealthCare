@@ -7,9 +7,8 @@ function NavBar() {
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-logo" onClick={() => {}}>
-            <span>Doctor's Profile</span>
-            <span className="icon"></span>
+          <div className="nav-logo h-full flex items-center" onClick={() => {}}>
+            <div>Doctor's Profile</div>
           </div>
           <ul className="nav-menu">
             <li className="nav-item">
