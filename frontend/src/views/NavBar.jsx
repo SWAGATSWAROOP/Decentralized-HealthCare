@@ -17,7 +17,10 @@ function NavBar() {
           </div>
           <ul className="nav-menu">
             <li className="nav-item">
-              <div className="nav-links" onClick={() => navigate("/profile")}>
+              <div
+                className="nav-links"
+                onClick={() => navigate("/user/profile")}
+              >
                 User Profile
               </div>
             </li>
