@@ -2,8 +2,10 @@ import React from "react";
 import "./PatientProfile.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const PatientProfile = () => {
+  const [update, setUpdate] = useState(false);
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -24,24 +26,42 @@ const PatientProfile = () => {
     fetchdata();
   }, []);
   return (
-    <div className="user-profile-box">
-      <div className="profile-field">
-        <h2>User Profile</h2>
-        <img className="rounded-full h-20 w-20" src={profilephoto} alt="" />
+    <>
+      <div className="flex flex-col  justify-center items-center">
+        <NavBar />
+        <div className="user-profile-box mt-10">
+          <div className="profile-field">
+            <h2>User Profile</h2>
+            <img className="rounded-full h-20 w-20" src={profilephoto} alt="" />
+          </div>
+          <div className="profile-field">
+            <span>Name : </span>
+            {!update ? (
+              <span>{name}</span>
+            ) : (
+              <input
+                className="outline-none border px-2 py-1 border-black"
+                type="text"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+              />
+            )}
+          </div>
+          <div className="profile-field">
+            <span>Email : </span>
+            <span>{email}</span>
+          </div>
+          <div className="profile-field">
+            <span>Phone no:</span>
+            {!update ? (
+              <span>{phone}</span>
+            ) : (
+              <input type="number" value={phone} />
+            )}
+          </div>
+        </div>
       </div>
-      <div className="profile-field">
-        <label>Name:</label>
-        <span>{name}</span>
-      </div>
-      <div className="profile-field">
-        <label>Email:</label>
-        <span>{email}</span>
-      </div>
-      <div className="profile-field">
-        <label>Phone no.:</label>
-        <span>{phone}</span>
-      </div>
-    </div>
+    </>
   );
 };
 

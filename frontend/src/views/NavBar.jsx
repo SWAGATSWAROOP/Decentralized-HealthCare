@@ -11,7 +11,7 @@ function NavBar() {
         <div className="nav-container">
           <div
             className="nav-logo h-full flex items-center"
-            onClick={() => navigate("/dashbaord")}
+            onClick={() => navigate("/dashboard")}
           >
             <div>Patient's DashBoard</div>
           </div>
