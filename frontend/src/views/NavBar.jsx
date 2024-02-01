@@ -1,9 +1,25 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setSignedOut } from "../slices/user.slice.js";
 import "./NavBar.css";
+import axios from "axios";
 
 function NavBar() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logout = async () => {
+    try {
+      const res = await axios.post("/user/logout");
+      if (res.data.success) {
+        dispatch(setSignedOut());
+        navigate("/");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
     <>
@@ -43,7 +59,7 @@ function NavBar() {
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => {}}>
+              <div className="nav-links" onClick={() => logout()}>
                 Logout
               </div>
             </li>
