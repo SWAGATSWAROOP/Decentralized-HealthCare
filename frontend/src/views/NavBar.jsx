@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
@@ -9,15 +9,15 @@ function NavBar() {
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <div className="nav-logo h-full flex items-center" onClick={() => {}}>
-            <div>Patient's Profile</div>
+          <div
+            className="nav-logo h-full flex items-center"
+            onClick={() => navigate("/dashbaord")}
+          >
+            <div>Patient's DashBoard</div>
           </div>
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
+          <ul className="nav-menu">
             <li className="nav-item">
-              <div
-                className="nav-links"
-                onClick={() => navigate("/org/profile")}
-              >
+              <div className="nav-links" onClick={() => navigate("/profile")}>
                 User Profile
               </div>
             </li>
@@ -45,14 +45,6 @@ function NavBar() {
               </div>
             </li>
           </ul>
-
-          <div className="nav-icon" onClick={handleClick}>
-            {click ? (
-              <span className="icon"></span>
-            ) : (
-              <span className="icon"></span>
-            )}
-          </div>
         </div>
       </nav>
     </>
