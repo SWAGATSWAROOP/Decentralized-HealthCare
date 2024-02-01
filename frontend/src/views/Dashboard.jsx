@@ -19,14 +19,12 @@ const Dashboard = () => {
       <div className="mt-4">
         <NavBar onUserProfileClick={handleUserProfileClick} />
       </div>
-
       <div
         className={`${styles.dashboardContent} mt-10 ${showUserProfile ? "hidden" : ""}`}
       >
         <h1>Welcome to the Patient Dashboard</h1>
         {/* Add other content here */}
       </div>
-
       <div className="mt-4 z-10">
         {showUserProfile && (
           <UserProfileBox onClose={() => setShowUserProfile(false)} />

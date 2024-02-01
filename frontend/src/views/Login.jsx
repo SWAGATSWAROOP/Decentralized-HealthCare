@@ -5,11 +5,9 @@ import { useGoogleLogin } from "@react-oauth/google";
 import GoogleButton from "react-google-button";
 import axios from "axios";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -61,8 +59,6 @@ function Login() {
         if (res.data.success) {
           sessionStorage.setItem("auth", "true");
           sessionStorage.setItem("email", email);
-          dispatch(setSignedIn());
-          dispatch(setemail(email));
           navigate("/ddashboard", { replace: true });
         }
       } catch (error) {
