@@ -73,7 +73,7 @@ const PatientProfile = () => {
   };
 
   return (
-    <>
+    <div>
       <Helmet>
         <title>Profile</title>
       </Helmet>
@@ -167,7 +167,7 @@ const PatientProfile = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

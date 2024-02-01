@@ -6,7 +6,6 @@ import GoogleButton from "react-google-button";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setSignedIn, setEmail } from "../slices/user.slice";
 import { Helmet } from "react-helmet";
 
 function Login() {
@@ -27,8 +26,7 @@ function Login() {
       });
 
       if (res.data.success) {
-        dispatch(setSignedIn());
-        dispatch(setEmail(email));
+        sessionStorage.setItem("auth", "true");
         navigate("/dashboard", { replace: true });
       } else {
         alert("Error in Logging in");
@@ -47,7 +45,8 @@ function Login() {
         });
 
         if (res.data.success) {
-          dispatch(setSignedIn());
+          sessionStorage.setItem("auth", "true");
+          sessionStorage.setItem("email", email);
           navigate("/dashboard", { replace: true });
         }
       } catch (error) {
@@ -60,7 +59,10 @@ function Login() {
           password: password,
         });
         if (res.data.success) {
+          sessionStorage.setItem("auth", "true");
+          sessionStorage.setItem("email", email);
           dispatch(setSignedIn());
+          dispatch(setemail(email));
           navigate("/ddashboard", { replace: true });
         }
       } catch (error) {

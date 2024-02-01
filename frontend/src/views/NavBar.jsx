@@ -1,19 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setSignedOut } from "../slices/user.slice.js";
 import "./NavBar.css";
 import axios from "axios";
 
 function NavBar() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const logout = async () => {
     try {
       const res = await axios.post("/user/logout");
       if (res.data.success) {
-        dispatch(setSignedOut());
+        sessionStorage.clear();
         navigate("/");
       }
     } catch (error) {
