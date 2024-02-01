@@ -4,7 +4,7 @@ import ApiResponse from "../utils/APIresponse.js";
 import { User } from "../models/auth.js";
 import { decodedJWT } from "../utils/deCodeToken.js";
 
-export const updateProfile = async (req, res) => {
+export const updateUserProfilePhoto = async (req, res) => {
   const localPath = req.files?.profilephoto[0]?.path || "";
   try {
     const decodedToken = decodedJWT(req.cookies.accessToken);

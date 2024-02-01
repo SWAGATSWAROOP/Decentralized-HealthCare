@@ -1,6 +1,5 @@
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
-import { decodedJWT } from "../utils/deCodeToken.js";
 
 // get profile details
 export const getProfile = async (req, res) => {
@@ -29,11 +28,7 @@ export const getProfile = async (req, res) => {
 //update profile details
 export const updateProfile = async (req, res) => {
   try {
-    const { name, phoneno } = req.body;
-    const decodedToken = decodedJWT(req.cookies.accessToken);
-
-    const email = decodedToken.email;
-
+    const { email, name, phoneno } = req.body;
     const updateduser = await User.findOneAndUpdate(
       { email },
       { $set: { name, phoneno } },

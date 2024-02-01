@@ -10,7 +10,7 @@ import { Verifyjwt } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/mutlerFileUpload.js";
 import {
   removephoto,
-  updateProfile,
+  updateUserProfilePhoto,
 } from "../controller/updateUserProfilePhoto.js";
 import {
   forgetPasswordUser,
@@ -40,7 +40,10 @@ router.route("/refresh-token").post(refreshAccesstoken);
 // Change Profile
 router
   .route("/changephoto")
-  .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), updateProfile);
+  .post(
+    upload.fields([{ name: "profilephoto", maxCount: 1 }]),
+    updateUserProfilePhoto
+  );
 
 // Remove Profile
 router.route("/removeprofile").post(removephoto);

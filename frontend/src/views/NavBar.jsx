@@ -34,7 +34,7 @@ function NavBar() {
                 className="nav-links"
                 onClick={() => navigate("/access-history")}
               >
-                Data Access History
+                Data Access
               </div>
             </li>
             <li className="nav-item">
@@ -44,7 +44,7 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <div className="nav-links" onClick={() => {}}>
-                Health Insurance Policies
+                Logout
               </div>
             </li>
           </ul>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./PatientProfile.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import NavBar from "./NavBar";
 
 const PatientProfile = () => {
@@ -25,6 +25,25 @@ const PatientProfile = () => {
     };
     fetchdata();
   }, []);
+
+  const submit = async () => {
+    try {
+      const res = await axios.post("/profile/update", {
+        email,
+        phoneno: phone,
+        name,
+      });
+      setUpdate(false);
+
+      if (res.data.success) {
+        setname(res.data?.data?.user?.name);
+        setPhone(res.data?.data?.user?.phoneno);
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col  justify-center items-center">
@@ -40,7 +59,7 @@ const PatientProfile = () => {
               <span>{name}</span>
             ) : (
               <input
-                className="outline-none border px-2 py-1 border-black"
+                className="outline-none"
                 type="text"
                 value={name}
                 onChange={(e) => setname(e.target.value)}
@@ -52,11 +71,33 @@ const PatientProfile = () => {
             <span>{email}</span>
           </div>
           <div className="profile-field">
-            <span>Phone no:</span>
+            <span>Phone no : </span>
             {!update ? (
               <span>{phone}</span>
             ) : (
-              <input type="number" value={phone} />
+              <input
+                type="text"
+                value={phone}
+                className="outline-none"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            )}
+          </div>
+          <div className="flex justify-center">
+            {!update ? (
+              <button
+                className="border-black border-2 p-2"
+                onClick={() => setUpdate(true)}
+              >
+                Update Details
+              </button>
+            ) : (
+              <button
+                className="border-black border-2 p-2"
+                onClick={() => submit()}
+              >
+                Submit
+              </button>
             )}
           </div>
         </div>
