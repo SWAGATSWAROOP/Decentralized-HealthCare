@@ -12,7 +12,7 @@
   padding-top: var(--dl-space-space-oneandhalfunits);
   flex-direction: column;
   padding-bottom: var(--dl-space-space-oneandhalfunits);
-  background-color: var(--dl-color-primary1-blue80);
+  background-color: #31b372;
 }
 .home-navbar-interactive {
   width: 90%;
@@ -40,6 +40,7 @@
   justify-content: space-between;
 }
 .home-links {
+  
   flex: 1;
   display: flex;
   align-items: center;
@@ -51,9 +52,10 @@
 .home-nav1 {
   transition: 0.3s;
   margin-left: 40px;
+  color: #31b372;
 }
 .home-nav1:hover {
-  color: green;
+  color: #228453;
 }
 
 .home-buttons {
@@ -63,25 +65,35 @@
   justify-content: space-between;
 }
 .home-login {
-  border-color: var(--dl-color-primary1-blue100);
+  color: white;
+ background-color: #31b372;
   border-width: 1px;
   margin-right: var(--dl-space-space-twounits);
   padding-left: 1.5rem;
   border-radius: 45px;
   padding-right: 1.5rem;
+  font-weight: bold;
+  
 }
+.home-login:hover {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: #228453;
+   
+ }
 .home-register {
-  color: var(--dl-color-gray-white);
+  color: #228453;
   transition: 0.3s;
   font-weight: bold;
   padding-left: 1.5rem;
   border-radius: 45px;
   padding-right: 1.5rem;
-  background-color: var(--dl-color-primary1-blue100);
+  background-color: #31b372;
 }
 .home-register:hover {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  background-color: #228453;
 }
 .home-burger-menu {
   display: none;
@@ -138,6 +150,7 @@
   align-self: flex-start;
   align-items: flex-start;
   flex-direction: column;
+  /* font-color:rgb(78, 203, 78) ; */
 }
 .home-nav11 {
   color: var(--dl-color-gray-black);
@@ -209,7 +222,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  background-color: var(--dl-color-primary1-blue80);
+  background-color: #31b372;
 }
 .home-hero1 {
   width: 100%;
@@ -256,18 +269,18 @@
   transition: 0.3s;
   font-weight: bold;
   padding-top: 1.5rem;
-  border-color: var(--dl-color-primary1-blue100);
-  border-width: 0px;
+  border-color:  #228453;
+  border-width: 2px;
   padding-left: 3rem;
   border-radius: 45px;
   padding-right: 3rem;
   padding-bottom: 1.5rem;
-  background-color: var(--dl-color-primary1-blue100);
+  background-color:  #31b372;
 }
 .home-hero-button1:hover {
   color: var(--dl-color-gray-white);
-  border-color: rgba(41, 20, 119, 0.9);
-  background-color: rgba(41, 20, 119, 0.9);
+  border-color:  #31b372;
+  background-color:  #228453;
 }
 .home-hero-button2 {
   color: var(--dl-color-gray-white);
@@ -371,7 +384,7 @@
   justify-content: flex-start;
 }
 .home-text03 {
-  color: var(--dl-color-primary1-blue80);
+  color: #31b372;
   font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
