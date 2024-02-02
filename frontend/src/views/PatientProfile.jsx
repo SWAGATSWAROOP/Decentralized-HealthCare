@@ -103,13 +103,13 @@ const PatientProfile = () => {
                 </div>
                 <div className="space-x-2">
                   <button
-                    className="border-black border-2 p-2 bg-blue-400"
+                    className="border-black"
                     onClick={() => changePhoto()}
                   >
                     Change Photo
                   </button>
                   <button
-                    className="border-black border-2 p-2 bg-blue-400"
+                    className="border-black"
                     onClick={() => removePhoto()}
                   >
                     Remove Photo
@@ -151,7 +151,7 @@ const PatientProfile = () => {
           <div className="flex justify-center">
             {!update ? (
               <button
-                className="border-black border-2 p-2  bg-blue-400"
+                className="border-black "
                 onClick={() => setUpdate(true)}
               >
                 Update Details
@@ -159,13 +159,13 @@ const PatientProfile = () => {
             ) : (
               <div className="space-x-3">
                 <button
-                  className="border-black border-2 p-2  bg-blue-400"
+                  className="border-black "
                   onClick={() => submit()}
                 >
                   Submit Details
                 </button>
                 <button
-                  className="border-black border-2 p-2  bg-blue-400"
+                  className="border-black "
                   onClick={() => setUpdate(false)}
                 >
                   Back To Profile
