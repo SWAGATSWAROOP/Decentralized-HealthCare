@@ -35,67 +35,69 @@ export const ForgotPasswordLink = () => {
 
   return (
     <>
-      <div className="h-full w-full flex justify-center">
-        <div className="flex h-1/2 w-1/2 justify-center border-black border-2">
-          <div className="h-fit w-1/2 border-black border-2 border-r-2">
+      <div className="h-screen w-screen flex justify-center items-center">
+        <div className="flex w-3/4 border-black border-2">
+          <div className="w-1/2 border-black border-r-2">
             <img src="/forgetpassword.jpg" alt="" />
           </div>
-          <div className="flex flex-col justify-center">
-            <div>
+          <div className="w-1/2 p-4 flex justify-center items-center">
+            <div className="flex flex-col justify-center items-center">
               {!link ? (
-                <div>
+                <div className="mb-4">
                   <select
                     id="userType"
                     name="userType"
                     value={userType}
                     onChange={(event) => setUserType(event.target.value)}
-                    className="form-select"
+                    className="outline-none"
                     required
                   >
-                    <option>Select User Type</option>
+                    <option value="">Select User Type</option>
                     <option value="Patient">Patient</option>
                     <option value="Doctor">Doctor</option>
                     <option value="Organization">Organization</option>
                   </select>
                 </div>
               ) : (
-                <div>{userType}</div>
+                <div className="mb-4">{userType}</div>
               )}
-            </div>
-            <div>
               {!link ? (
-                <div>
-                  <span>Email : </span>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                <div className="mb-4">
+                  <div>
+                    Email :
+                    <input
+                      type="email"
+                      value={email}
+                      placeholder="Enter Your Email"
+                      style={{ width: "20rem" }}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
                 </div>
               ) : (
-                <div>
+                <div className="mb-4">
                   <span>Email : </span>
                   {email}
                 </div>
               )}
-            </div>
-            {link ? (
+              {link ? (
+                <div className="mb-4">
+                  <span>OTP : </span>
+                  <input
+                    type="text"
+                    value={otp}
+                    onChange={(e) => setOTP(e.target.value)}
+                  />
+                </div>
+              ) : null}
               <div>
-                <span>OTP : </span>
-                <input
-                  type="text"
-                  value={otp}
-                  onChange={(e) => setOTP(e.target.value)}
-                />
+                <button
+                  className="p-2 border-black border-2 bg-violet-700"
+                  onClick={() => (link ? submitOTP() : getOTP())}
+                >
+                  {button}
+                </button>
               </div>
-            ) : null}
-            <div>
-              <button
-                className="p-2 border-black border-2 bg-violet-700"
-                onClick={() => (link ? submitOTP() : getOTP())}
-              >
-                {button}
-              </button>
             </div>
           </div>
         </div>
