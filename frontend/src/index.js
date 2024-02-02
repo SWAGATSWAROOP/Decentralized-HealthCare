@@ -13,6 +13,7 @@ import AuditAcess from "./views/AuditAccessControls.jsx";
 import DDashboard from "./views/DDashboard.jsx";
 import DocterProfile from "./views/DoctorProfile.jsx";
 import PatientProfile from "./views/PatientProfile.jsx";
+import { ForgotPasswordLink } from "./views/Forgotpassword.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/*" element={<Home />} />
+        <Route path="/forgetpassword" element={<ForgotPasswordLink />} />
         {/* Secured Routes */}
         <Route
           path="/dashboard"

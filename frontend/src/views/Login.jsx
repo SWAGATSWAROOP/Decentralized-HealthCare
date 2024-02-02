@@ -158,7 +158,7 @@ function Login() {
               </button>
             </div>
             <div className="mt-3 mx-2">
-              <Link to="/forgot-password" className={styles.forgotPasswordLink}>
+              <Link to="/forgetpassword" className={styles.forgotPasswordLink}>
                 Forgot Password?
               </Link>
             </div>
