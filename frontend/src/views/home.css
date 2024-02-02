@@ -33,6 +33,7 @@
   font-family: "Lato";
   font-weight: bold;
   text-transform: uppercase;
+  color: #31b372;
 }
 .home-desktop-menu {
   flex: 1;
@@ -321,7 +322,7 @@
   justify-content: flex-start;
 }
 .home-text {
-  color: var(--dl-color-primary1-blue80);
+  color: #31b372;
   text-align: left;
   font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
@@ -927,7 +928,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: white
 }
 .home-banner1 {
   gap: var(--dl-space-space-oneandhalfunits);
@@ -940,9 +941,11 @@
   flex-direction: column;
   padding-bottom: var(--dl-space-space-sixunits);
   justify-content: flex-start;
+  border-color: #31b372;
+  border-width: 2px;
 }
 .home-banner-heading {
-  color: var(--dl-color-gray-white);
+  color: black;
   text-align: center;
   font-family: "Raleway";
   line-height: 1.6;
@@ -963,11 +966,11 @@
   border-radius: 45px;
   padding-right: 3rem;
   padding-bottom: 1.5rem;
-  background-color: var(--dl-color-primary1-blue100);
+  background-color: #31b372;
 }
 .home-banner-button:hover {
-  border-color: rgba(41, 20, 119, 0.9);
-  background-color: rgba(41, 20, 119, 0.9);
+ border-color: #228453;
+  background-color: #228453;
 }
 .home-faq {
   flex: 0 0 auto;
@@ -1005,7 +1008,7 @@
   justify-content: flex-start;
 }
 .home-text40 {
-  color: var(--dl-color-primary1-blue80);
+  color:  #31b372;
   font-family: "Raleway";
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
@@ -1033,7 +1036,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--dl-color-gray-black);
+  background-color: #31b372;
 }
 .home-footer1 {
   width: 100%;
