@@ -10,7 +10,7 @@ const PatientProfile = () => {
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [profilephoto, setProfilePhoto] = useState("profilephoto.png");
+  const [profilephoto, setProfilePhoto] = useState("/profilephoto.png");
   useEffect(() => {
     const fetchdata = async () => {
       const res = await axios.get("/profile");
@@ -25,7 +25,7 @@ const PatientProfile = () => {
       }
     };
     fetchdata();
-  }, []);
+  }, [update]);
 
   const submit = async () => {
     try {
@@ -50,7 +50,7 @@ const PatientProfile = () => {
       const res = await axios.post("/user/removeprofile");
 
       if (res.data.success) {
-        setProfilePhoto("profilephoto.png");
+        setProfilePhoto("/profilephoto.png");
         setUpdate(false);
       }
     } catch (error) {
@@ -151,18 +151,26 @@ const PatientProfile = () => {
           <div className="flex justify-center">
             {!update ? (
               <button
-                className="border-black border-2 p-2"
+                className="border-black border-2 p-2  bg-blue-400"
                 onClick={() => setUpdate(true)}
               >
                 Update Details
               </button>
             ) : (
-              <button
-                className="border-black border-2 p-2"
-                onClick={() => submit()}
-              >
-                Submit Details
-              </button>
+              <div className="space-x-3">
+                <button
+                  className="border-black border-2 p-2  bg-blue-400"
+                  onClick={() => submit()}
+                >
+                  Submit Details
+                </button>
+                <button
+                  className="border-black border-2 p-2  bg-blue-400"
+                  onClick={() => setUpdate(false)}
+                >
+                  Back To Profile
+                </button>
+              </div>
             )}
           </div>
         </div>
