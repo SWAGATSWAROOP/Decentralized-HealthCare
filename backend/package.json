@@ -10,7 +10,7 @@
   "author": "Swagat Swaroop Parida",
   "license": "MIT",
   "devDependencies": {
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.1",
     "nodemon": "^3.0.2",
     "prettier": "^3.1.1"
   },

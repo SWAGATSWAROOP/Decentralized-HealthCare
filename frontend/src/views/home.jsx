@@ -64,7 +64,7 @@ const Home = () => {
             </nav>
             <div className="home-buttons">
               <button className="home-login hover:scale-125">
-                <Link to="/login">Login</Link>
+                <Link to="/login" className="text-white">Login</Link>
               </button>
               <button className="home-register hover:scale-125">
                 <Link to="/register" className="text-white">
