@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ForgotPasswordLink = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [otp, setOTP] = useState("");
   const [link, setLink] = useState(false);
@@ -11,6 +13,9 @@ export const ForgotPasswordLink = () => {
   const submitOTP = async () => {
     try {
       const res = await axios.post();
+      if (res.data.success) {
+        navigate("/login", { replace: true });
+      }
     } catch (error) {}
   };
 
@@ -23,13 +28,17 @@ export const ForgotPasswordLink = () => {
         const res = await axios.get("/user/forgetpass");
         setLink(true);
         setButton("Submit OTP");
-      } catch (error) {}
+      } catch (error) {
+        alert(alert("Unable to Send OTP"));
+      }
     } else {
       try {
         const res = await axios.get();
         setLink(true);
         setButton("Submit OTP");
-      } catch (error) {}
+      } catch (error) {
+        alert("Unable to Submit OTP");
+      }
     }
   };
 
