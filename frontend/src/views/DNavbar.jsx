@@ -9,6 +9,7 @@ function NavBar() {
     try {
       const res = await axios.post("/org/logout");
       if (res.data.success) {
+        sessionStorage.clear();
         navigate("/login");
       }
     } catch (error) {
