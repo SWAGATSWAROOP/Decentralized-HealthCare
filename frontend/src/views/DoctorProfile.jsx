@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./DNavbar";
+import { Helmet } from "react-helmet";
 
 const DocterProfile = () => {
   const [update, setUpdate] = useState(false);
@@ -68,6 +69,9 @@ const DocterProfile = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Profile</title>
+      </Helmet>
       <div className="h-screen bg-green-500 flex flex-col justify-center items-center">
         <NavBar />
         <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
