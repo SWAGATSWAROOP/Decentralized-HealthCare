@@ -24,22 +24,12 @@ function NavBar() {
             </li>
             <li className="nav-item">
               <div className="nav-links" onClick={() => {}}>
-                Patients List
+                Patients Data
               </div>
             </li>
             <li className="nav-item">
               <div className="nav-links" onClick={() => {}}>
-                Hospital Visits
-              </div>
-            </li>
-            <li className="nav-item">
-              <div className="nav-links" onClick={() => {}}>
-                Scheduled Appointments
-              </div>
-            </li>
-            <li className="nav-item">
-              <div className="nav-links" onClick={() => {}}>
-                Meetings
+                Logout
               </div>
             </li>
           </ul>
