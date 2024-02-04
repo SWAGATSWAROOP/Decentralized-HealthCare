@@ -1,8 +1,21 @@
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./NavBar.css";
 
 function NavBar() {
   const navigate = useNavigate();
+
+  const logout = async () => {
+    try {
+      const res = await axios.post("/org/logout");
+      if (res.data.success) {
+        navigate("/login");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <>
       <nav className="navbar">
