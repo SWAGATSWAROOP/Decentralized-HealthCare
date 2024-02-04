@@ -2,6 +2,7 @@
 .dashboardContainer {
   height: 100vh;
   width: 100vw;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,10 +14,49 @@
 
 .dashboardContent {
   /* Adjust this margin to create space for the NavBar */
+  font-family: 'Lato',sans-serif;
+  color: white;
+  height: 500px;
+  width: 700px;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color:  rgba(126, 211, 165, 0.8);
   border-radius: 10px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* You can add more styling as needed for your content */
+/* Add this CSS code to your Dashboard.module.css stylesheet */
+
+.dashboardContainer {
+  height: 100vh;
+  width: 100vw;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-image: url("https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.dashboardContent {
+  font-family: 'Lato', sans-serif;
+  color: white;
+
+  padding: 20px;
+  background-color: rgba(126, 211, 165, 0.8);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Styling for the opening paragraph */
+.dashboardContent p {
+  font-family: 'Lato',sans-serif;
+  color: white;
+  font-weight: bold;
+  font-size: xx-large;
 }
 
 /* You can add more styling as needed for your content */

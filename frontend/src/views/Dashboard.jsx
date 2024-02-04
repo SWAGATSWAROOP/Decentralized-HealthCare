@@ -1,34 +1,45 @@
-import React, { useState } from "react";
-import NavBar from "./NavBar";
-import UserProfileBox from "./PatientProfile"; // Import the UserProfileBox component
-import styles from "./Dashboard.module.css";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
+import NavBar from "./NavBar";
+import UserProfileBox from "./PatientProfile";
+import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-  const [showUserProfile, setShowUserProfile] = useState(false);
+  const [text, setText] = useState("");
+  const openingParagraph =
+    "Weelcome to our healthcare platform! Connect with providers, access records, and prioritize your well-being. Your health, your data, your control!!";
 
-  const handleUserProfileClick = () => {
-    setShowUserProfile(true);
-  };
+    useEffect(() => {
+      let currentIndex = 0;
+      const intervalId = setInterval(() => {
+        if (currentIndex < openingParagraph.length) {
+          setText((prevText) => prevText + openingParagraph[currentIndex]);
+          currentIndex++;
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 30);
+    
+      return () => {
+        clearInterval(intervalId);
+      };
+    }, [openingParagraph]);
+    
 
   return (
     <div className={styles.dashboardContainer}>
       <Helmet>
-        <title>DashBoard</title>
+        <title>Dashboard</title>
       </Helmet>
       <div className="mt-4">
-        <NavBar onUserProfileClick={handleUserProfileClick} />
+        <NavBar />
       </div>
-      <div
-        className={`${styles.dashboardContent} mt-10 ${showUserProfile ? "hidden" : ""}`}
-      >
-        <h1>Welcome to the Patient Dashboard</h1>
-        {/* Add other content here */}
+      <div className={`${styles.dashboardContent} mt-10`}>
+        <p>{text}</p>
       </div>
       <div className="mt-4 z-10">
-        {showUserProfile && (
-          <UserProfileBox onClose={() => setShowUserProfile(false)} />
-        )}
+        {/* Additional content, like UserProfileBox, if needed */}
+        {/* <UserProfileBox /> */}
       </div>
     </div>
   );
