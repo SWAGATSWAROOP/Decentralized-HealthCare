@@ -31,7 +31,8 @@ router.route("/login").post(loginUser);
 router.route("/google-signin").post(googleSignIn);
 
 // Forget Password
-router.route("/forgetpass").get(forgetPasswordUser).post(verifyOtp);
+router.route("/forgetpass").post(forgetPasswordUser);
+router.route("/submitotp").post(verifyOtp);
 
 //secured routes
 router.route("/logout").post(Verifyjwt, logOutUser);

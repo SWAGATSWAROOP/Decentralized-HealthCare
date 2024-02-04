@@ -17,7 +17,6 @@ import { decodeHeader } from "../utils/deCodeToken.js";
 export const forgetPasswordUser = async (req, res) => {
   try {
     let email = req.body?.email;
-    console.log(email);
     email = email.toLowerCase();
     const user = await User.findOne({ email });
     if (!user || !user.type) {
@@ -30,10 +29,10 @@ export const forgetPasswordUser = async (req, res) => {
       { userid: user._id, genOTP },
       process.env.FORGOT_PASSWORD_SECRET,
       {
-        expiresIn: "1m",
+        expiresIn: "3m",
       }
     );
-
+    console.log(req.body);
     const mail = await sendMail(email, genOTP);
     if (!mail) {
       return res

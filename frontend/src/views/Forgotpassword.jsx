@@ -10,30 +10,25 @@ export const ForgotPasswordLink = () => {
   const [button, setButton] = useState("Send OTP");
   const [userType, setUserType] = useState("");
 
-  const submitOTP = async () => {
-    try {
-      const res = await axios.post();
-      if (res.data.success) {
-        navigate("/login", { replace: true });
-      }
-    } catch (error) {}
-  };
-
   const getOTP = async () => {
     if (!userType) {
       return alert("Select User Type!!!");
     }
     if (userType === "Patient") {
       try {
-        const res = await axios.get("/user/forgetpass");
+        const res = await axios.post("/user/forgetpass", {
+          email: email,
+        });
         setLink(true);
         setButton("Submit OTP");
       } catch (error) {
-        alert(alert("Unable to Send OTP"));
+        alert("Unable to Send OTP");
       }
     } else {
       try {
-        const res = await axios.get();
+        const res = await axios.post("/org/forgetpass", {
+          email: email,
+        });
         setLink(true);
         setButton("Submit OTP");
       } catch (error) {
@@ -42,14 +37,45 @@ export const ForgotPasswordLink = () => {
     }
   };
 
+  const submitOTP = async () => {
+    if (!userType) {
+      return alert("Select User Type!!!");
+    }
+    if (userType === "Patient") {
+      try {
+        const res = await axios.post("/user/forgetpass");
+        if (res.data.success) {
+          navigate("/login", { replace: true });
+        }
+      } catch (error) {
+        alert("Unable to Submit OTP");
+      }
+    } else {
+      try {
+        const res = await axios.post("/org/forgetpass");
+        if (res.data.success) {
+          navigate("/login", { replace: true });
+        }
+      } catch (error) {
+        alert("Unable to Submit OTP");
+      }
+    }
+  };
+
   return (
     <>
-      <div className="h-screen w-screen flex justify-center items-center">
+      <div
+        className="h-screen w-screen flex justify-center items-center bg-contain"
+        style={{
+          backgroundImage: `url(/profileback.jpg)`,
+        }}
+      >
         <div className="flex w-3/4 border-black border-2">
           <div className="w-1/2 border-black border-r-2">
             <img src="/forgetpassword.jpg" alt="" />
           </div>
-          <div className="w-1/2 p-4 flex justify-center items-center bg-white">
+          <div className="w-1/2 p-4 flex flex-col justify-center items-center bg-white">
+            <h1 className="text-center text-4xl mb-4">Forget Password</h1>
             <div className="flex flex-col justify-center items-center">
               {!link ? (
                 <div className="mb-4">
@@ -75,7 +101,6 @@ export const ForgotPasswordLink = () => {
                   <div>
                     Email :
                     <input
-                      type="email"
                       value={email}
                       placeholder="Enter Your Email"
                       style={{ width: "20rem" }}
@@ -92,16 +117,12 @@ export const ForgotPasswordLink = () => {
               {link ? (
                 <div className="mb-4">
                   <span>OTP : </span>
-                  <input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOTP(e.target.value)}
-                  />
+                  <input value={otp} onChange={(e) => setOTP(e.target.value)} />
                 </div>
               ) : null}
               <div>
                 <button
-                  className="p-2 border-black border-2 bg-violet-700"
+                  className="p-2 border-black border-2 hover:scale-110 rounded-xl bg-green-400"
                   onClick={() => (link ? submitOTP() : getOTP())}
                 >
                   {button}
