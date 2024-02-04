@@ -63,14 +63,14 @@ const Home = () => {
               </a>
             </nav>
             <div className="home-buttons">
-              <button className="home-login hover:scale-125">
-                <Link to="/login" className="text-white">Login</Link>
-              </button>
-              <button className="home-register hover:scale-125">
-                <Link to="/register" className="text-white">
+              <Link to="/login" className="text-white">
+                <button className="home-login hover:scale-125">Login</button>
+              </Link>
+              <Link to="/register">
+                <button className="home-register text-white hover:scale-125">
                   Register
-                </Link>
-              </button>
+                </button>
+              </Link>
             </div>
           </div>
           {!open && (
