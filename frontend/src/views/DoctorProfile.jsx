@@ -79,7 +79,9 @@ const DocterProfile = () => {
         }}
       >
         <NavBar />
-        <div className="mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4">
+        <div
+          className={`mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4 ${update ? "bg-white" : ""}`}
+        >
           <div>
             <h1 className="text-center text-5xl mb-8">User Profile</h1>
             {!update ? (
