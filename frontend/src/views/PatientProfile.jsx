@@ -76,7 +76,12 @@ const PatientProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="h-screen bg-green-500 flex flex-col justify-center items-center">
+      <div
+        className="h-screen flex flex-col justify-center items-center bg-contain"
+        style={{
+          backgroundImage: `url(/profileback.jpg)`,
+        }}
+      >
         <NavBar />
         <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
           <div>

@@ -72,9 +72,14 @@ const DocterProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="h-screen bg-green-500 flex flex-col justify-center items-center">
+      <div
+        className="h-screen flex flex-col justify-center items-center bg-contain"
+        style={{
+          backgroundImage: `url(/profileback.jpg)`,
+        }}
+      >
         <NavBar />
-        <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
+        <div className="mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4">
           <div>
             <h1 className="text-center text-5xl mb-8">User Profile</h1>
             {!update ? (
@@ -112,7 +117,7 @@ const DocterProfile = () => {
             ) : (
               <div className="inline">
                 <input
-                  className="outline-none"
+                  className="outline-none bg-transparent"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
                 />
@@ -130,7 +135,7 @@ const DocterProfile = () => {
             ) : (
               <input
                 value={phone}
-                className="outline-none"
+                className="outline-none bg-transparent"
                 onChange={(e) => setPhone(e.target.value)}
               />
             )}
@@ -142,7 +147,7 @@ const DocterProfile = () => {
             ) : (
               <textarea
                 value={address}
-                className="outline-none resize-none"
+                className="outline-none resize-none bg-transparent"
                 onChange={(e) => setAddress(e.target.value)}
               />
             )}
@@ -158,7 +163,7 @@ const DocterProfile = () => {
                 <span>Type :</span>
                 <select
                   value={type}
-                  className="outline-none col-2"
+                  className="outline-none col-2 bg-transparent"
                   onChange={(e) => setType(e.target.value)}
                 >
                   <option value="Docter">Docter</option>
