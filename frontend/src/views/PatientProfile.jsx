@@ -76,7 +76,7 @@ const PatientProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="outer-div bg-green-500 flex flex-col justify-center items-center">
+      <div className="h-screen bg-green-500 flex flex-col justify-center items-center">
         <NavBar />
         <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
           <div>
@@ -123,7 +123,7 @@ const PatientProfile = () => {
               <span>{name}</span>
             ) : (
               <input
-                className="outline-none"
+                className="outline-none col-4"
                 value={name}
                 onChange={(e) => setname(e.target.value)}
               />
@@ -140,7 +140,7 @@ const PatientProfile = () => {
             ) : (
               <input
                 value={phone}
-                className="outline-none"
+                className="outline-none col-4"
                 onChange={(e) => setPhone(e.target.value)}
               />
             )}

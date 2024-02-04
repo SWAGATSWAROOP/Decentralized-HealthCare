@@ -30,14 +30,15 @@ const DocterProfile = () => {
     };
 
     fetchData(); // Call the fetchData function
-  }, []); // Empty dependency array means this effect will run once on mount
+  }, [update]); // Empty dependency array means this effect will run once on mount
 
   const submit = async () => {
     try {
-      const res = await axios.post("/profile/update", {
-        email,
+      const res = await axios.post("/org/update", {
         phoneno: phone,
         name,
+        type,
+        address,
       });
 
       if (res.data.success) {
@@ -54,7 +55,7 @@ const DocterProfile = () => {
     try {
       const formData = new FormData();
       formData.append("profilephoto", profilephoto);
-      const res = await axios.post("/user/changephoto", formData);
+      const res = await axios.post("/org/updatephoto", formData);
 
       if (res.data.success) {
         setProfilePhoto(res.data?.data?.user?.profilephoto);
@@ -67,7 +68,7 @@ const DocterProfile = () => {
 
   return (
     <>
-      <div className="outer-div bg-green-500 flex flex-col justify-center items-center">
+      <div className="h-screen bg-green-500 flex flex-col justify-center items-center">
         <NavBar />
         <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
           <div>
@@ -75,7 +76,7 @@ const DocterProfile = () => {
             {!update ? (
               <div className="flex justify-center">
                 <img
-                  className="rounded-full h-40 w-40 border-black border-2 mb-8 hover:scale-110"
+                  className="rounded-full h-40 w-40 border-black border-2 mb-2 hover:scale-110"
                   src={profilephoto}
                   alt=""
                 />
