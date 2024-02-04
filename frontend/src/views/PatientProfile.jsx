@@ -1,5 +1,4 @@
 import React from "react";
-import "./PatientProfile.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
@@ -73,14 +72,14 @@ const PatientProfile = () => {
   };
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="flex flex-col  justify-center items-center">
+      <div className="outer-div bg-green-500 flex flex-col justify-center items-center">
         <NavBar />
-        <div className="mt-10 w-3/4 h-3/4">
-          <div className="profile-field">
+        <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
+          <div>
             <h1 className="text-center text-7xl mb-8">User Profile</h1>
             {!update ? (
               <div className="flex justify-center">
@@ -118,7 +117,7 @@ const PatientProfile = () => {
               </div>
             )}
           </div>
-          <div className="profile-field">
+          <div className="">
             <span>Name : </span>
             {!update ? (
               <span>{name}</span>
@@ -131,11 +130,11 @@ const PatientProfile = () => {
               />
             )}
           </div>
-          <div className="profile-field">
+          <div className="">
             <span>Email : </span>
             <span>{email}</span>
           </div>
-          <div className="profile-field">
+          <div className="">
             <span>Phone no : </span>
             {!update ? (
               <span>{phone}</span>
@@ -175,7 +174,7 @@ const PatientProfile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
