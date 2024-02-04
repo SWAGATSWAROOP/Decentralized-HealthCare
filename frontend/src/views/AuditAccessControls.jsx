@@ -8,7 +8,12 @@ const AuditAcess = () => {
       <Helmet>
         <title>Data Access History</title>
       </Helmet>
-      <div className="flex flex-col items-center">
+      <div
+        className="h-screen flex flex-col items-center bg-contain"
+        style={{
+          backgroundImage: `url(/profileback.jpg)`,
+        }}
+      >
         <NavBar />
         <div className="mt-10 w-3/4">
           <CollapsibleTable />
