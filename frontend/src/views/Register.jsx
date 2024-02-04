@@ -248,7 +248,7 @@ function Register() {
           </div>
         </form>
         <div className="text-center">
-          Already have an account?{" "}
+          <span className="text-sky-600">Already have an account ? </span>
           <NavLink to="/login" exact>
             Sign In
           </NavLink>
