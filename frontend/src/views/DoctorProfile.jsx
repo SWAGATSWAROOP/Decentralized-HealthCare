@@ -71,7 +71,7 @@ const DocterProfile = () => {
         <NavBar />
         <div className="mt-10 w-3/4 h-3/4 bg-white p-4 rounded-lg space-y-4">
           <div>
-            <h1 className="text-center text-7xl mb-8">User Profile</h1>
+            <h1 className="text-center text-5xl mb-8">User Profile</h1>
             {!update ? (
               <div className="flex justify-center">
                 <img
@@ -105,12 +105,13 @@ const DocterProfile = () => {
             {!update ? (
               <span>{name}</span>
             ) : (
-              <input
-                className="outline-none"
-                type="text"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-              />
+              <div className="inline">
+                <input
+                  className="outline-none"
+                  value={name}
+                  onChange={(e) => setname(e.target.value)}
+                />
+              </div>
             )}
           </div>
           <div className="">
@@ -123,11 +124,42 @@ const DocterProfile = () => {
               <span>{phone}</span>
             ) : (
               <input
-                type="text"
                 value={phone}
                 className="outline-none"
                 onChange={(e) => setPhone(e.target.value)}
               />
+            )}
+          </div>
+          <div className="">
+            <span>Address : </span>
+            {!update ? (
+              <span>{address}</span>
+            ) : (
+              <textarea
+                value={address}
+                className="outline-none resize-none"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            )}
+          </div>
+          <div className="">
+            {!update ? (
+              <div>
+                <span>Type : </span>
+                <span>{type}</span>
+              </div>
+            ) : (
+              <div>
+                <span>Type : </span>
+                <select
+                  value={type}
+                  className="outline-none"
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <option value="Docter">Docter</option>
+                  <option value="Organization">Organization</option>
+                </select>
+              </div>
             )}
           </div>
           <div className="flex justify-center">
