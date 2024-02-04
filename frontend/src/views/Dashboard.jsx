@@ -6,12 +6,12 @@ import styles from "./Dashboard.module.css";
 const Dashboard = () => {
   const [text, setText] = useState("");
   const openingParagraph =
-    "Welcome to our healthcare platform! Connect with providers, access records, and prioritize your well-being. Your health, your data, your control!!";
+    "  Welcome to our healthcare platform! Connect with providers, access records, and prioritize your well-being. Your health, your data, your control!!";
 
   useEffect(() => {
     let currentIndex = 0;
     const intervalId = setInterval(() => {
-      if (currentIndex < openingParagraph.length) {
+      if (currentIndex < openingParagraph.length - 1) {
         setText((prevText) => prevText + openingParagraph[currentIndex]);
         currentIndex++;
       } else {
@@ -21,8 +21,9 @@ const Dashboard = () => {
 
     return () => {
       clearInterval(intervalId);
+      setText(openingParagraph); 
     };
-  }, [openingParagraph]);
+  }, []);
 
   return (
     <div className={styles.dashboardContainer}>
