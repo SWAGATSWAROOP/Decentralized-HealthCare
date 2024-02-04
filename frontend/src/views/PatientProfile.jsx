@@ -38,7 +38,7 @@ const PatientProfile = () => {
       if (res.data.success) {
         setname(res.data?.data?.user?.name);
         setPhone(res.data?.data?.user?.phoneno);
-        setUpdate(false);
+        alert("Updated Successfully");
       }
     } catch (error) {
       alert(error);
@@ -51,7 +51,7 @@ const PatientProfile = () => {
 
       if (res.data.success) {
         setProfilePhoto("/profilephoto.png");
-        setUpdate(false);
+        alert("Updated Successfully");
       }
     } catch (error) {
       alert(error);
@@ -65,7 +65,7 @@ const PatientProfile = () => {
 
       if (res.data.success) {
         setProfilePhoto(res.data?.data?.user?.profilephoto);
-        setUpdate(false);
+        alert("Updated Successfully");
       }
     } catch (error) {
       alert(error);
@@ -85,7 +85,7 @@ const PatientProfile = () => {
             {!update ? (
               <div className="flex justify-center">
                 <img
-                  className="rounded-full h-40 w-40 border-black border-2 mb-8"
+                  className="rounded-full h-40 w-40 border-black border-2 mb-8 hover:scale-110"
                   src={profilephoto}
                   alt=""
                 />
@@ -103,13 +103,13 @@ const PatientProfile = () => {
                 </div>
                 <div className="space-x-2">
                   <button
-                    className="border-black"
+                    className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                     onClick={() => changePhoto()}
                   >
                     Change Photo
                   </button>
                   <button
-                    className="border-black"
+                    className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                     onClick={() => removePhoto()}
                   >
                     Remove Photo
@@ -151,7 +151,7 @@ const PatientProfile = () => {
           <div className="flex justify-center">
             {!update ? (
               <button
-                className="border-black "
+                className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                 onClick={() => setUpdate(true)}
               >
                 Update Details
@@ -159,13 +159,13 @@ const PatientProfile = () => {
             ) : (
               <div className="space-x-3">
                 <button
-                  className="border-black "
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => submit()}
                 >
                   Submit Details
                 </button>
                 <button
-                  className="border-black "
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => setUpdate(false)}
                 >
                   Back To Profile

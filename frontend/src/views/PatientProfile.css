@@ -1,11 +1,4 @@
 /* PatientProfile.css */
-
-#app {
-  background-image: url('https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh; /* Set the height to 100% of the viewport height */
-}
 .user-profile-box {
   padding: 20px;
   background-color: rgba(126, 211, 165, 0.8);
@@ -13,20 +6,6 @@
   border-radius: 10px;
   font-family: "Lato", sans-serif; /* Match the font used in the navbar */
   /* background-image: url("https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg"); */
-}
-.mt-10 {
-  width: 600px;
-  height: 600px;
-  padding: 20px;
-  background-color: rgba(126, 211, 165, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Lato', sans-serif;
-  overflow: hidden; /* Ensure the content doesn't overflow the container */
 }
 
 .user-profile-box h2 {
@@ -45,20 +24,7 @@
 .profile-field span {
   font-size: 20px; /* Increased font size */
 }
-.text-center{
-  color: white;
-}
-.border-black{
-  color: white;
-  font-size: large;
- 
-  
-}
-.border-black:hover{
-  color: #146a3f;
-  font-weight: bold;
-   font-size: larger;
-}
+
 @media screen and (max-width: 700px) {
   .user-profile-box {
     width: 400px;
