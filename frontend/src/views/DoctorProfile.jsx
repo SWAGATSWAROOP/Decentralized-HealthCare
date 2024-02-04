@@ -29,8 +29,8 @@ const DocterProfile = () => {
       }
     };
 
-    fetchData(); // Call the fetchData function
-  }, [update]); // Empty dependency array means this effect will run once on mount
+    fetchData();
+  }, [update]);
 
   const submit = async () => {
     try {
