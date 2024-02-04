@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./forgetpass.css";
+
 export const ForgotPasswordLink = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -45,17 +45,12 @@ export const ForgotPasswordLink = () => {
   return (
     <>
       <div className="h-screen w-screen flex justify-center items-center">
-        <div className="flex w-3/4 ">
-          <div className="w-1/2 ">
+        <div className="flex w-3/4 border-black border-2">
+          <div className="w-1/2 border-black border-r-2">
             <img src="/forgetpassword.jpg" alt="" />
           </div>
-          <div className="w-1/2 p-4 flex justify-center items-center">
+          <div className="w-1/2 p-4 flex justify-center items-center bg-white">
             <div className="flex flex-col justify-center items-center">
-            <div className="mb-4">
-              <p className="instruction-text">
-                Enter the following details to retrieve the password:
-              </p>
-            </div>
               {!link ? (
                 <div className="mb-4">
                   <select
@@ -106,7 +101,7 @@ export const ForgotPasswordLink = () => {
               ) : null}
               <div>
                 <button
-                  className="p-2"
+                  className="p-2 border-black border-2 bg-violet-700"
                   onClick={() => (link ? submitOTP() : getOTP())}
                 >
                   {button}
