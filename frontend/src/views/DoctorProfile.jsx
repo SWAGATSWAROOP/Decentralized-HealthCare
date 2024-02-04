@@ -150,10 +150,10 @@ const DocterProfile = () => {
               </div>
             ) : (
               <div>
-                <span>Type : </span>
+                <span>Type :</span>
                 <select
                   value={type}
-                  className="outline-none"
+                  className="outline-none col-2"
                   onChange={(e) => setType(e.target.value)}
                 >
                   <option value="Docter">Docter</option>

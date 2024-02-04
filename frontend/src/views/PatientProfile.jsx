@@ -124,7 +124,6 @@ const PatientProfile = () => {
             ) : (
               <input
                 className="outline-none"
-                type="text"
                 value={name}
                 onChange={(e) => setname(e.target.value)}
               />
@@ -140,7 +139,6 @@ const PatientProfile = () => {
               <span>{phone}</span>
             ) : (
               <input
-                type="text"
                 value={phone}
                 className="outline-none"
                 onChange={(e) => setPhone(e.target.value)}
