@@ -21,7 +21,7 @@ const Dashboard = () => {
 
     return () => {
       clearInterval(intervalId);
-      setText(openingParagraph); 
+      setText(openingParagraph);
     };
   }, []);
 
