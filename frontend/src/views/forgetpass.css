@@ -1,0 +1,31 @@
+.mb-4{
+    color: white;
+    font-weight: bold;
+    width: max-content;
+    font-size:large;
+    padding: 45px;
+    background-color: rgba(126, 211, 165, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-family: "Lato", sans-serif;
+}
+.p-2{
+    color: white;
+    font-weight: bold;
+    padding: 45px;
+  background-color: rgba(126, 211, 165, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: "Lato", sans-serif;
+}
+.p-2:hover{
+    color: white;
+    font-weight: bold;
+    font-size:large;
+    padding: 20px;
+  background-color: rgba(8, 72, 38, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: "Lato", sans-serif;
+    
+}
