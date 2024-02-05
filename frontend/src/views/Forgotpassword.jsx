@@ -140,7 +140,6 @@ export const ForgotPasswordLink = () => {
                       <input
                         value={password}
                         type="password"
-                        className="col-4"
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter Password"
                       />
