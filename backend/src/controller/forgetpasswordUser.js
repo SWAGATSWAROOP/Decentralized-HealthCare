@@ -51,7 +51,9 @@ export const forgetPasswordUser = async (req, res) => {
 export const verifyOtp = async (req, res) => {
   try {
     const { otp, password } = req.body;
-    const token = req.headers.authorization || req.body;
+    const token = req.headers.authorization;
+    console.log(req.body);
+    console.log(token);
     if (!token) {
       return res
         .status(400)

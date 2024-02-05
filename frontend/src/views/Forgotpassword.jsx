@@ -9,28 +9,33 @@ export const ForgotPasswordLink = () => {
   const [link, setLink] = useState(false);
   const [button, setButton] = useState("Send OTP");
   const [userType, setUserType] = useState("");
+  const [token, setToken] = useState("");
+  const [password, setPassword] = useState("");
 
   const getOTP = async () => {
     if (!userType) {
       return alert("Select User Type!!!");
     }
     if (userType === "Patient") {
+      setLink(true);
+      setButton("Submit OTP");
       try {
         const res = await axios.post("/user/forgetpass", {
           email: email,
         });
-        setLink(true);
-        setButton("Submit OTP");
+        console.log(res.data.data.token);
+        setToken(res.data.data.token);
       } catch (error) {
         alert("Unable to Send OTP");
       }
     } else {
       try {
+        setLink(true);
+        setButton("Submit OTP");
         const res = await axios.post("/org/forgetpass", {
           email: email,
         });
-        setLink(true);
-        setButton("Submit OTP");
+        setToken(res.data.data.token);
       } catch (error) {
         alert("Unable to Submit OTP");
       }
@@ -42,8 +47,16 @@ export const ForgotPasswordLink = () => {
       return alert("Select User Type!!!");
     }
     if (userType === "Patient") {
+      console.log(token);
       try {
-        const res = await axios.post("/user/forgetpass");
+        const res = await axios.post(
+          "/user/submitotp",
+          {
+            otp: otp,
+            password: password,
+          },
+          { headers: { Authorization: token } }
+        );
         if (res.data.success) {
           navigate("/login", { replace: true });
         }
@@ -52,7 +65,11 @@ export const ForgotPasswordLink = () => {
       }
     } else {
       try {
-        const res = await axios.post("/org/forgetpass");
+        const res = await axios.post("/org/forgetpass", {
+          otp: otp,
+          password: password,
+          token: token,
+        });
         if (res.data.success) {
           navigate("/login", { replace: true });
         }
@@ -114,6 +131,22 @@ export const ForgotPasswordLink = () => {
                   {email}
                 </div>
               )}
+              <div>
+                {link ? (
+                  <div className="flex justify-center">
+                    <div>
+                      Password :
+                      <input
+                        value={password}
+                        type="password"
+                        className="col-4"
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter Password"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+              </div>
               {link ? (
                 <div className="mb-4">
                   <span>OTP : </span>
