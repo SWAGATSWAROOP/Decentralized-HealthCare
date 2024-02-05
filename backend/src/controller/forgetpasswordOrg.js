@@ -22,9 +22,9 @@ export const forgetPasswordUser = async (req, res) => {
     console.log(genOTP);
     // The token expires in 3 minute
     const token = jwt.sign(
-      { OTP: genOTP, userid: user._id },
+      { genOTP: genOTP, userid: user._id },
       process.env.FORGOT_PASSWORD_SECRET,
-      { expiresIn: "1m" }
+      { expiresIn: "3m" }
     );
 
     const mail = await sendMail(email, genOTP);
@@ -47,14 +47,13 @@ export const verifyOtp = async (req, res) => {
     const { otp, password } = req.body;
     const token = req.headers.authorization;
 
-    console.log(token);
     if (!token) {
       return res.status(400).json(new ApiResponse(400, {}, "Invalid Access"));
     }
 
     const { genOTP, userid } = decodeHeader(token);
 
-    console.log(genOTP);
+    console.log(genOTP, userid);
     if (otp != genOTP) {
       console.log("otp doesnot match");
       return res.status(400).json(new ApiResponse(400, {}, "Invalid OTP"));

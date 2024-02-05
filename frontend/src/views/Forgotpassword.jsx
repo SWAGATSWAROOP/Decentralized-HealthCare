@@ -23,7 +23,6 @@ export const ForgotPasswordLink = () => {
         const res = await axios.post("/user/forgetpass", {
           email: email,
         });
-        console.log(res.data.data.token);
         setToken(res.data.data.token);
       } catch (error) {
         alert("Unable to Send OTP");
@@ -47,7 +46,6 @@ export const ForgotPasswordLink = () => {
       return alert("Select User Type!!!");
     }
     if (userType === "Patient") {
-      console.log(token);
       try {
         const res = await axios.post(
           "/user/submitotp",
@@ -65,11 +63,14 @@ export const ForgotPasswordLink = () => {
       }
     } else {
       try {
-        const res = await axios.post("/org/forgetpass", {
-          otp: otp,
-          password: password,
-          token: token,
-        });
+        const res = await axios.post(
+          "/org/submitotp",
+          {
+            otp: otp,
+            password: password,
+          },
+          { headers: { Authorization: token } }
+        );
         if (res.data.success) {
           navigate("/login", { replace: true });
         }

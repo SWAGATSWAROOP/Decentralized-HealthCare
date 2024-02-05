@@ -24,7 +24,8 @@ router
   .post(upload.fields([{ name: "profilephoto", maxCount: 1 }]), registerOrg);
 
 // forgetpass
-router.route("/forgetpass").get(forgetPasswordUser).post(verifyOtp);
+router.route("/forgetpass").post(forgetPasswordUser);
+router.route("/submitotp").post(verifyOtp);
 
 // secured Route
 router.route("/login").post(loginOrg);
