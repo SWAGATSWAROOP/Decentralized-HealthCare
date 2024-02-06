@@ -14,6 +14,7 @@ import DDashboard from "./views/DDashboard.jsx";
 import DocterProfile from "./views/DoctorProfile.jsx";
 import PatientProfile from "./views/PatientProfile.jsx";
 import { ForgotPasswordLink } from "./views/Forgotpassword.jsx";
+import ChangePassword from "./views/ChangePassword.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -73,6 +74,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <PatientProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/changepass"
+          element={
+            <ProtectedRoute>
+              <ChangePassword />
             </ProtectedRoute>
           }
         />
