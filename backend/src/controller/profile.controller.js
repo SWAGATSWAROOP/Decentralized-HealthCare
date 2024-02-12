@@ -50,6 +50,7 @@ export const updateProfile = async (req, res) => {
 export const updatePassword = async (req, res) => {
   try {
     const { email, oldPassword, newPassword } = req.body;
+    console.log(email, oldPassword, newPassword);
     const user = await User.findOne({ email });
     if (!user.type) {
       return res.status(400).json(new ApiResponse(400, {}, "Not Authorized"));

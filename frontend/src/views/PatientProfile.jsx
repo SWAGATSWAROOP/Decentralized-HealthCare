@@ -2,9 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
 const PatientProfile = () => {
+  const navigate = useNavigate();
   const [update, setUpdate] = useState(false);
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
@@ -167,6 +169,12 @@ const PatientProfile = () => {
                   onClick={() => submit()}
                 >
                   Submit Details
+                </button>
+                <button
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  onClick={() => navigate("/user/changepass")}
+                >
+                  Change Password
                 </button>
                 <button
                   className="border-black border-2 p-2 bg-blue-400 hover:scale-110"

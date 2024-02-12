@@ -44,7 +44,7 @@ function Login() {
 
         if (res.data.success) {
           sessionStorage.setItem("auth", "true");
-          sessionStorage.setItem("email", email);
+          sessionStorage.setItem("email", `${email}`);
           navigate("/dashboard", { replace: true });
         }
       } catch (error) {
