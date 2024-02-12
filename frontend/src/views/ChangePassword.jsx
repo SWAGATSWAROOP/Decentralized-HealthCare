@@ -19,7 +19,7 @@ const ChangePassword = () => {
     if (confirmPass != newPass) {
       setMessage("Invalid");
     } else setMessage("");
-  }, [confirmPass]);
+  }, [confirmPass, newPass]);
 
   const submit = async () => {
     try {

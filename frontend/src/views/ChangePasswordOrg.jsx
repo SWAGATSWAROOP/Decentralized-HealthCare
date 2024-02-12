@@ -19,7 +19,7 @@ const ChangePassword = () => {
     if (confirmPass != newPass) {
       setMessage("Invalid");
     } else setMessage("");
-  }, [confirmPass]);
+  }, [confirmPass, newPass]);
 
   const submit = async () => {
     try {
@@ -29,7 +29,7 @@ const ChangePassword = () => {
         newPassword: newPass,
       });
       if (res.data.success) {
-        navigate("/dashboard");
+        navigate("/ddashboard");
       }
     } catch (error) {
       alert("Error in ", error);
