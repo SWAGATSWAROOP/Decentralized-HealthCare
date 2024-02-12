@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "./DNavbar";
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 const DocterProfile = () => {
+  const navigate = useNavigate();
   const [update, setUpdate] = useState(false);
   const [name, setname] = useState("");
   const [email, setEmail] = useState("");
@@ -189,6 +191,12 @@ const DocterProfile = () => {
                   onClick={() => submit()}
                 >
                   Submit Details
+                </button>
+                <button
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  onClick={() => navigate("/org/changepass")}
+                >
+                  Change Password
                 </button>
                 <button
                   className="border-black border-2 p-2 bg-blue-400 hover:scale-110"

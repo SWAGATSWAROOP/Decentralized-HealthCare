@@ -284,9 +284,8 @@ export const updateDetails = async (req, res) => {
 //update password
 export const updatePassword = async (req, res) => {
   try {
-    const decodedToken = decodedJWT(req.cookies.accessToken);
-    const { oldPassword, newPassword } = req.body;
-    const user = await OrgDoc.findById(decodedToken._id);
+    const { email, oldPassword, newPassword } = req.body;
+    const user = await OrgDoc.find({ email: email });
     if (!user) {
       console.log("Error in fetching the data");
       return res
