@@ -403,7 +403,7 @@ const Home = () => {
           <div className="home-separator"></div>
           <div className="home-container33">
             <span className="home-text61">
-              © 2023 DHM, All Rights Reserved.
+              © {new Date().getFullYear()} DHM, All Rights Reserved.
             </span>
             <div className="home-icon-group1">
               <svg viewBox="0 0 950.8571428571428 1024" className="home-icon10">
