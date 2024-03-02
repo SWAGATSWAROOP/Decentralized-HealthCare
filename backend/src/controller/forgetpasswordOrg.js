@@ -7,7 +7,6 @@ import bcrypt from "bcrypt";
 import { decodeHeader } from "../utils/deCodeToken.js";
 
 // Verify genotp throught token
-
 export const forgetPasswordUser = async (req, res) => {
   try {
     let email = req.body?.email;
@@ -18,9 +17,9 @@ export const forgetPasswordUser = async (req, res) => {
         .status(404)
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
     }
-    const genOTP = genearateOTP();
-    const hashedOTP = await bcrypt.hash(genOTP, 10);
+    const genOTP = genearateOTP().toString();
     console.log(genOTP);
+    const hashedOTP = await bcrypt.hash(genOTP, 10);
     // The token expires in 3 minute
     const token = jwt.sign(
       { genOTP: hashedOTP, userid: user._id },

@@ -25,7 +25,7 @@ export const forgetPasswordUser = async (req, res) => {
         .status(404)
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
     }
-    const genOTP = genearateOTP();
+    const genOTP = genearateOTP().toString();
     const hashedOTP = await bcrypt.hash(genOTP, 10);
     const token = jwt.sign(
       { userid: user._id, genOTP: hashedOTP },
