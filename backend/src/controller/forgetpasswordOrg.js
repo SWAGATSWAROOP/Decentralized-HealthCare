@@ -3,6 +3,7 @@ import { genearateOTP } from "../utils/OTP.js";
 import { sendMail } from "../utils/nodemailer.js";
 import { OrgDoc } from "../models/orgdocter.js";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import { decodeHeader } from "../utils/deCodeToken.js";
 
 // Verify genotp throught token
@@ -18,11 +19,11 @@ export const forgetPasswordUser = async (req, res) => {
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
     }
     const genOTP = genearateOTP();
-
+    const hashedOTP = await bcrypt.hash(genOTP, 10);
     console.log(genOTP);
     // The token expires in 3 minute
     const token = jwt.sign(
-      { genOTP: genOTP, userid: user._id },
+      { genOTP: hashedOTP, userid: user._id },
       process.env.FORGOT_PASSWORD_SECRET,
       { expiresIn: "3m" }
     );
@@ -54,7 +55,8 @@ export const verifyOtp = async (req, res) => {
     const { genOTP, userid } = decodeHeader(token);
 
     console.log(genOTP, userid);
-    if (otp != genOTP) {
+    const checkOTP = await bcrypt.compare(otp, genOTP);
+    if (!checkOTP) {
       console.log("otp doesnot match");
       return res.status(400).json(new ApiResponse(400, {}, "Invalid OTP"));
     }

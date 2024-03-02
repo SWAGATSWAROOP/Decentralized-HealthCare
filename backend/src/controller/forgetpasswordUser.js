@@ -8,6 +8,7 @@
 // updated
 
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import { User } from "../models/auth.js";
 import ApiResponse from "../utils/APIresponse.js";
 import { genearateOTP } from "../utils/OTP.js";
@@ -25,8 +26,9 @@ export const forgetPasswordUser = async (req, res) => {
         .json(new ApiResponse(404, {}, "User doesnot Exist"));
     }
     const genOTP = genearateOTP();
+    const hashedOTP = await bcrypt.hash(genOTP, 10);
     const token = jwt.sign(
-      { userid: user._id, genOTP },
+      { userid: user._id, genOTP: hashedOTP },
       process.env.FORGOT_PASSWORD_SECRET,
       {
         expiresIn: "3m",
@@ -59,7 +61,8 @@ export const verifyOtp = async (req, res) => {
     }
 
     const { userid, genOTP } = decodeHeader(token);
-    if (otp != genOTP) {
+    const checkOTP = await bcrypt.compare(otp, genOTP);
+    if (!checkOTP) {
       console.log("otp doesnot match");
       return res.status(400).json(new ApiResponse(400, {}, "Invalid OTP"));
     }
