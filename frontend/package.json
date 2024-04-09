@@ -15,8 +15,6 @@
     "axios": "^1.6.5",
     "cors": "^2.8.5",
     "ethers": "^6.11.1",
-    "ipfs-core": "^0.18.1",
-    "ipfs-http-client": "^60.0.1",
     "nft.storage": "^7.1.1",
     "prop-types": "15.7.2",
     "react": "^18.2.0",
