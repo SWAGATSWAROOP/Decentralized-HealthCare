@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import FormData from "form-data";
+import Web3Modal from "web3modal";
+import { ethers } from "ethers";
+
+import NFT from "../../artifacts/contracts/NFT.sol/NFT.json";
+import AccessRights from "../../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
 const UploadDocuments = () => {
   const [url, setUrl] = useState("");
@@ -59,9 +64,19 @@ const UploadDocuments = () => {
       );
       const url = `https://gateway.pinata.cloud/ipfs/${res.data.IpfsHash}`;
       console.log(url);
+      createDocument(url);
     } catch (err) {
       console.log("Error in uploading file: ", err);
     }
+  };
+
+  const createDocument = async (url) => {
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    let contract = new ethers.Contract();
   };
 
   return <></>;
