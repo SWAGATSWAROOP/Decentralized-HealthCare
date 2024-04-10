@@ -16,6 +16,7 @@ import PatientProfile from "./views/PatientProfile.jsx";
 import { ForgotPasswordLink } from "./views/Forgotpassword.jsx";
 import ChangePassword from "./views/ChangePassword.jsx";
 import ChangePasswordOrg from "./views/ChangePasswordOrg.jsx";
+import UploadDocuments from "./views/UploadDocuments.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -83,6 +84,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <ChangePassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/upload-documents"
+          element={
+            <ProtectedRoute>
+              <UploadDocuments />
             </ProtectedRoute>
           }
         />
