@@ -82,7 +82,7 @@ const UploadDocuments = () => {
     const signer = provider.getSigner();
 
     let contract = new ethers.Contract(
-      process.env.NFT_CONTRACT_ADDRESS,
+      process.env.REACT_APP_NFT_CONTRACT_ADDRESS,
       NFT.abi,
       signer
     );
@@ -94,7 +94,7 @@ const UploadDocuments = () => {
     let tokenId = value.toNumber();
 
     contract = new ethers.Contract(
-      process.env.ACCESSRIGHTS_CONTRACT_ADDRESS,
+      process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
       signer
     );
