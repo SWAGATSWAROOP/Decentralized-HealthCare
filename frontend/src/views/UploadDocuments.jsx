@@ -5,7 +5,6 @@ import { ethers } from "ethers";
 import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
 import axios from "axios";
-import { PINATA_JWT } from "../config/config.js";
 
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
@@ -28,7 +27,7 @@ const UploadDocuments = () => {
         data,
         {
           headers: {
-            Authorization: `Bearer ${PINATA_JWT}`,
+            Authorization: `Bearer ${process.env.REACT_APP_PINATA_JWT}`,
           },
         }
       );

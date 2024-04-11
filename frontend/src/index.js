@@ -112,7 +112,7 @@ const container = document.getElementById("app");
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
   <Provider store={store}>
-    <GoogleOAuthProvider clientId="306989628878-1ac30rkduv4bm4qqse143c52eomo1660.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={`${process.env.REACT_APP_GOOGLE_clientId}`}>
       <App />
     </GoogleOAuthProvider>
   </Provider>
