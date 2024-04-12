@@ -3,6 +3,10 @@ import styles from "./Register.module.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ethers } from "ethers";
+
+// Importing ABI Contract.
+import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
 function Register() {
   const navigate = useNavigate();
@@ -20,7 +24,6 @@ function Register() {
   const [validEmailVisiblity, setValidEmailVisiblity] = useState("invisible");
   const [validPasswordVisiblity, setValidPasswordVisiblity] =
     useState("invisible");
-
   const [passwordValidationMessage, setPasswordValidationMessage] =
     useState("");
 
@@ -34,46 +37,97 @@ function Register() {
       },
     };
     if (userType === "Patient") {
-      const name = firstName + " " + lastName;
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phoneno", phone);
-      formData.append("password", password);
-      const res = await axios.post("/user/register", formData, config);
+      try {
+        const name = firstName + " " + lastName;
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("phoneno", phone);
+        formData.append("password", password);
+        const res = await axios.post("/user/register", formData, config);
+        // Etherjs
+        if (res.data.success) {
+          // const web3Modal = new Web3Modal();
+          // const connection = await web3Modal.connect();
+          const provider = new ethers.JsonRpcProvider();
+          const signer = await provider.getSigner();
 
-      if (res.data.success) {
+          let contract = new ethers.Contract(
+            process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
+            AccessRights.abi,
+            signer
+          );
+
+          const transaction = await contract.createPatient(email);
+          await transaction.wait();
+          console.log(res.data);
+          navigate("/login");
+        }
         navigate("/login");
-      } else {
-        alert("Unable to register");
+      } catch (error) {
+        alert(error);
       }
     } else if (userType === "Doctor") {
-      const name = firstName + lastName;
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phoneno", phone);
-      formData.append("password", password);
-      formData.append("address", address);
-      formData.append("type", userType);
-      const res = await axios.post("/org/register", formData, config);
+      try {
+        const name = firstName + lastName;
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("phoneno", phone);
+        formData.append("password", password);
+        formData.append("address", address);
+        formData.append("type", userType);
+        const res = await axios.post("/org/register", formData, config);
+        // Etherjs
+        if (res.data.success) {
+          // const web3Modal = new Web3Modal();
+          // const connection = await web3Modal.connect();
+          const provider = new ethers.JsonRpcProvider();
+          const signer = await provider.getSigner();
 
-      if (res.data.success) {
-        navigate("/login");
-      } else {
-        alert("Unable to register");
+          let contract = new ethers.Contract(
+            process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
+            AccessRights.abi,
+            signer
+          );
+
+          const transaction = await contract.createDocter(email);
+          await transaction.wait();
+          console.log(res.data);
+          navigate("/login");
+        } else {
+          alert("Unable to register");
+        }
+      } catch (error) {
+        alert(error);
       }
     } else {
-      formData.append("name", firstName);
-      formData.append("email", email);
-      formData.append("phoneno", phone);
-      formData.append("password", password);
-      formData.append("address", address);
-      formData.append("type", userType);
-      const res = await axios.post("/org/register", formData, config);
+      try {
+        formData.append("name", firstName);
+        formData.append("email", email);
+        formData.append("phoneno", phone);
+        formData.append("password", password);
+        formData.append("address", address);
+        formData.append("type", userType);
+        const res = await axios.post("/org/register", formData, config);
 
-      if (res.data.success) {
-        navigate("/login");
-      } else {
-        alert("Unable to register");
+        if (res.data.success) {
+          const provider = new ethers.JsonRpcProvider();
+          const signer = await provider.getSigner();
+
+          let contract = new ethers.Contract(
+            process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
+            AccessRights.abi,
+            signer
+          );
+
+          const transaction = await contract.createDocter(email);
+          await transaction.wait();
+          console.log(res.data);
+          navigate("/login");
+        } else {
+          alert("Unable to register");
+        }
+      } catch (error) {
+        alert(error);
       }
     }
   };

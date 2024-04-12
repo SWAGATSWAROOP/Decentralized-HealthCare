@@ -6,12 +6,6 @@ import GoogleButton from "react-google-button";
 import axios from "axios";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-
-// ABI for BlockChain
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
-import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,7 +22,7 @@ function Login() {
         // backend that will exchange the code
         code,
       });
-  
+
       if (res.data.success) {
         sessionStorage.setItem("auth", "true");
         sessionStorage.setItem("email", `${res?.data?.user?.email}`);
