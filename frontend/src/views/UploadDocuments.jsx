@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import FormData from "form-data";
-import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
@@ -9,8 +8,9 @@ import axios from "axios";
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
 const UploadDocuments = () => {
-  const fileRef = useRef("");
-  const desRef = useRef("");
+  const fileRef = useRef(null);
+  const desRef = useRef(null);
+  const uploadfileRef = useRef(null);
   const [fileUrl, setFileUrl] = useState(null);
   const [formInput, setFormInput] = useState({ filename: "", description: "" });
 
@@ -75,29 +75,30 @@ const UploadDocuments = () => {
   };
 
   const createDocument = async (url) => {
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.BrowserProvider(connection);
-    const signer = provider.getSigner();
+    const provider = new ethers.JsonRpcProvider();
+    const signer = await provider.getSigner();
 
-    contract = new ethers.Contract(
+    let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
       signer
     );
 
     let transaction = await contract.createToken(url);
-    let tx = await transaction.wait();
-    let event = tx.events[0];
-    let value = event.args[2];
-    let tokenId = value.toNumber();
+    // Wait for the transaction to be mined and get the receipt
+    await transaction.wait();
+
+    const tokenId = await contract.getTokenIds();
+    console.log(tokenId);
 
     const email = sessionStorage.getItem("email");
     transaction = await contract.addDocuments(email, tokenId);
     await transaction.wait();
     setFileUrl(null);
     setFormInput({ filename: "", description: "" });
-    fileRef.value = "";
+    fileRef.current.value = "";
+    desRef.current.value = "";
+    uploadfileRef.current.value = null;
   };
 
   return (
@@ -132,6 +133,7 @@ const UploadDocuments = () => {
             />
             <input
               type="file"
+              ref={uploadfileRef}
               name="asset"
               className="my-3"
               placeholder="Choose File"

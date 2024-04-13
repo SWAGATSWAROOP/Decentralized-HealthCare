@@ -6,7 +6,7 @@ import "./ReentrancyGuard/ReentrancyGuard.sol";
 contract RolesAndRights is ReentrancyGuard{
     uint256 private docterids;
     uint256 private patientids;
-    uint256 private _tokenIds;
+    uint256 _tokenIds;
 
     address payable owner;
 
@@ -200,11 +200,16 @@ contract RolesAndRights is ReentrancyGuard{
     event tokenIdCreated(
         uint256 indexed tokenId
     );
-    function createToken(string memory tokenURI)public  returns(uint256){
+    function createToken(string memory tokenURI)public nonReentrant{
         _tokenIds++;
         tokenURIs[_tokenIds] = tokenURI;
         emit tokenIdCreated(_tokenIds);
-        return _tokenIds;
     }
-
+    function getTokenURI(uint256 tokenId)public view returns(string memory){
+        return tokenURIs[tokenId];
+    }
+    function getTokenIds() external view returns(uint256){
+        uint256 size = _tokenIds;
+        return size;
+    }
 }
