@@ -39,8 +39,8 @@ const UploadDocuments = () => {
   }
 
   const createMetaData = async () => {
-    const { name, description } = formInput;
-    if (!name || !description || !fileUrl) return;
+    const { filename, description } = formInput;
+    if (!filename || !description || !fileUrl) return;
 
     const data = JSON.stringify({
       pinataOptions: {
@@ -51,7 +51,7 @@ const UploadDocuments = () => {
         keyvalues: {},
       },
       pinataContent: {
-        name,
+        filename,
         description,
         image: fileUrl,
       },
@@ -133,7 +133,7 @@ const UploadDocuments = () => {
               onChange={(e) =>
                 setFormInput({
                   ...formInput,
-                  description: e.target.description,
+                  description: e.target.value,
                 })
               }
             />
