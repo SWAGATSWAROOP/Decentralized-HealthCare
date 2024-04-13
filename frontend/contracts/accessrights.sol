@@ -1,19 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./ReentrancyGuard/ReentrancyGuard.sol";
 
 contract RolesAndRights is ReentrancyGuard{
     uint256 private docterids;
     uint256 private patientids;
+    uint256 private _tokenIds;
 
     address payable owner;
 
+    // TokenId mapping
+    mapping (uint256 => string) private tokenURIs;
     constructor (){
         owner = payable(msg.sender);
         docterids = 0;
         patientids = 0;
+        _tokenIds = 0;
     }
 
     // Patients
@@ -193,4 +196,15 @@ contract RolesAndRights is ReentrancyGuard{
         if(!anon)emit moneyReceived(email, msg.value);
         return true;
     }
+
+    event tokenIdCreated(
+        uint256 indexed tokenId
+    );
+    function createToken(string memory tokenURI)public  returns(uint256){
+        _tokenIds++;
+        tokenURIs[_tokenIds] = tokenURI;
+        emit tokenIdCreated(_tokenIds);
+        return _tokenIds;
+    }
+
 }

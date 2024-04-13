@@ -6,7 +6,6 @@ import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 
-import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
 const UploadDocuments = () => {
@@ -63,7 +62,7 @@ const UploadDocuments = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.PINATA_JWT}`,
+            Authorization: `Bearer ${process.env.REACT_APP_PINATA_JWT}`,
           },
         }
       );
@@ -81,9 +80,9 @@ const UploadDocuments = () => {
     const provider = new ethers.BrowserProvider(connection);
     const signer = provider.getSigner();
 
-    let contract = new ethers.Contract(
-      process.env.REACT_APP_NFT_CONTRACT_ADDRESS,
-      NFT.abi,
+    contract = new ethers.Contract(
+      process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
+      AccessRights.abi,
       signer
     );
 
@@ -92,12 +91,6 @@ const UploadDocuments = () => {
     let event = tx.events[0];
     let value = event.args[2];
     let tokenId = value.toNumber();
-
-    contract = new ethers.Contract(
-      process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
-      AccessRights.abi,
-      signer
-    );
 
     const email = sessionStorage.getItem("email");
     transaction = await contract.addDocuments(email, tokenId);
