@@ -179,4 +179,18 @@ contract RolesAndRights is ReentrancyGuard{
     )public view returns(string [] memory){
         return Patients[email].approvedemails;
     }
+
+    event moneyReceived(
+        string indexed email,
+        uint256 money
+    );
+
+    function donateMoney(
+        string memory email,
+        bool anon
+    )public payable nonReentrant returns(bool){
+        require(msg.value > 0,"Give a valid amount");
+        if(!anon)emit moneyReceived(email, msg.value);
+        return true;
+    }
 }
