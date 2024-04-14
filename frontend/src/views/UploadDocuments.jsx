@@ -107,10 +107,10 @@ const UploadDocuments = () => {
       <Helmet>
         <title>Upload Documents</title>
       </Helmet>
-      <NavBar />
 
       <div className="upload-container">
-        <div className="navbar">
+        <div>
+          <NavBar />
         </div>
         <div className="upload-form">
           <input

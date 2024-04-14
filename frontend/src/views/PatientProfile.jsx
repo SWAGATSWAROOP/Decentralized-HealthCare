@@ -84,7 +84,9 @@ const PatientProfile = () => {
           backgroundImage: `url(/profileback.jpg)`,
         }}
       >
-        <NavBar />
+        <div>
+          <NavBar />
+        </div>
         <div
           className={`mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4 ${update ? "bg-white" : ""}`}
         >
