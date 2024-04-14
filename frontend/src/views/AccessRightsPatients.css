@@ -1,0 +1,66 @@
+/* AccessRightsPatients.css */
+
+.container {
+    background-color: #34d399;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-container {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 50%;
+    border: 2px solid #000000;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    border: 1px solid #000000;
+    border-radius: 0.25rem;
+    outline: none;
+  }
+  
+  .input-container button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #000000;
+    cursor: pointer;
+  }
+  
+  .rights-container {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .rights-container .right {
+    border: 2px solid #000000;
+    margin-top: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+  
+  .rights-container .right button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    cursor: pointer;
+  }
+  
+  .rights-container .right button:hover {
+    transform: scale(1.1);
+  }
+  

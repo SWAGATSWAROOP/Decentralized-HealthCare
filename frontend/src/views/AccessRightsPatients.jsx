@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { userContext } from "../components/Global/components/ProtectedRoute/protectedroute";
 import { Helmet } from "react-helmet";
 import NavBar from "./NavBar";
+import "./AccessRightsPatients.css"; // Import the CSS file
 
 // Importing ABI Contract.
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
@@ -58,35 +59,23 @@ const AccessRightsPatients = () => {
       <Helmet>
         <title>Data Access History</title>
       </Helmet>
-      <div className="bg-green-600 h-screen flex flex-col items-center">
-        <NavBar />
-        <div className="bg-white flex flex-col items-center p-7 mt-8 w-1/2 border-black border-2">
+      <NavBar />
+      <div className="container">
+        
+        <div className="input-container">
           <input type="email" ref={accessRef} placeholder="Enter Email" />
-          <button
-            className="border-black border-2 p-2 mt-2"
-            onClick={giveAccess}
-          >
+          <button className="border-black border-2 p-2 mt-2" onClick={giveAccess}>
             Approve Access
           </button>
         </div>
-        <div className="flex flex-col bg-white w-screen items-center mt-2">
+        <div className="rights-container">
           {loading &&
             rightsArr.map((rights, i) => (
-              <div key={i} className="flex mt-4 p-2">
-                <div
-                  className="border-black border-2 flex justify-between p-4"
-                  // onClick={(rights) => openDocter(rights)}
-                >
-                  <div className="w-full p-2">{rights}</div>
-                  <div>
-                    <button
-                      className="ml-3 text-red-500 p-2 border-black border-2 hover:scale-110"
-                      onClick={() => revokeAccess(rights)}
-                    >
-                      Revoke
-                    </button>
-                  </div>
-                </div>
+              <div key={i} className="right">
+                <div className="right-info">{rights}</div>
+                <button className="revoke-button" onClick={() => revokeAccess(rights)}>
+                  Revoke
+                </button>
               </div>
             ))}
         </div>
