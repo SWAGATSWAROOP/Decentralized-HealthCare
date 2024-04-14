@@ -68,6 +68,8 @@ contract RolesAndRights is ReentrancyGuard{
             tokenIds
         );
 
+        checkApproveness[email][email] = true;
+
         emit PatientCreated(
             patientids,
             email

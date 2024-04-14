@@ -54,8 +54,11 @@ function NavBar() {
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => {}}>
-                Doctors Consulted
+              <div
+                className="nav-links"
+                onClick={() => navigate("/user/documents")}
+              >
+                My Documents
               </div>
             </li>
             <li className="nav-item">
