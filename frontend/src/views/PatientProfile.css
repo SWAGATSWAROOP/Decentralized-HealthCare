@@ -1,0 +1,109 @@
+/* PatientProfile.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw; /* This ensures the container covers the entire viewport horizontally */
+    background-image: url("https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  .profile-container {
+    width: 75%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 50px; /* Adjust margin for the NavBar */
+    background-color: rgba(126, 211, 165, 0.8); /* Match background color to dashboard */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); /* Add box shadow */
+  }
+  
+  .profile-title {
+    text-align: center;
+    font-size: 36px; /* Adjust font size */
+    margin-bottom: 20px;
+  }
+  
+  .profile-photo-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-photo {
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  .profile-photo-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-photo-input {
+    outline: none;
+  }
+  
+  .profile-photo-buttons {
+    display: flex;
+    margin-left: 10px;
+  }
+  
+  .profile-info {
+    margin-bottom: 20px;
+  }
+  
+  .profile-label {
+    font-weight: bold;
+  }
+  
+  .profile-value {
+    margin-left: 5px;
+  }
+  
+  .profile-input {
+    outline: none;
+  }
+  
+  .profile-buttons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .profile-button {
+    border: 2px solid black;
+    padding: 10px;
+    background-color: #3498db;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .update-mode .profile-photo-actions,
+  .update-mode .profile-value {
+    display: none;
+  }
+  
+  .update-mode .profile-photo-input,
+  .update-mode .profile-input {
+    display: block;
+  }
+  
+  .update-mode .profile-buttons {
+    justify-content: space-between;
+  }
+  
+  .profile-button-container {
+    display: flex;
+  }
+  
