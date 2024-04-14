@@ -1,0 +1,51 @@
+/* UploadDocuments.css */
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background-image: url("https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  .upload-form {
+    font-family: 'Lato', sans-serif;
+    color: white;
+    padding: 20px;
+    background-color: rgba(126, 211, 165, 0.8);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    margin-top: 50px; /* Adjust margin to create space for the NavBar */
+  }
+  
+  .input-field {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+  }
+  
+  .file-input {
+    margin-top: 10px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #00bcd4;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #008ba3;
+    transform: scale(1.05);
+  }
+  

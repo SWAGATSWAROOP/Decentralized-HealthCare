@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import NavBar from "./NavBar";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import "./UploadDocuments.css";
 
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
@@ -106,48 +107,49 @@ const UploadDocuments = () => {
       <Helmet>
         <title>Upload Documents</title>
       </Helmet>
-      <div className="flex-col justify-center space-y-10 bg-green-200 h-screen overflow-hidden">
-        <div className="mt-4 flex justify-center">
-          <NavBar />
+      <NavBar />
+
+      <div className="upload-container">
+        <div className="navbar">
         </div>
-        <div className="flex justify-center">
-          <div className="bg-white flex-col p-4 space-y-5 border-black border-2">
-            <input
-              ref={fileRef}
-              type="text"
-              placeholder="File Name"
-              onChange={(e) =>
-                setFormInput({ ...formInput, filename: e.target.value })
-              }
-            />
-            <input
-              type="text"
-              ref={desRef}
-              placeholder="Description"
-              onChange={(e) =>
-                setFormInput({
-                  ...formInput,
-                  description: e.target.value,
-                })
-              }
-            />
-            <input
-              type="file"
-              ref={uploadfileRef}
-              name="asset"
-              className="my-3"
-              placeholder="Choose File"
-              onChange={onChange}
-            />
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="p-2 w-32 bg-cyan-300 text-white hover:scale-110"
-                onClick={createMetaData}
-              >
-                Submit
-              </button>
-            </div>
+        <div className="upload-form">
+          <input
+            ref={fileRef}
+            type="text"
+            className="input-field"
+            placeholder="File Name"
+            onChange={(e) =>
+              setFormInput({ ...formInput, filename: e.target.value })
+            }
+          />
+          <input
+            type="text"
+            ref={desRef}
+            className="input-field"
+            placeholder="Description"
+            onChange={(e) =>
+              setFormInput({
+                ...formInput,
+                description: e.target.value,
+              })
+            }
+          />
+          <input
+            type="file"
+            ref={uploadfileRef}
+            name="asset"
+            className="file-input"
+            placeholder="Choose File"
+            onChange={onChange}
+          />
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="submit-button"
+              onClick={createMetaData}
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>
