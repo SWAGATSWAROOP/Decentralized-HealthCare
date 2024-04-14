@@ -9,7 +9,6 @@ import LoginPage from "./views/Login.jsx";
 import RegisterPage from "./views/Register.jsx";
 import Dashboard from "./views/Dashboard.jsx";
 import ProtectedRoute from "./components/Global/components/ProtectedRoute/protectedroute.jsx";
-import AuditAcess from "./views/AuditAccessControls.jsx";
 import DDashboard from "./views/DDashboard.jsx";
 import DocterProfile from "./views/DoctorProfile.jsx";
 import PatientProfile from "./views/PatientProfile.jsx";
@@ -17,6 +16,7 @@ import { ForgotPasswordLink } from "./views/Forgotpassword.jsx";
 import ChangePassword from "./views/ChangePassword.jsx";
 import ChangePasswordOrg from "./views/ChangePasswordOrg.jsx";
 import UploadDocuments from "./views/UploadDocuments.jsx";
+import AccessRightsPatients from "./views/AccessRightsPatients.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -44,14 +44,6 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/access-history"
-          element={
-            <ProtectedRoute>
-              <AuditAcess />
             </ProtectedRoute>
           }
         />
@@ -100,6 +92,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <ChangePasswordOrg />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/user/getdocters"
+          element={
+            <ProtectedRoute>
+              <AccessRightsPatients />
             </ProtectedRoute>
           }
         />

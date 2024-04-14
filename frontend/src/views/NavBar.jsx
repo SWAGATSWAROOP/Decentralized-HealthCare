@@ -48,7 +48,7 @@ function NavBar() {
             <li className="nav-item">
               <div
                 className="nav-links"
-                onClick={() => navigate("/access-history")}
+                onClick={() => navigate("/user/getdocters")}
               >
                 Data Access
               </div>
