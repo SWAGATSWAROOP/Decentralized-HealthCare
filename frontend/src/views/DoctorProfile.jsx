@@ -3,16 +3,18 @@ import axios from "axios";
 import NavBar from "./DNavbar";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import "./DoctorProfile.css"; // Import the CSS file
 
-const DocterProfile = () => {
+const DoctorProfile = () => {
   const navigate = useNavigate();
   const [update, setUpdate] = useState(false);
-  const [name, setname] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [type, setType] = useState("");
-  const [profilephoto, setProfilePhoto] = useState("./profilephoto.png");
+  const [profilePhoto, setProfilePhoto] = useState("./profilephoto.png");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,7 +22,7 @@ const DocterProfile = () => {
         console.log(res);
 
         if (res.data.success) {
-          setname(res.data?.data?.user?.name);
+          setName(res.data?.data?.user?.name);
           setEmail(res.data?.data?.user?.email);
           setPhone(res.data?.data?.user?.phoneno);
           setProfilePhoto(res.data?.data?.user?.profilephoto);
@@ -35,7 +37,7 @@ const DocterProfile = () => {
     fetchData();
   }, [update]);
 
-  const submit = async () => {
+  const handleSubmit = async () => {
     try {
       const res = await axios.post("/org/update", {
         phoneno: phone,
@@ -45,7 +47,7 @@ const DocterProfile = () => {
       });
 
       if (res.data.success) {
-        setname(res.data?.data?.user?.name);
+        setName(res.data?.data?.user?.name);
         setPhone(res.data?.data?.user?.phoneno);
         alert("Updated Successfully");
       }
@@ -54,10 +56,10 @@ const DocterProfile = () => {
     }
   };
 
-  const changePhoto = async () => {
+  const handleChangePhoto = async () => {
     try {
       const formData = new FormData();
-      formData.append("profilephoto", profilephoto);
+      formData.append("profilephoto", profilePhoto);
       const res = await axios.post("/org/updatephoto", formData);
 
       if (res.data.success) {
@@ -74,132 +76,121 @@ const DocterProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div
-        className="h-screen flex flex-col justify-center items-center bg-contain"
-        style={{
-          backgroundImage: `url(/profileback.jpg)`,
-        }}
-      >
+      <div className="container">
         <NavBar />
-        <div
-          className={`mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4 ${update ? "bg-white" : ""}`}
-        >
+        <div className={`profile-container ${update ? "update-mode" : ""}`}>
           <div>
-            <h1 className="text-center text-5xl mb-8">User Profile</h1>
+            <h1 className="profile-title">User Profile</h1>
             {!update ? (
-              <div className="flex justify-center">
+              <div className="profile-photo-container">
                 <img
-                  className="rounded-full h-40 w-40 border-black border-2 mb-2 hover:scale-110"
-                  src={profilephoto}
-                  alt=""
+                  className="profile-photo"
+                  src={profilePhoto}
+                  alt="Profile"
                 />
               </div>
             ) : (
-              <div className="flex justify-between">
+              <div className="profile-photo-container">
                 <div>
                   <span>Profile Photo : </span>
                   <input
-                    className="outline-none"
+                    className="profile-photo-input"
                     type="file"
-                    multiple={false}
                     onChange={(e) => setProfilePhoto(e.target.files[0])}
                   />
                 </div>
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
-                  onClick={() => changePhoto()}
+                  className="profile-button"
+                  onClick={() => handleChangePhoto()}
                 >
                   Change Photo
                 </button>
               </div>
             )}
           </div>
-          <div className="">
+          <div className="profile-info">
             <span>Name : </span>
             {!update ? (
-              <span>{name}</span>
+              <span className="profile-value">{name}</span>
             ) : (
-              <div className="inline">
-                <input
-                  className="outline-none bg-transparent"
-                  value={name}
-                  onChange={(e) => setname(e.target.value)}
-                />
-              </div>
+              <input
+                className="profile-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             )}
           </div>
-          <div className="">
+          <div className="profile-info">
             <span>Email : </span>
-            <span>{email}</span>
+            <span className="profile-value">{email}</span>
           </div>
-          <div className="">
+          <div className="profile-info">
             <span>Phone no : </span>
             {!update ? (
-              <span>{phone}</span>
+              <span className="profile-value">{phone}</span>
             ) : (
               <input
                 value={phone}
-                className="outline-none bg-transparent"
+                className="profile-input"
                 onChange={(e) => setPhone(e.target.value)}
               />
             )}
           </div>
-          <div className="">
+          <div className="profile-info">
             <span>Address : </span>
             {!update ? (
-              <span>{address}</span>
+              <span className="profile-value">{address}</span>
             ) : (
               <textarea
                 value={address}
-                className="outline-none resize-none bg-transparent"
+                className="profile-input"
                 onChange={(e) => setAddress(e.target.value)}
               />
             )}
           </div>
-          <div className="">
+          <div className="profile-info">
             {!update ? (
-              <div>
-                <span>Type : </span>
-                <span>{type}</span>
-              </div>
+              <span>
+                Type : <span className="profile-value">{type}</span>
+              </span>
             ) : (
               <div>
                 <span>Type :</span>
                 <select
                   value={type}
-                  className="outline-none col-2 bg-transparent"
+                  className="profile-input"
                   onChange={(e) => setType(e.target.value)}
                 >
-                  <option value="Docter">Docter</option>
+                  <option value="Doctor">Doctor</option>
                   <option value="Organization">Organization</option>
                 </select>
               </div>
             )}
           </div>
-          <div className="flex justify-center">
+          <div className="profile-buttons">
             {!update ? (
               <button
-                className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                className="profile-button"
                 onClick={() => setUpdate(true)}
               >
                 Update Details
               </button>
             ) : (
-              <div className="space-x-3">
+              <div className="profile-button-container">
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
-                  onClick={() => submit()}
+                  className="profile-button"
+                  onClick={() => handleSubmit()}
                 >
                   Submit Details
                 </button>
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  className="profile-button"
                   onClick={() => navigate("/org/changepass")}
                 >
                   Change Password
                 </button>
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  className="profile-button"
                   onClick={() => setUpdate(false)}
                 >
                   Back To Profile
@@ -213,4 +204,4 @@ const DocterProfile = () => {
   );
 };
 
-export default DocterProfile;
+export default DoctorProfile;
