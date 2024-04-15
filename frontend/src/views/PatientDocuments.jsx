@@ -12,35 +12,33 @@ const PatientDocuments = () => {
   const { email } = useContext(userContext);
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [arr, setArr] = useState([]);
 
-  useEffect(() => {
+  const loadMetaData = async () => {
     let provider = new ethers.JsonRpcProvider();
     let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
       provider
     );
+    const array = await contract.getPatientDetails(email, email);
 
-    const loadMetaData = async () => {
-      setArr(await contract.getPatientDetails(email, email));
-    };
+    const items = await Promise.all(
+      array.map(async (i) => {
+        console.log(i);
+        const meta = await axios.get(i);
+        let item = {
+          filename: meta.data.filename,
+          description: meta.data.description,
+          image: meta.data.image,
+        };
+        return item;
+      })
+    );
+    setDocuments(items);
+  };
+
+  useEffect(() => {
     loadMetaData();
-    async function loadItems() {
-      const items = await Promise.all(
-        arr.map(async (i) => {
-          const meta = await axios.get(i);
-          let item = {
-            filename: meta.data.filename,
-            description: meta.data.description,
-            image: meta.data.image,
-          };
-          return item;
-        })
-      );
-      setDocuments(items);
-    }
-    loadItems();
     setLoading(true);
   }, []);
 
@@ -58,7 +56,7 @@ const PatientDocuments = () => {
             documents.map((document, i) => (
               <div key={i}>
                 <div className="flex flex-col p-4">
-                  <img src={document.image} alt="" />
+                  <img className="w-8 h-8" src={document.image} alt="" />
                   <div>{document.filename}</div>
                   <div>{document.description}</div>
                 </div>
