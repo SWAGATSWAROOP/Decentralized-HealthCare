@@ -59,12 +59,12 @@ const AccessRightsPatients = () => {
       <Helmet>
         <title>Data Access History</title>
       </Helmet>
+      
+      <div className="upload-container">
       <NavBar />
-      <div className="container">
-        
-        <div className="input-container">
+        <div className="profile-container">
           <input type="email" ref={accessRef} placeholder="Enter Email" />
-          <button className="border-black border-2 p-2 mt-2" onClick={giveAccess}>
+          <button className="profile-button" onClick={giveAccess}>
             Approve Access
           </button>
         </div>

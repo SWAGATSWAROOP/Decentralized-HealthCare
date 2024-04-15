@@ -86,7 +86,7 @@ const PatientProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="container">
+      <div className="upload-container">
         <NavBar />
         <div className={`profile-container ${update ? "update-mode" : ""}`}>
           <h1 className="profile-title">User Profile</h1>

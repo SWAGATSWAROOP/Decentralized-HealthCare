@@ -101,11 +101,11 @@ const UploadDocuments = () => {
         <title>Upload Documents</title>
       </Helmet>
 
-      <div className="">
+      <div className="upload-container">
         <div>
           <NavBar />
         </div>
-        <div className="">
+        <div className="upload-form">
           <input
             ref={fileRef}
             type="text"
