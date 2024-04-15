@@ -86,7 +86,7 @@ const UploadDocuments = () => {
     );
 
     const email = sessionStorage.getItem("email");
-    transaction = await contract.addDocuments(email, url);
+    const transaction = await contract.addDocuments(email, url);
     await transaction.wait();
     setFileUrl(null);
     setFormInput({ filename: "", description: "" });
@@ -101,11 +101,11 @@ const UploadDocuments = () => {
         <title>Upload Documents</title>
       </Helmet>
 
-      <div className="upload-container">
+      <div className="">
         <div>
           <NavBar />
         </div>
-        <div className="upload-form">
+        <div className="">
           <input
             ref={fileRef}
             type="text"
