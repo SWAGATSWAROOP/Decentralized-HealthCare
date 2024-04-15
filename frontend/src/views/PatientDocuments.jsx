@@ -22,30 +22,26 @@ const PatientDocuments = () => {
       provider
     );
 
-    console.log()
-
-    const getdata = async () =>
+    const loadMetaData = async () => {
       setArr(await contract.getPatientDetails(email, email));
-    getdata();
-    console.log(arr);
-    let produceDocumentView = async () => {
-      arr.map(async (i) => {
-        const tokenURI = await contract.getTokenURI(i);
-        const meta = await axios.get(tokenURI);
-        let item = {
-          filename: meta.data.filename,
-          description: meta.data.description,
-          image: meta.data.image,
-        };
-        return item;
-      });
     };
-    async function loadDocuments() {
-      produceDocumentView = await Promise.all();
+    loadMetaData();
+    async function loadItems() {
+      const items = await Promise.all(
+        arr.map(async (i) => {
+          console.log(i);
+          const meta = await axios.get(i);
+          let item = {
+            filename: meta.data.filename,
+            description: meta.data.description,
+            image: meta.data.image,
+          };
+          return item;
+        })
+      );
+      setDocuments(items);
     }
-    loadDocuments();
-    setDocuments(produceDocumentView);
-    console.log(produceDocumentView);
+    loadItems();
     setLoading(true);
   }, []);
 

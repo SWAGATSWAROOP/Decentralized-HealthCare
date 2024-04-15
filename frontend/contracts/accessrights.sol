@@ -6,7 +6,6 @@ import "./ReentrancyGuard/ReentrancyGuard.sol";
 contract RolesAndRights is ReentrancyGuard{
     uint256 private docterids;
     uint256 private patientids;
-    uint256 private _tokenIds;
 
     address payable owner;
 
@@ -16,7 +15,6 @@ contract RolesAndRights is ReentrancyGuard{
         owner = payable(msg.sender);
         docterids = 0;
         patientids = 0;
-        _tokenIds = 0;
     }
 
     // Patients
@@ -24,7 +22,7 @@ contract RolesAndRights is ReentrancyGuard{
         uint256 patientId;
         string email;
         string [] approvedemails;
-        uint256 [] tokenIds;
+        string [] urls;
     }
 
     // Forlogging details on blockChain
@@ -60,12 +58,12 @@ contract RolesAndRights is ReentrancyGuard{
     )public nonReentrant{
         patientids++;
         string [] memory approvedemails;
-        uint256 [] memory tokenIds;
+        string [] memory urls;
         Patients[email] = Patient(
             patientids,
             email,
             approvedemails,
-            tokenIds
+            urls
         );
 
         checkApproveness[email][email] = true;
@@ -79,15 +77,15 @@ contract RolesAndRights is ReentrancyGuard{
     // Function to add documents
     function addDocuments(
         string memory email,
-        uint256 tokenId
+        string memory url
     )public nonReentrant{
-        uint size = Patients[email].tokenIds.length;
-        uint256 [] memory tokenIds = new uint256 [](size+1);  
-        tokenIds[size] = tokenId;
+        uint size = Patients[email].urls.length;
+        string [] memory urls = new string [](size+1);  
+        urls[size] = url;
         for(uint i = 0;i < size; i++){
-            tokenIds[i] = Patients[email].tokenIds[i];
+            urls[i] = Patients[email].urls[i];
         }
-        Patients[email].tokenIds = tokenIds;
+        Patients[email].urls = urls;
     }
 
     // Function to approve Docter
@@ -173,10 +171,10 @@ contract RolesAndRights is ReentrancyGuard{
         string memory emailP,
         string memory emailD
     )public view returns(
-        uint256 [] memory
+        string [] memory
     ){
         require(checkApproveness[emailD][emailP]==true,"Access Denied");
-        return Patients[emailP].tokenIds;
+        return Patients[emailP].urls;
     }
 
     function getDocters(
@@ -199,18 +197,8 @@ contract RolesAndRights is ReentrancyGuard{
         return true;
     }
 
-    event tokenIdCreated(
-        uint256 indexed tokenId
-    );
-    function createToken(string memory tokenURI)public nonReentrant{
-        _tokenIds++;
-        tokenURIs[_tokenIds] = tokenURI;
-        emit tokenIdCreated(_tokenIds);
-    }
-    function getTokenURI(uint256 tokenId)public view returns(string memory){
-        return tokenURIs[tokenId];
-    }
-    function getTokenIds() public view returns(uint256){
-        return _tokenIds;
+    function withdraw() public payable nonReentrant{
+        require(msg.sender == owner, "You are not the owner");
+        owner.transfer(address(this).balance);
     }
 }

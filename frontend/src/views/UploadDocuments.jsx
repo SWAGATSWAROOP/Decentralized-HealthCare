@@ -85,15 +85,8 @@ const UploadDocuments = () => {
       signer
     );
 
-    let transaction = await contract.createToken(url);
-    // Wait for the transaction to be mined and get the receipt
-    await transaction.wait();
-
-    const tokenId = await contract.getTokenIds();
-    console.log(tokenId);
-
     const email = sessionStorage.getItem("email");
-    transaction = await contract.addDocuments(email, tokenId);
+    transaction = await contract.addDocuments(email, url);
     await transaction.wait();
     setFileUrl(null);
     setFormInput({ filename: "", description: "" });

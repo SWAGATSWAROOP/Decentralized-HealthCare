@@ -18,8 +18,8 @@ module.exports = {
     enabled: true,
     currency: "INR",
     coinmarketcap: "66adcdf2-c736-4c96-bef0-65db0e192cbb",
-    // token: "matic",
-    outputFile: "gasReportsETH.txt",
+    token: "matic",
+    outputFile: "gasReportsPOLY.txt",
     noColors: true,
   },
 };
