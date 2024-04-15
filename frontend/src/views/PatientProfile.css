@@ -1,5 +1,4 @@
 /* PatientProfile.css */
-
 .container {
     display: flex;
     flex-direction: column;
@@ -8,14 +7,12 @@
     height: 100vh;
     width: 100vw; /* Set width to fill the entire viewport */
     background-image: url("https://thejournalofmhealth.com/wp-content/uploads/2020/08/5-digital-health-trends-that-are-transforming-patient-care.jpg");
-    background-size: cover; /* Adjusted to cover the entire container */
+    background-size: 100% 100%; /* Adjusted to cover the entire container */
     background-repeat: no-repeat;
     margin: 0; /* Set margin to zero */
     padding: 0; /* Set padding to zero */
-  }
-  
+}
   .profile-container {
-    
     width: 75%;
     padding: 20px;
     border-radius: 10px;
