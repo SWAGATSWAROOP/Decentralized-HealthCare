@@ -29,7 +29,6 @@ const PatientDocuments = () => {
     async function loadItems() {
       const items = await Promise.all(
         arr.map(async (i) => {
-          console.log(i);
           const meta = await axios.get(i);
           let item = {
             filename: meta.data.filename,
