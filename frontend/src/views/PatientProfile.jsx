@@ -5,7 +5,6 @@ import axios from "axios";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import "./PatientProfile.css"; // Import CSS file
 
 const PatientProfile = () => {
   const navigate = useNavigate();
@@ -65,7 +64,7 @@ const PatientProfile = () => {
       alert(error);
     }
   };
-  
+
   const changePhoto = async () => {
     try {
       const formData = new FormData();
@@ -86,35 +85,46 @@ const PatientProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="upload-container">
+      <div
+        className="h-screen flex flex-col justify-center items-center bg-contain"
+        style={{
+          backgroundImage: `url(/profileback.jpg)`,
+        }}
+      >
         <NavBar />
-        <div className={`profile-container ${update ? "update-mode" : ""}`}>
-          <h1 className="profile-title">User Profile</h1>
+        <div
+          className={`mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4 ${update ? "bg-white" : ""}`}
+        >
+          <h1 className="text-center text-7xl mb-8">User Profile</h1>
           <div className="profile-photo-container">
             {!update ? (
-              <img
-                className="profile-photo"
-                src={profilephoto}
-                alt=""
-              />
-            ) : (
-              <div className="profile-photo-actions">
-                <span>Profile Photo : </span>
-                <input
-                  className="profile-photo-input"
-                  type="file"
-                  multiple={false}
-                  onChange={(e) => setProfilePhoto(e.target.files[0])}
+              <div className="flex justify-center">
+                <img
+                  className="rounded-full h-40 w-40 border-black border-2 mb-8 hover:scale-110"
+                  src={profilephoto}
+                  alt=""
                 />
-                <div className="profile-photo-buttons">
+              </div>
+            ) : (
+              <div className="flex justify-between">
+                <div>
+                  <span>Profile Photo : </span>
+                  <input
+                    className="outline-none"
+                    type="file"
+                    multiple={false}
+                    onChange={(e) => setProfilePhoto(e.target.files[0])}
+                  />
+                </div>
+                <div className="space-x-2">
                   <button
-                    className="profile-photo-button"
+                    className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                     onClick={() => changePhoto()}
                   >
                     Change Photo
                   </button>
                   <button
-                    className="profile-photo-button"
+                    className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                     onClick={() => removePhoto()}
                   >
                     Remove Photo
@@ -123,58 +133,58 @@ const PatientProfile = () => {
               </div>
             )}
           </div>
-          <div className="profile-info">
+          <div className="">
             <span className="profile-label">Name : </span>
             {!update ? (
               <span className="profile-value">{name}</span>
             ) : (
               <input
-                className="profile-input"
+                className="outline-none col-4"
                 value={name}
                 onChange={(e) => setname(e.target.value)}
               />
             )}
           </div>
-          <div className="profile-info">
-            <span className="profile-label">Email : </span>
-            <span className="profile-value">{email}</span>
+          <div>
+            <span>Email : </span>
+            <span>{email}</span>
           </div>
-          <div className="profile-info">
-            <span className="profile-label">Phone no : </span>
+          <div>
+            <span>Phone no : </span>
             {!update ? (
-              <span className="profile-value">{phone}</span>
+              <span>{phone}</span>
             ) : (
               <input
-                className="profile-input"
+                className="outline-none col-4"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             )}
           </div>
-          <div className="profile-buttons">
+          <div className="flex justify-center">
             {!update ? (
               <button
-                className="profile-button"
+                className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                 onClick={() => setUpdate(true)}
               >
                 Update Details
               </button>
             ) : (
-              <div className="profile-button-container">
+              <div className="space-x-3">
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => submit()}
                 >
                   Submit Details
                 </button>
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => navigate("/user/changepass")}
                 >
                   Change Password
                 </button>
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => setUpdate(false)}
                 >
                   Back To Profile
