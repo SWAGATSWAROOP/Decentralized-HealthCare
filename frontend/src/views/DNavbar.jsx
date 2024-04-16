@@ -37,7 +37,10 @@ function NavBar() {
               </div>
             </li>
             <li className="nav-item">
-              <div className="nav-links" onClick={() => {}}>
+              <div
+                className="nav-links"
+                onClick={() => navigate("/org/documents")}
+              >
                 Patients Data
               </div>
             </li>

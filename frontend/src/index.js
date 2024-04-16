@@ -18,6 +18,8 @@ import ChangePasswordOrg from "./views/ChangePasswordOrg.jsx";
 import UploadDocuments from "./views/UploadDocuments.jsx";
 import AccessRightsPatients from "./views/AccessRightsPatients.jsx";
 import PatientDocuments from "./views/PatientDocuments.jsx";
+import GetPatients from "./views/GetPatientData.jsx";
+import GetPatientDetailDocter from "./views/GetPatientDetailDocter.jsx";
 
 import "./assets/assets/css/font-awesome.min.css";
 import "./assets/assets/css/style.css";
@@ -109,6 +111,22 @@ const App = () => {
           element={
             <ProtectedRoute>
               <PatientDocuments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/org/documents"
+          element={
+            <ProtectedRoute>
+              <GetPatients />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/org/documents/patient"
+          element={
+            <ProtectedRoute>
+              <GetPatientDetailDocter />
             </ProtectedRoute>
           }
         />
