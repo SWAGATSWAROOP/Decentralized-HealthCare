@@ -41,7 +41,6 @@ const GetPatientDetailDocter = () => {
           description: metadata.data.description,
           image: metadata.data.image,
         };
-        console.log(item);
         return item;
       })
     );
