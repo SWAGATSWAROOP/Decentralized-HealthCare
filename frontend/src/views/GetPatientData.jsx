@@ -40,7 +40,7 @@ const GetPatients = () => {
             key={i}
             className=""
             onClick={() =>
-              navigate("/org/documents/patient", { state: patient })
+              navigate("/org/documents/patient", { state: { pemail: patient } })
             }
           >
             {patient}

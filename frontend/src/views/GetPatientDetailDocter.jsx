@@ -13,7 +13,15 @@ const GetPatientDetailDocter = () => {
   const [loading, setLoading] = useState(false);
   const [documents, setDocuments] = useState([]);
   const location = useLocation();
-  const patientemail = location.state.patient;
+  const { pemail } = location.state;
+
+  if (!pemail) {
+    return (
+      <>
+        <div>Not able to fetch patient here</div>
+      </>
+    );
+  }
 
   async function loadData() {
     const provider = new ethers.JsonRpcProvider();
@@ -23,16 +31,17 @@ const GetPatientDetailDocter = () => {
       provider
     );
 
-    const arr = await contract.getPatientDetails(patientemail, email);
+    const arr = await contract.getPatientDetails(pemail, email);
 
     const items = await Promise.all(
       arr.map(async (i) => {
         const metadata = await axios.get(i);
         let item = {
-          filename: metadata.filename,
-          description: metadata.description,
-          image: metadata.image,
+          filename: metadata.data.filename,
+          description: metadata.data.description,
+          image: metadata.data.image,
         };
+        console.log(item);
         return item;
       })
     );
@@ -56,9 +65,7 @@ const GetPatientDetailDocter = () => {
           {loading &&
             documents.map((document, i) => (
               <div key={i} className="flex flex-col w-8 h-8">
-                <div className="w-4 h-4">
-                  <image src={document.image} alt="" />
-                </div>
+                <img className="w-8 h-8" src={document.image} alt="" />
                 <div>{document.filename}</div>
                 <div>{document.description}</div>
               </div>
