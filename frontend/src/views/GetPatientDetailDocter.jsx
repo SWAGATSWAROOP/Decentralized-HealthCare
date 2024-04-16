@@ -49,9 +49,7 @@ const GetPatientDetailDocter = () => {
   }
 
   useEffect(() => {
-    console.log("Hello");
     loadData();
-    console.log("hello2");
     setLoading(true);
   }, []);
 
