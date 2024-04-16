@@ -15,7 +15,9 @@ const AccessRightsPatients = () => {
   const accessRef = useRef(null);
 
   useEffect(() => {
-    let provider = new ethers.JsonRpcProvider();
+    let provider = new ethers.JsonRpcProvider(
+      process.env.REACT_APP_SEPOLIA_RPC_URL
+    );
     let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
@@ -27,12 +29,17 @@ const AccessRightsPatients = () => {
   }, [loading]);
 
   const revokeAccess = async (docteremail) => {
-    let provider = new ethers.JsonRpcProvider();
-    let signer = await provider.getSigner();
+    let provider = new ethers.JsonRpcProvider(
+      process.env.REACT_APP_SEPOLIA_RPC_URL
+    );
+    // For Connecting to Website provider like
+    let wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+    let walletConnected = wallet.connect(provider);
+
     let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
-      signer
+      walletConnected
     );
 
     const transaction = await contract.revoke(docteremail, email);
@@ -41,12 +48,15 @@ const AccessRightsPatients = () => {
   };
 
   const giveAccess = async () => {
-    let provider = new ethers.JsonRpcProvider();
-    let signer = await provider.getSigner();
+    let provider = new ethers.JsonRpcProvider(
+      process.env.REACT_APP_SEPOLIA_RPC_URL
+    );
+    let wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+    let walletConnected = wallet.connect(provider);
     let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
-      signer
+      walletConnected
     );
     const transaction = await contract.approve(accessRef.current.value, email);
     await transaction.wait();
@@ -59,9 +69,9 @@ const AccessRightsPatients = () => {
       <Helmet>
         <title>Data Access History</title>
       </Helmet>
-      
+
       <div className="upload-container">
-      <NavBar />
+        <NavBar />
         <div className="profile-container">
           <input type="email" ref={accessRef} placeholder="Enter Email" />
           <button className="profile-button" onClick={giveAccess}>
@@ -73,7 +83,10 @@ const AccessRightsPatients = () => {
             rightsArr.map((rights, i) => (
               <div key={i} className="right">
                 <div className="right-info">{rights}</div>
-                <button className="revoke-button" onClick={() => revokeAccess(rights)}>
+                <button
+                  className="revoke-button"
+                  onClick={() => revokeAccess(rights)}
+                >
                   Revoke
                 </button>
               </div>

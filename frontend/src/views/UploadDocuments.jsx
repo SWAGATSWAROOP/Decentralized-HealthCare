@@ -76,13 +76,16 @@ const UploadDocuments = () => {
   };
 
   const createDocument = async (url) => {
-    const provider = new ethers.JsonRpcProvider();
-    const signer = await provider.getSigner();
+    const provider = new ethers.JsonRpcProvider(
+      process.env.REACT_APP_SEPOLIA_RPC_URL
+    );
+    const wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+    const walletConnected = wallet.connect(provider);
 
     let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
-      signer
+      walletConnected
     );
 
     const email = sessionStorage.getItem("email");

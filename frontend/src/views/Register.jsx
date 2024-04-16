@@ -46,15 +46,16 @@ function Register() {
         const res = await axios.post("/user/register", formData, config);
         // Etherjs
         if (res.data.success) {
-          // const web3Modal = new Web3Modal();
-          // const connection = await web3Modal.connect();
-          const provider = new ethers.JsonRpcProvider();
-          const signer = await provider.getSigner();
+          const provider = new ethers.JsonRpcProvider(
+            process.env.REACT_APP_SEPOLIA_RPC_URL
+          );
+          const wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+          const walletConnected = wallet.connect(provider);
 
           let contract = new ethers.Contract(
             process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
             AccessRights.abi,
-            signer
+            walletConnected
           );
 
           const transaction = await contract.createPatient(email);
@@ -78,15 +79,16 @@ function Register() {
         const res = await axios.post("/org/register", formData, config);
         // Etherjs
         if (res.data.success) {
-          // const web3Modal = new Web3Modal();
-          // const connection = await web3Modal.connect();
-          const provider = new ethers.JsonRpcProvider();
-          const signer = await provider.getSigner();
+          const provider = new ethers.JsonRpcProvider(
+            process.env.REACT_APP_SEPOLIA_RPC_URL
+          );
+          const wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+          const walletConnected = wallet.connect(provider);
 
           let contract = new ethers.Contract(
             process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
             AccessRights.abi,
-            signer
+            walletConnected
           );
 
           const transaction = await contract.createDocter(email);
@@ -110,13 +112,16 @@ function Register() {
         const res = await axios.post("/org/register", formData, config);
 
         if (res.data.success) {
-          const provider = new ethers.JsonRpcProvider();
-          const signer = await provider.getSigner();
+          const provider = new ethers.JsonRpcProvider(
+            process.env.REACT_APP_SEPOLIA_RPC_URL
+          );
+          const wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+          const walletConnected = wallet.connect(provider);
 
           let contract = new ethers.Contract(
             process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
             AccessRights.abi,
-            signer
+            walletConnected
           );
 
           const transaction = await contract.createDocter(email);

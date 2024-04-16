@@ -14,7 +14,9 @@ const GetPatients = () => {
   const [patients, setPatients] = useState([]);
 
   async function loadPatients() {
-    const provider = new ethers.JsonRpcProvider();
+    const provider = new ethers.JsonRpcProvider(
+      process.env.REACT_APP_SEPOLIA_RPC_URL
+    );
     const contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,

@@ -14,7 +14,9 @@ const PatientDocuments = () => {
   const [loading, setLoading] = useState(false);
 
   const loadMetaData = async () => {
-    let provider = new ethers.JsonRpcProvider();
+    let provider = new ethers.JsonRpcProvider(
+      process.env.REACT_APP_SEPOLIA_RPC_URL
+    );
     let contract = new ethers.Contract(
       process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
       AccessRights.abi,
