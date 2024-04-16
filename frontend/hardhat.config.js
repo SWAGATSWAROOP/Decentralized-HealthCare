@@ -14,11 +14,11 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    // sepolia: {
-    //   chainId: 11155111,
-    //   url: process.env.REACT_APP_SEPOLIA_RPC_URL,
-    //   accounts: [process.env.PRIVATE_KEY],
-    // },
+    sepolia: {
+      chainId: 11155111,
+      url: process.env.REACT_APP_SEPOLIA_RPC_URL,
+      accounts: [process.env.REACT_APP_PRIVATE_KEY],
+    },
   },
   gasReporter: {
     enabled: true,
