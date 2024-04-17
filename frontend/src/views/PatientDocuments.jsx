@@ -4,6 +4,7 @@ import { userContext } from "../components/Global/components/ProtectedRoute/prot
 import { Helmet } from "react-helmet";
 import NavBar from "./NavBar";
 import axios from "axios";
+import "./AccessRightsPatients.css"; // Import the CSS file
 
 // Importing ABI Contract.
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
@@ -48,18 +49,36 @@ const PatientDocuments = () => {
       <Helmet>
         <title>Documents</title>
       </Helmet>
-      <div className="flex flex-col">
+      <div className="upload-container flex flex-col">
         <div>
           <NavBar />
         </div>
-        <div>
+        <h1 className="mt-6 text-4xl text-black bg-white p-3 rounded-md">
+          My Documents
+        </h1>
+        <div className="mt-4 bg-white">
           {loading &&
             documents.map((document, i) => (
-              <div key={i}>
-                <div className="flex flex-col p-4">
-                  <img className="w-8 h-8" src={document.image} alt="" />
-                  <div>{document.filename}</div>
-                  <div>{document.description}</div>
+              <div
+                key={i}
+                className="w-screen flex flex-col border-black border-2"
+              >
+                <div className="flex space-x-7 p-4">
+                  <div className="flex items-center">
+                    <div>({i + 1})</div>
+                  </div>
+                  <div>
+                    <div>Name of Documents: {document.filename}</div>
+                    <div>Description: {document.description}</div>
+                  </div>
+                  <div
+                    className="flex justify-end cursor-pointer"
+                    onClick={() => window.open(document.image, "_blank")}
+                  >
+                    <button className="bg-green-300 pl-3 pr-3 hover:scale-110">
+                      Access Document
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

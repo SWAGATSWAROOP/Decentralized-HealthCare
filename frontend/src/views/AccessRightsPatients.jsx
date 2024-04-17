@@ -58,6 +58,7 @@ const AccessRightsPatients = () => {
       AccessRights.abi,
       walletConnected
     );
+    accessRef.current.value = accessRef.current.value.trim();
     const transaction = await contract.approve(accessRef.current.value, email);
     await transaction.wait();
     accessRef.current.value = "";
@@ -72,23 +73,37 @@ const AccessRightsPatients = () => {
 
       <div className="upload-container">
         <NavBar />
-        <div className="profile-container">
+        <div className="profile-container flex flex-col">
           <input type="email" ref={accessRef} placeholder="Enter Email" />
-          <button className="profile-button" onClick={giveAccess}>
-            Approve Access
-          </button>
+          <div className="flex justify-center mt-4">
+            <button
+              className=" bg-green-600 text-white border-black border-2 p-2 rounded-sm hover:scale-110"
+              onClick={giveAccess}
+            >
+              Approve Access
+            </button>
+          </div>
         </div>
-        <div className="rights-container">
+        <h1 className="mt-4 text-4xl text-black bg-white p-3 rounded-md">
+          Access Rights
+        </h1>
+        <div className="flex flex-col bg-white w-screen mt-4 overflow-scroll">
           {loading &&
             rightsArr.map((rights, i) => (
-              <div key={i} className="right">
-                <div className="right-info">{rights}</div>
-                <button
-                  className="revoke-button"
-                  onClick={() => revokeAccess(rights)}
-                >
-                  Revoke
-                </button>
+              <div key={i} className="flex p-3  border-black border-1">
+                <div className="w-1/2">
+                  <div className="p-2">
+                    ({i + 1}) {rights}
+                  </div>
+                </div>
+                <div className="w-1/2 flex justify-center">
+                  <button
+                    className="p-2 bg-red-400 text-white rounded-md hover:scale-110"
+                    onClick={() => revokeAccess(rights)}
+                  >
+                    Revoke
+                  </button>
+                </div>
               </div>
             ))}
         </div>

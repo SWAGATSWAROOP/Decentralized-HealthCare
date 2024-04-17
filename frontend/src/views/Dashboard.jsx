@@ -36,10 +36,6 @@ const Dashboard = () => {
       <div className={`${styles.dashboardContent} mt-10`}>
         <p style={{ lineHeight: "1.5" }}>{text}</p>
       </div>
-      <div className="mt-4 z-10">
-        {/* Additional content, like UserProfileBox, if needed */}
-        {/* <UserProfileBox /> */}
-      </div>
     </div>
   );
 };
