@@ -270,7 +270,7 @@ export const googleSignIn = async (req, res) => {
       .status(200)
       .cookie("accessToken", accessToken, options)
       .cookie("refreshToken", refreshToken, options)
-      .json(new ApiResponse(200, {}, "Authentication successful"));
+      .json(new ApiResponse(200, { email }, "Authentication successful"));
   } catch (error) {
     // Handle error
     res.status(500).json(new ApiResponse(500, {}, "Authentication failed"));

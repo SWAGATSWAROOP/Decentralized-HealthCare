@@ -6,6 +6,10 @@ import GoogleButton from "react-google-button";
 import axios from "axios";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { ethers } from "ethers";
+
+// Importing ABI Contract.
+import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,20 +26,29 @@ function Login() {
         // backend that will exchange the code
         code,
       });
-
+      let email = res?.data?.data?.user?.email;
+      console.log(res.data);
       if (res.data.success) {
-        sessionStorage.setItem("auth", "true");
-        sessionStorage.setItem("email", `${res?.data?.user?.email}`);
-        // const web3Modal = new Web3Modal();
-        // const connection = await web3Modal.connect();
-        // const provider = new ethers.BrowserProvider(connection);
-        // const signer = provider.getSigner();
-        // const contract = new ethers.Contract(
-        //   process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
-        //   AccessRights.abi,
-        //   signer
-        // );
+        if (res.data.message !== "User already exist") {
+          email = res.data.data.email;
+          const provider = new ethers.JsonRpcProvider(
+            process.env.REACT_APP_SEPOLIA_RPC_URL
+          );
+          const wallet = new ethers.Wallet(process.env.REACT_APP_PRIVATE_KEY);
+          const walletConnected = wallet.connect(provider);
+          console.log(email);
+          let contract = new ethers.Contract(
+            process.env.REACT_APP_ACCESSRIGHTS_CONTRACT_ADDRESS,
+            AccessRights.abi,
+            walletConnected
+          );
 
+          const transaction = await contract.createPatient(email);
+          await transaction.wait();
+        }
+
+        sessionStorage.setItem("auth", "true");
+        sessionStorage.setItem("email", `${email}`);
         navigate("/dashboard", { replace: true });
       } else {
         alert("Error in Logging in");
