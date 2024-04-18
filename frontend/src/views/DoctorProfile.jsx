@@ -106,7 +106,7 @@ const DoctorProfile = () => {
                   />
                 </div>
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  className="border-black border-2 p-2 bg-green-300  hover:scale-110"
                   onClick={() => handleChangePhoto()}
                 >
                   Change Photo
@@ -176,7 +176,7 @@ const DoctorProfile = () => {
           <div className="flex justify-center">
             {!update ? (
               <button
-                className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                className="border-black border-2 p-2 bg-green-300  hover:scale-110"
                 onClick={() => setUpdate(true)}
               >
                 Update Details
@@ -184,19 +184,19 @@ const DoctorProfile = () => {
             ) : (
               <div className="flex justify-center space-x-7">
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  className="border-black border-2 p-2 bg-green-300  hover:scale-110"
                   onClick={() => handleSubmit()}
                 >
                   Submit Details
                 </button>
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  className="border-black border-2 p-2 bg-green-300  hover:scale-110"
                   onClick={() => navigate("/org/changepass")}
                 >
                   Change Password
                 </button>
                 <button
-                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
+                  className="border-black border-2 p-2 bg-green-300  hover:scale-110"
                   onClick={() => setUpdate(false)}
                 >
                   Back To Profile

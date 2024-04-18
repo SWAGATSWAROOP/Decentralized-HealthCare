@@ -4,6 +4,7 @@ import { userContext } from "../components/Global/components/ProtectedRoute/prot
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import NavBar from "./DNavbar";
 
 // Importing ABI Contract.
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
@@ -59,14 +60,37 @@ const GetPatientDetailDocter = () => {
       <Helmet>
         <title>Patient Details</title>
       </Helmet>
-      <div className="">
+      <div className="upload-container">
+        <NavBar />
+        <div>
+          <h1 className="mt-8 text-5xl text-black bg-white p-3 rounded-md">
+            Patient Details
+          </h1>
+        </div>
         <div className="mt-4">
           {loading &&
             documents.map((document, i) => (
-              <div key={i} className="flex flex-col w-8 h-8">
-                <img className="w-8 h-8" src={document.image} alt="" />
-                <div>{document.filename}</div>
-                <div>{document.description}</div>
+              <div
+                key={i}
+                className="w-screen flex flex-col border-black border-2 bg-white"
+              >
+                <div className="flex space-x-7 p-4">
+                  <div className="flex items-center">
+                    <div>({i + 1})</div>
+                  </div>
+                  <div>
+                    <div>Name of Documents: {document.filename}</div>
+                    <div>Description: {document.description}</div>
+                  </div>
+                  <div
+                    className="flex justify-end cursor-pointer"
+                    onClick={() => window.open(document.image, "_blank")}
+                  >
+                    <button className="bg-green-300 pl-3 pr-3 hover:scale-110">
+                      Access Document
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
         </div>
