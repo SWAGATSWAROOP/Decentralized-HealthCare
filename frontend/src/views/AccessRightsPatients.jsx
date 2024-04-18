@@ -3,7 +3,6 @@ import { ethers } from "ethers";
 import { userContext } from "../components/Global/components/ProtectedRoute/protectedroute";
 import { Helmet } from "react-helmet";
 import NavBar from "./NavBar";
-import "./AccessRightsPatients.css"; // Import the CSS file
 
 // Importing ABI Contract.
 import AccessRights from "../artifacts/contracts/accessrights.sol/RolesAndRights.json";
@@ -73,17 +72,25 @@ const AccessRightsPatients = () => {
 
       <div className="upload-container">
         <NavBar />
-        <div className="profile-container flex flex-col">
-          <input type="email" ref={accessRef} placeholder="Enter Email" />
+        <div className="flex flex-col mt-9 pl-8 pr-8 pt-4 pb-4 bg-white">
+          <div className="w-full md:w-80">
+            <input
+              type="email"
+              ref={accessRef}
+              placeholder="Enter Email"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent"
+            />
+          </div>
           <div className="flex justify-center mt-4">
             <button
-              className=" bg-green-600 text-white border-black border-2 p-2 rounded-sm hover:scale-110"
+              className="bg-green-600 text-white border-black border-2 p-2 rounded-sm hover:scale-110"
               onClick={giveAccess}
             >
               Approve Access
             </button>
           </div>
         </div>
+
         <h1 className="mt-4 text-4xl text-black bg-white p-3 rounded-md">
           Access Rights
         </h1>

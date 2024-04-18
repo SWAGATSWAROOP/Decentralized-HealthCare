@@ -3,7 +3,6 @@ import axios from "axios";
 import NavBar from "./DNavbar";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
-import "./DoctorProfile.css"; // Import the CSS file
 
 const DoctorProfile = () => {
   const navigate = useNavigate();
@@ -76,31 +75,38 @@ const DoctorProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="container">
+      <div
+        className="h-screen flex flex-col justify-center items-center bg-contain"
+        style={{
+          backgroundImage: `url(/profileback.jpg)`,
+        }}
+      >
         <NavBar />
-        <div className={`profile-container ${update ? "update-mode" : ""}`}>
+        <div
+          className={`mt-10 w-3/4 h-3/4 p-4 rounded-lg space-y-4 ${update ? "bg-white" : ""}`}
+        >
           <div>
-            <h1 className="profile-title">User Profile</h1>
+            <h1 className="text-center text-7xl mb-8">User Profile</h1>
             {!update ? (
-              <div className="profile-photo-container">
+              <div className="flex justify-center">
                 <img
-                  className="profile-photo"
+                  className="rounded-full h-40 w-40 border-black border-2 mb-8 hover:scale-110"
                   src={profilePhoto}
                   alt="Profile"
                 />
               </div>
             ) : (
-              <div className="profile-photo-container">
+              <div className="flex justify-between">
                 <div>
                   <span>Profile Photo : </span>
                   <input
-                    className="profile-photo-input"
+                    className="outline-none"
                     type="file"
                     onChange={(e) => setProfilePhoto(e.target.files[0])}
                   />
                 </div>
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => handleChangePhoto()}
                 >
                   Change Photo
@@ -167,30 +173,30 @@ const DoctorProfile = () => {
               </div>
             )}
           </div>
-          <div className="profile-buttons">
+          <div className="flex justify-center">
             {!update ? (
               <button
-                className="profile-button"
+                className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                 onClick={() => setUpdate(true)}
               >
                 Update Details
               </button>
             ) : (
-              <div className="profile-button-container">
+              <div className="flex justify-center space-x-7">
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => handleSubmit()}
                 >
                   Submit Details
                 </button>
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => navigate("/org/changepass")}
                 >
                   Change Password
                 </button>
                 <button
-                  className="profile-button"
+                  className="border-black border-2 p-2 bg-blue-400 hover:scale-110"
                   onClick={() => setUpdate(false)}
                 >
                   Back To Profile
