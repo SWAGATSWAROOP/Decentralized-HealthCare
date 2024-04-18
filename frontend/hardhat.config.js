@@ -24,8 +24,8 @@ module.exports = {
     enabled: true,
     currency: "INR",
     coinmarketcap: process.env.REACT_APP_COINMARKETCAP_API_KEY,
-    token: "matic",
-    outputFile: "gasReportsPOLY.txt",
+    // token: "matic",
+    outputFile: "gasReportsETH.txt",
     noColors: true,
   },
 };
