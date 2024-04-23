@@ -104,7 +104,12 @@ const UploadDocuments = () => {
         <title>Upload Documents</title>
       </Helmet>
 
-      <div className="upload-container">
+      <div
+        className="upload-container"
+        style={{
+          backgroundImage: `url(/dashboardphoto.jpg)`,
+        }}
+      >
         <div>
           <NavBar />
         </div>

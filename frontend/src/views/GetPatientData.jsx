@@ -36,7 +36,12 @@ const GetPatients = () => {
       <Helmet>
         <title>Patient List</title>
       </Helmet>
-      <div className="upload-container">
+      <div
+        className="upload-container"
+        style={{
+          backgroundImage: `url(/dashboardphoto.jpg)`,
+        }}
+      >
         <NavBar />
         <div>
           <h1 className="mt-8 text-5xl text-black bg-white p-3 rounded-md">

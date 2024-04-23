@@ -61,7 +61,12 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className={styles.dashboardContainer}>
+    <div
+      className={styles.dashboardContainer}
+      style={{
+        backgroundImage: `url(/dashboardphoto.jpg)`,
+      }}
+    >
       <Helmet>
         <title>Dashboard</title>
       </Helmet>

@@ -49,7 +49,12 @@ const PatientDocuments = () => {
       <Helmet>
         <title>Documents</title>
       </Helmet>
-      <div className="upload-container flex flex-col">
+      <div
+        className="upload-container flex flex-col"
+        style={{
+          backgroundImage: `url(/dashboardphoto.jpg)`,
+        }}
+      >
         <div>
           <NavBar />
         </div>

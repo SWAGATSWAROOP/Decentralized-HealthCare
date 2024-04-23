@@ -70,7 +70,12 @@ const AccessRightsPatients = () => {
         <title>Data Access History</title>
       </Helmet>
 
-      <div className="upload-container">
+      <div
+        className="upload-container"
+        style={{
+          backgroundImage: `url(/dashboardphoto.jpg)`,
+        }}
+      >
         <NavBar />
         <div className="flex flex-col mt-9 pl-8 pr-8 pt-4 pb-4 bg-white">
           <div className="w-full md:w-80">
